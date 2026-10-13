@@ -26,33 +26,38 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="wrap">
-  <header class="top">
+<header class="site-head">
+  <div class="wrap top">
     <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
-    <nav class="nav" aria-label="Main">
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
       <a href="#screens">The app</a>
       <a href="#inside">What it does</a>
       <a href="#companies">For companies</a>
       <a href="/docs/">Documentation</a>
+      <a class="cta-link" href="https://apps.apple.com/app/id6796077930">Get the app</a>
     </nav>
-  </header>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
 
-  <main id="main">
-    <div class="hero">
-      <div>
-        <p class="tag" style="margin-bottom:18px">Thermodynamics &amp; process engineering</p>
-        <h1>Process calculations you can run on the plant floor.</h1>
-        <p class="lede">ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. It runs on your phone, with no account and no connection.</p>
-        <div class="cta">
-          <a class="btn fill" href="https://apps.apple.com/app/id6796077930"><small>Download on the</small>App Store</a>
-          <span class="btn line disabled" aria-disabled="true"><small>Google Play</small>Coming soon</span>
+<main id="main">
+  <section class="band hero cut-bottom">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="rise-group">
+          <p class="eyebrow">Thermodynamics &amp; process engineering</p>
+          <h1>Process calculations you can run on the plant floor.</h1>
+          <p class="lede">ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. It runs on your phone, with no account and no connection.</p>
+          <div class="cta">
+            <a class="btn fill" href="https://apps.apple.com/app/id6796077930"><small>Download on the</small>App Store</a>
+            <span class="btn line disabled" aria-disabled="true"><small>Google Play</small>Coming soon</span>
+          </div>
+          <p class="note">On iPhone and iPad today. Android is coming soon.</p>
         </div>
-        <p class="note">On iPhone and iPad today. Android is coming soon.</p>
+        <div class="stage"><figure class="device" data-drift="-0.06"><img src="/assets/screens/case-heater-results.jpg" width="774" height="1674" alt="ProcessChem Heater case: heat duty, conditions and amounts for water heated from 20 to 120 degrees Celsius"></figure></div>
       </div>
-      <div class="stage"><figure class="device"><img src="/assets/screens/case-heater-results.jpg" width="774" height="1674" alt="ProcessChem Heater case: heat duty, conditions and amounts for water heated from 20 to 120 degrees Celsius"></figure></div>
-    </div>
-
-    <div class="strip" aria-hidden="false">
+      <div class="strip" aria-hidden="false">
       <svg viewBox="0 0 1200 160" role="img" aria-label="Simplified process flow: feed vessel, pump, heat exchanger, control valve and fluidized bed reactor">
         <!-- V-101 feed vessel -->
         <path class="liq" d="M32 86 H108 V104 a28 28 0 0 1 -28 28 H60 a28 28 0 0 1 -28 -28 Z"/>
@@ -95,116 +100,133 @@
         <path class="flow" d="M680 50 H1150"/>
       </svg>
     </div>
-  </main>
-
-  <section id="screens">
-    <div class="sec-head">
-      <h2>See it on the phone.</h2>
-      <p>These are screens from the app, not mock-ups. Property results for ethanol, the four Thermo modes, the Case list, and the Units tab.</p>
-    </div>
-    <div class="shots">
-      <figure>
-        <div class="device"><img src="/assets/screens/property-results.jpg" width="774" height="1674" loading="lazy" alt="Property tab: results for ethanol, including density, heat capacity, viscosity and boiling point"></div>
-        <figcaption><b>Property</b>Look up a fluid</figcaption>
-      </figure>
-      <figure>
-        <div class="device"><img src="/assets/screens/thermo-modes.jpg" width="774" height="1674" loading="lazy" alt="Thermo tab with the mode list: Phase Equilibrium, Chemical Equilibrium, Reaction and Electrochemical Reaction"></div>
-        <figcaption><b>Thermo</b>Solve a state</figcaption>
-      </figure>
-      <figure>
-        <div class="device"><img src="/assets/screens/case-list.jpg" width="774" height="1674" loading="lazy" alt="Case tab with the case list: Heater, Vessel Heater, Fluidized Bed and Heat Exchanger"></div>
-        <figcaption><b>Case</b>Answer a plant question</figcaption>
-      </figure>
-      <figure>
-        <div class="device"><img src="/assets/screens/units.jpg" width="774" height="1674" loading="lazy" alt="Units tab: choose a unit for temperature, pressure, mass, volume, energy and more"></div>
-        <figcaption><b>Units</b>Keep your own units</figcaption>
-      </figure>
     </div>
   </section>
 
-  <section id="inside">
-    <div class="sec-head">
-      <h2>Four tabs, one engine.</h2>
-      <p>Every tab shares the same thermodynamic core, so a number you read in one place agrees with the answer in another.</p>
+  <section class="s" id="screens">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">The app</p>
+        <h2>See it on the phone.</h2>
+        <p>These are screens from the app, not mock-ups. Property results for ethanol, the four Thermo modes, the Case list, and the Units tab.</p>
+      </div>
+      <div class="shots" data-stagger>
+        <figure class="reveal">
+          <div class="device"><img src="/assets/screens/property-results.jpg" width="774" height="1674" loading="lazy" alt="Property tab: results for ethanol, including density, heat capacity, viscosity and boiling point"></div>
+          <figcaption><b>Property</b>Look up a fluid</figcaption>
+        </figure>
+        <figure class="reveal">
+          <div class="device"><img src="/assets/screens/thermo-modes.jpg" width="774" height="1674" loading="lazy" alt="Thermo tab with the mode list: Phase Equilibrium, Chemical Equilibrium, Reaction and Electrochemical Reaction"></div>
+          <figcaption><b>Thermo</b>Solve a state</figcaption>
+        </figure>
+        <figure class="reveal">
+          <div class="device"><img src="/assets/screens/case-list.jpg" width="774" height="1674" loading="lazy" alt="Case tab with the case list: Heater, Vessel Heater, Fluidized Bed and Heat Exchanger"></div>
+          <figcaption><b>Case</b>Answer a plant question</figcaption>
+        </figure>
+        <figure class="reveal">
+          <div class="device"><img src="/assets/screens/units.jpg" width="774" height="1674" loading="lazy" alt="Units tab: choose a unit for temperature, pressure, mass, volume, energy and more"></div>
+          <figcaption><b>Units</b>Keep your own units</figcaption>
+        </figure>
+      </div>
     </div>
-    <div class="index">
-      <div class="row">
+  </section>
+
+  <section class="s" id="inside">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">What it does</p>
+        <h2>Four tabs, one engine.</h2>
+        <p>Every tab shares the same thermodynamic core, so a number you read in one place agrees with the answer in another.</p>
+      </div>
+      <div class="index">
+      <div class="row reveal">
         <h3>Property<span>Look up a fluid</span></h3>
         <div>
           <p>Density, heat capacity, viscosity, thermal conductivity, vapour pressure and more for thousands of chemicals and mixtures, with flash point, flammability limits and exposure limits alongside.</p>
           <ul><li>density</li><li>Cp</li><li>viscosity</li><li>Hvap</li><li>Z factor</li><li>surface tension</li><li>hazard data</li></ul>
         </div>
       </div>
-      <div class="row">
+      <div class="row reveal">
         <h3>Thermo<span>Solve a state</span></h3>
         <div>
           <p>Flash a stream at any two properties, find the equilibrium composition of a reacting system, balance a reaction with its energy balance, or get the cell voltage of an electrolysis.</p>
           <ul><li>Phase Equilibrium</li><li>Chemical Equilibrium</li><li>Reaction</li><li>Electrochemical Reaction</li></ul>
         </div>
       </div>
-      <div class="row">
+      <div class="row reveal">
         <h3>Case<span>Answer a plant question</span></h3>
         <div>
           <p>Start from the question an engineer actually asks. Give what you know and the case finds the rest, and it refuses a combination that cannot happen, such as heat flowing the wrong way.</p>
           <ul><li>Heater</li><li>Vessel Heater</li><li>Fluidized Bed</li><li>Heat Exchanger</li></ul>
         </div>
       </div>
-      <div class="row">
+      <div class="row reveal">
         <h3>Units<span>Keep your own units</span></h3>
         <div>
           <p>Choose a unit for each quantity, so bar can sit beside °C or psi beside °F. Gas volumes convert at the Normal reference you pick: 0 °C, 15 °C or 20 °C.</p>
           <ul><li>bara / barg</li><li>psi</li><li>Nm³/h</li><li>SCFM</li></ul>
         </div>
       </div>
+      </div>
     </div>
   </section>
 
-  <section>
-    <div class="sec-head">
-      <h2>What it stands on.</h2>
-      <p>The numbers come from published reference data and established models.</p>
-    </div>
-    <div class="stands">
-      <div><h3>Reference equations of state</h3><p>CoolProp's reference equations cover more than 100 fluids. Peng-Robinson with ChemSep interaction parameters handles the rest, and mixtures.</p></div>
-      <div><h3>Thermodynamic data</h3><p>NASA CEA coefficients for 1,820 species, plus tabulated data for cement and metallurgical minerals, feed the equilibrium and reaction solvers.</p></div>
-      <div><h3>Private by design</h3><p>No account, no ads, and no connection needed. Your calculations stay on your phone unless you save them to a file.</p></div>
+  <section class="s">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Foundations</p>
+        <h2>What it stands on.</h2>
+        <p>The numbers come from published reference data and established models.</p>
+      </div>
+      <div class="stands" data-stagger>
+        <div class="reveal"><h3>Reference equations of state</h3><p>CoolProp's reference equations cover more than 100 fluids. Peng-Robinson with ChemSep interaction parameters handles the rest, and mixtures.</p></div>
+        <div class="reveal"><h3>Thermodynamic data</h3><p>NASA CEA coefficients for 1,820 species, plus tabulated data for cement and metallurgical minerals, feed the equilibrium and reaction solvers.</p></div>
+        <div class="reveal"><h3>Private by design</h3><p>No account, no ads, and no connection needed. Your calculations stay on your phone unless you save them to a file.</p></div>
+      </div>
     </div>
   </section>
 
-  <section id="companies">
-    <div class="sec-head">
-      <h2>One app, set up for your plant.</h2>
-      <p>A company code switches ProcessChem to your company's setup. Engineers see only the tabs and calculators they use, in your order, with your units and your standard cases already saved. Everyone else keeps the standard app.</p>
-    </div>
-    <div class="demo">
-      <div class="phone-col"><div class="app p-std" id="demoPhone" aria-label="Illustrative app screen"></div></div>
-      <div>
-        <div class="seg" role="group" aria-label="Choose an example company">
-          <button type="button" aria-pressed="true" data-k="std">Standard app</button>
-          <button type="button" aria-pressed="false" data-k="acme">Acme Process Co.</button>
-          <button type="button" aria-pressed="false" data-k="nw">Northwind Chemicals</button>
+  <section class="band cut-both s" id="companies">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">For companies</p>
+        <h2>One app, set up for your plant.</h2>
+        <p>A company code switches ProcessChem to your company's setup. Engineers see only the tabs and calculators they use, in your order, with your units and your standard cases already saved. Everyone else keeps the standard app.</p>
+      </div>
+      <div class="demo reveal">
+        <div class="phone-col"><div class="app p-std" id="demoPhone" aria-label="Illustrative app screen"></div></div>
+        <div>
+          <div class="seg" role="group" aria-label="Choose an example company">
+            <button type="button" aria-pressed="true" data-k="std">Standard app</button>
+            <button type="button" aria-pressed="false" data-k="acme">Acme Process Co.</button>
+            <button type="button" aria-pressed="false" data-k="nw">Northwind Chemicals</button>
+          </div>
+          <p class="fict">Fictional example companies. Illustrative screens.</p>
+          <dl id="facts"></dl>
+          <p class="after">We set this up with you: your tabs, your cases, your units and your standard setups. If your plant needs a calculator that does not exist yet, we can build it for you.</p>
+          <div class="cta"><a class="btn fill" href="mailto:ronmjacob1994@gmail.com"><small>Company setup</small>Talk to us</a></div>
         </div>
-        <p class="fict">Fictional example companies. Illustrative screens.</p>
-        <dl id="facts"></dl>
-        <p class="after">We set this up with you: your tabs, your cases, your units and your standard setups. If your plant needs a calculator that does not exist yet, we can build it for you.</p>
-        <div class="cta"><a class="btn fill" href="mailto:ronmjacob1994@gmail.com"><small>Company setup</small>Talk to us</a></div>
       </div>
     </div>
   </section>
 
-  <section id="docs">
-    <div class="docs">
-      <div>
-        <h2 style="font-size:1.7rem;font-weight:800;margin-bottom:8px">Documented with the equations.</h2>
-        <p>Each tab and calculation has its own page that states the governing equations, the data sources and the limits of the method.</p>
+  <section class="s" id="docs">
+    <div class="wrap">
+      <div class="docs-cta reveal">
+        <div>
+          <h2>Documented with the equations.</h2>
+          <p>Each tab and calculation has its own page that states the governing equations, the data sources and the limits of the method.</p>
+        </div>
+        <a class="btn line" href="/docs/"><small>Read the</small>Documentation</a>
       </div>
-      <a class="btn line" href="/docs/"><small>Read the</small>Documentation</a>
     </div>
   </section>
+</main>
 
-  <footer id="contact">
+<footer class="band cut-top site-foot" id="contact">
+  <div class="wrap">
     <div>
-      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      <strong>ProcessChem</strong><br>
       Built by Ron M. Jacob<br>
       <a href="mailto:ronmjacob1994@gmail.com" style="font-family:var(--mono);font-size:13px">ronmjacob1994@gmail.com</a>
     </div>
@@ -212,8 +234,8 @@
       <a href="/docs/">Documentation</a>
       <a href="/privacy/">Privacy policy</a>
     </div>
-  </footer>
-</div>
+  </div>
+</footer>
 
 <script>
 (function () {
@@ -317,5 +339,6 @@
   });
 })();
 </script>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

@@ -137,20 +137,28 @@ HEAD = """<!doctype html>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="wrap">
-  <header class="top">
+<header class="site-head">
+  <div class="wrap top">
     <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
-    <nav class="nav" aria-label="Main">
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="/#screens">The app</a>
       <a href="/#inside">What it does</a>
       <a href="/#companies">For companies</a>
       <a href="/docs/" aria-current="page">Documentation</a>
+      <a class="cta-link" href="https://apps.apple.com/app/id6796077930">Get the app</a>
     </nav>
-  </header>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+<div class="wrap">
 """
 
-FOOT = """  <footer>
+FOOT = """</div>
+<footer class="band cut-top site-foot">
+  <div class="wrap">
     <div>
-      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      <strong>ProcessChem</strong><br>
       Built by Ron M. Jacob<br>
       <a href="mailto:ronmjacob1994@gmail.com" style="font-family:var(--mono);font-size:13px">ronmjacob1994@gmail.com</a>
     </div>
@@ -158,8 +166,9 @@ FOOT = """  <footer>
       <a href="/docs/">Documentation</a>
       <a href="/privacy/">Privacy policy</a>
     </div>
-  </footer>
-</div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
 """

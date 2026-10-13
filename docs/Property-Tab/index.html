@@ -21,15 +21,21 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="wrap">
-  <header class="top">
+<header class="site-head">
+  <div class="wrap top">
     <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
-    <nav class="nav" aria-label="Main">
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="/#screens">The app</a>
       <a href="/#inside">What it does</a>
       <a href="/#companies">For companies</a>
       <a href="/docs/" aria-current="page">Documentation</a>
+      <a class="cta-link" href="https://apps.apple.com/app/id6796077930">Get the app</a>
     </nav>
-  </header>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+<div class="wrap">
   <div class="docs-layout">
 <nav class="docs-nav" aria-label="Documentation">
 <ul><li><a href="/docs/">Overview</a></li></ul>
@@ -193,9 +199,11 @@
 <p>The <strong>Open</strong>, <strong>Save</strong> and <strong>Reset</strong> buttons sit under the tab heading. Save stores the chemical or mixture, the pressure and the temperature under a name of up to 40 characters, up to 25 sets; saving under an existing name replaces it. Open lists them, and lets you load, rename or delete each one. The set you last saved or opened comes back when the app starts. Reset returns the original inputs (Ethanol, 1.0 bar, 20.0 °C) and leaves your saved sets untouched. Saved sets are kept inside the app and are deleted with it, so to keep a copy safe, use <strong>Save to a file…</strong> in the Save dialog and <strong>Open from a file…</strong> in the Open list; see <a href="/docs/Saving-and-Opening/">Saving and opening</a>.</p>
   </main>
   </div>
-  <footer>
+</div>
+<footer class="band cut-top site-foot">
+  <div class="wrap">
     <div>
-      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      <strong>ProcessChem</strong><br>
       Built by Ron M. Jacob<br>
       <a href="mailto:ronmjacob1994@gmail.com" style="font-family:var(--mono);font-size:13px">ronmjacob1994@gmail.com</a>
     </div>
@@ -203,7 +211,8 @@
       <a href="/docs/">Documentation</a>
       <a href="/privacy/">Privacy policy</a>
     </div>
-  </footer>
-</div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

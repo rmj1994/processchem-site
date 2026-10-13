@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Property Tab | ProcessChem documentation</title>
+<meta name="description" content="The Open documentation icon icon beside the tab heading opens this page in your browser.">
+<link rel="canonical" href="https://processchem.no/docs/Property-Tab/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08171F" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Property Tab | ProcessChem documentation">
+<meta property="og:description" content="The Open documentation icon icon beside the tab heading opens this page in your browser.">
+<meta property="og:url" content="https://processchem.no/docs/Property-Tab/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+    </nav>
+  </header>
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/" aria-current="page">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Keeping your work</h2><ul>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+</ul>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="property-tab">Property Tab</h1>
+<h2 id="about">About</h2>
+<p>Here you can look up properties of either a single or multicomponent mixture of chemicals at your desired temperature and pressure.</p>
+<p>The <img alt="Open documentation icon" src="/docs/images/open-in-new.svg"> icon beside the tab heading opens this page in your browser.</p>
+<p>Type a name or formula, set the pressure and temperature, and tap Calculate Properties. The result is a grid of property cards, a line of phase-change temperatures, and a button for safety and hazard data.</p>
+<h2 id="inputs">Inputs</h2>
+<p><strong>Component</strong> chooses between a Single Component and a Multi Component mixture (see <a href="#mixtures">Mixtures</a>).</p>
+<p><strong>Name or Formula</strong> takes a common name, a formula, a CAS number or a synonym. As you type, a list of matching chemicals appears under the field; tap one to fill it in. The list matches each compound's primary name and its formula, so a synonym such as "caustic soda" suggests nothing, though typing it in full and calculating still finds it.</p>
+<p><strong>Pressure</strong> and <strong>Temperature</strong> start at 1.0 bar and 20.0 °C, in whichever units you have chosen on the <a href="/docs/Units-Tab/">Units</a> tab. The fields accept only numbers: any other character is removed and the field says "Only numbers are allowed". An empty or unreadable field is reported by name, so you know which of the two is wrong.</p>
+<p>Changing the chemical clears the results. Editing the pressure or temperature (once you leave the field) or changing a unit replaces them with a prompt to calculate again, so a result is never left on screen under inputs that no longer match it.</p>
+<h2 id="properties">Properties</h2>
+<p>The tool returns density and phase, heat capacity, viscosity, thermal and electrical conductivity, enthalpy of vaporisation, compressibility factor, surface tension, and the enthalpy and Gibbs energy of formation. Each value sits on its own card. Whether it moves with the pressure and temperature you entered depends on what it is.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Card</th>
+<th>What it shows</th>
+<th>Reads N/A when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Formula</td>
+<td>The chemical formula. Reads "mixture" or "aqueous solution" for those.</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Molecular weight</td>
+<td>Molar mass in g/mol.</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Phase</td>
+<td>Solid, liquid or gas at your conditions, or supercritical above both the critical temperature and pressure.</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Density</td>
+<td>At your conditions.</td>
+<td>The source has no volumetric data (see <a href="#what-can-be-looked-up">What can be looked up</a>).</td>
+</tr>
+<tr>
+<td>Specific heat capacity</td>
+<td>At your temperature.</td>
+<td>A mineral or NASA-only species is outside its verified range.</td>
+</tr>
+<tr>
+<td>Vapor pressure</td>
+<td>At your temperature.</td>
+<td>Above the critical temperature, where none exists. Also for mixtures, blends, minerals and plastics.</td>
+</tr>
+<tr>
+<td>Viscosity</td>
+<td>At your conditions.</td>
+<td>The chemical is a solid, which has no viscosity model.</td>
+</tr>
+<tr>
+<td>Thermal conductivity</td>
+<td>At your conditions.</td>
+<td>No data exists; common for solids.</td>
+</tr>
+<tr>
+<td>Enthalpy of vaporization</td>
+<td>At your temperature.</td>
+<td>The chemical is not a liquid.</td>
+</tr>
+<tr>
+<td>Surface tension</td>
+<td>At your temperature.</td>
+<td>The chemical is not a liquid.</td>
+</tr>
+<tr>
+<td>Enthalpy of formation</td>
+<td>At the standard reference state (298.15 K, 1 bar).</td>
+<td>No formation data exists.</td>
+</tr>
+<tr>
+<td>Compressibility factor (Z)</td>
+<td>How far a gas departs from ideal behaviour.</td>
+<td>The chemical is not a gas.</td>
+</tr>
+<tr>
+<td>Gibbs energy of formation</td>
+<td>At the same reference state.</td>
+<td>Always, for an ordinary chemical: only cement minerals and NASA-only species carry it.</td>
+</tr>
+<tr>
+<td>Electrical conductivity</td>
+<td>Of the pure substance, at the temperature it was measured.</td>
+<td>No measurement exists, which is the usual case.</td>
+</tr>
+</tbody>
+</table></div>
+<p>A few values do not follow your conditions. Enthalpy and Gibbs energy of formation are reference-state quantities and never change with the temperature or pressure entered. Electrical conductivity comes from a table of single measurements rather than a correlation, so it belongs to the temperature its ⓘ names, and it is not the conductivity of a solution, which depends strongly on concentration.</p>
+<h2 id="phase-change-temperatures">Phase-change temperatures</h2>
+<p>Under the grid, a blue banner gives the phase-change temperatures:</p>
+<ul>
+<li><strong>Boiling Point</strong> at the pressure you entered. Below the triple-point pressure there is no liquid, so it reads <strong>Sublimation Point</strong> instead, and above the critical pressure there is no boiling point to give. A mixture shows its <strong>Bubble Point</strong> and <strong>Dew Point</strong>.</li>
+<li><strong>Freezing Point</strong>, always at 1 atm: it does not move with the pressure you enter.</li>
+<li><strong>Decomposes</strong> replaces the freezing point for a solid that breaks down before it could melt, such as calcium carbonate. Its ⓘ explains why the figure is not a melting point.</li>
+</ul>
+<h2 id="health-and-safety-data">Health and safety data <img alt="Health and safety icon" src="/docs/images/health-and-safety.svg"></h2>
+<p>Tool also includes Hazard and safety data of the chemical which you can access by clicking <img alt="Health and safety icon" src="/docs/images/health-and-safety.svg"> icon, beside the results heading. Clicking this icon returns:</p>
+<ul>
+<li>flash point and autoignition temperature</li>
+<li>lower and upper flammability limits, and the NFPA 30 class</li>
+<li>exposure limits: 8-hour TWA, short-term STEL and ceiling</li>
+<li>whether the chemical can be absorbed through the skin</li>
+<li>carcinogen classification from IARC and from the US National Toxicology Program</li>
+<li>global warming potential (100-year) and ozone depletion potential</li>
+</ul>
+<p>Each field is looked up on its own, and many read N/A: water and most inorganics have little of this data. <strong>N/A means no data is available, not that the hazard is absent.</strong> Carcinogen classifications can refer to a broader exposure context than industrial vapour, such as consumption.</p>
+<p>For a mixture the dialog gives each component's own pure-substance values, and for an aqueous solution each solute's. These are never the mixture's: a mixture's flash point is not the lowest of its components', and mixing rules for flammability limits are not implemented. Air, the refrigerant blends, minerals, plastics and NASA-only species have no hazard data, so their dialog reads N/A throughout.</p>
+<h2 id="data-source-">Data source ⓘ</h2>
+<p>Every value names where it came from and says when it does not apply, rather than showing a number that is really an extrapolation or a phase it was never measured in. Tap the ⓘ beside any value to see its source.</p>
+<p>Tap a card, or the icon beside its label, to open the dialog. A grey ⓘ names the correlation or model behind the number. An amber ⚠ replaces it when the value is low-confidence: predicted from other properties because nothing measured exists for that chemical, or extrapolated beyond where it was fitted. The dialog says which, and ends with the method used.</p>
+<p>Not every card has an icon. Formula and compressibility factor have none, and a card that reads N/A usually has none either, since there is no number to trace. Where N/A itself needs explaining, such as vapor pressure above the critical temperature or a mineral outside its verified range, the icon stays and gives the reason.</p>
+<p>Phase itself is decided by rule, from comparisons against the melting, boiling and critical points and the vapor pressure, and its ⓘ says when that vapor pressure is itself low-confidence.</p>
+<h2 id="what-can-be-looked-up">What can be looked up</h2>
+<p><strong>Ordinary chemicals</strong> are the bulk of it: tens of thousands of compounds, with properties from the <code>thermo</code> and <code>chemicals</code> packages. Some are refused rather than answered wrongly: where the only critical point available is an estimate at or below absolute zero, phase and density cannot be derived, and the app says so.</p>
+<p><strong>Air and refrigerant blends</strong> (Air, R404A, R407C, R410A, R507A, SES36) are treated as a single pseudo-pure fluid. Density, phase, specific heat, viscosity, thermal conductivity and surface tension come from CoolProp where it supplies them. There is a bubble point in place of a vapor pressure, because a blend boils across a temperature range. There is no hazard, freezing-point, vaporization or formation data.</p>
+<p><strong>Cement clinker minerals</strong> (alite, belite, tricalcium aluminate, lime, portlandite and C4AF, by name, formula or cement shorthand such as C3S) come from a curated table, not the general databases. They are always solid at 1 bar, so the pressure you enter is ignored. Formation enthalpy and Gibbs energy are from Barin (1997), and from Hanein, Glasser and Bannerman (2020) for C4AF. Specific heat is only verified over each mineral's tabulated range, which begins at 25 °C, so the default 20 °C reads N/A with the range given as the reason. Density, viscosity and everything else fluid-related reads N/A.</p>
+<p><strong>Common plastics</strong> (HDPE, LDPE, polypropylene, PET, PVC) are also curated and always solid. Real resin varies by grade, so density and specific heat are single representative estimates, not a material specification. The molecular weight card is relabelled <strong>Repeat-unit mass</strong>: a polymer is a distribution of chain lengths rather than one molecule, and the figure is the mass of its repeating unit. There is no verified melt-phase model, so nothing is offered above the melting point. PVC decomposes rather than melting and shows <strong>Decomposes</strong> instead of a freezing point.</p>
+<p><strong>NASA-only species</strong> are substances the general databases do not carry but the NASA Glenn (CEA) database does. That source gives heat capacity, enthalpy and entropy only, so the card shows specific heat and formation enthalpy and Gibbs energy, and reads N/A for the rest. It is consulted only when nothing else can identify the name.</p>
+<h2 id="mixtures">Mixtures</h2>
+<p>Choose <strong>Multi Component</strong>, then <strong>Choose Components</strong>. Pick 2 to 6 components and a basis of Mole % or Mass %, and name each one. Type every percentage except the last: the last is the balance, worked out as 100% minus the rest and shown live. <strong>Use mixture</strong> stays disabled while the shares are invalid (negative, or already totalling 100% or more), and blank or duplicate names are refused. The button then reads "N components". Switching between Single and Multi keeps both what you typed and the mixture you built.</p>
+<p>How a mixture is modelled depends on what is in it:</p>
+<ul>
+<li><strong>Water plus solutes</strong> that all have fitted Laliberté and Cooper (2009) data are treated as an <strong>aqueous solution</strong>: always liquid, with density, specific heat and viscosity taken from that fit rather than an equation of state. Vapor pressure, bubble and dew point and critical properties read N/A, and the app warns if the temperature is outside the fit's range.</li>
+<li><strong>Any other mixture</strong> uses NRTL where fitted interaction data exists (ChemSep) and Peng-Robinson with ideal mixing where it does not. It reports phase, density, specific heat, viscosity, and the bubble and dew points at your pressure; the gap between them is the temperature glide. Vapor pressure reads N/A, since a mixture has no single one.</li>
+</ul>
+<p>A note under the grid says which model was used and lists anything that weakens the result, such as a missing interaction parameter, a liquid-liquid split the model may have invented, or a temperature beyond where the data reaches.</p>
+<h2 id="saving-your-inputs">Saving your inputs</h2>
+<p>The <strong>Open</strong>, <strong>Save</strong> and <strong>Reset</strong> buttons sit under the tab heading. Save stores the chemical or mixture, the pressure and the temperature under a name of up to 40 characters, up to 25 sets; saving under an existing name replaces it. Open lists them, and lets you load, rename or delete each one. The set you last saved or opened comes back when the app starts. Reset returns the original inputs (Ethanol, 1.0 bar, 20.0 °C) and leaves your saved sets untouched. Saved sets are kept inside the app and are deleted with it, so to keep a copy safe, use <strong>Save to a file…</strong> in the Save dialog and <strong>Open from a file…</strong> in the Open list; see <a href="/docs/Saving-and-Opening/">Saving and opening</a>.</p>
+  </main>
+  </div>
+  <footer>
+    <div>
+      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

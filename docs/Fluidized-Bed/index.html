@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fluidized Bed | ProcessChem documentation</title>
+<meta name="description" content="A gas passed upward through a bed of particles. Below a certain velocity the bed sits on the distributor and the gas merely percolates through it. At...">
+<link rel="canonical" href="https://processchem.no/docs/Fluidized-Bed/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08171F" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Fluidized Bed | ProcessChem documentation">
+<meta property="og:description" content="A gas passed upward through a bed of particles. Below a certain velocity the bed sits on the distributor and the gas merely percolates through it. At...">
+<meta property="og:url" content="https://processchem.no/docs/Fluidized-Bed/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+    </nav>
+  </header>
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Keeping your work</h2><ul>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/" aria-current="page">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+</ul>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="fluidized-bed">Fluidized Bed</h1>
+<h2 id="about">About</h2>
+<p>Sizes a fluidized bed: the velocity at which it lifts, the velocity at which it blows out, where the gas you have sits between them, and the pressure drop that follows.</p>
+<h2 id="what-this-models">What This Models</h2>
+<p>A gas passed upward through a bed of particles. Below a certain velocity the bed sits on the distributor and the gas merely percolates through it. At that velocity the drag on the particles equals their weight, the bed lifts, and it begins to behave like a liquid — this is the minimum fluidization velocity. Well above it, individual particles are carried out of the vessel altogether. Those two velocities bound every fluidized bed, and this case computes both and says where your gas rate falls.</p>
+<h2 id="inputs">Inputs</h2>
+<p>The form is grouped Solid, Gas, Vessel, Distributor and Freeboard, then the optional reaction. It opens on a bed that fluidizes: 200 µm calcite in a 1 m cylinder, fluidized by carbon dioxide, the recycled product gas of an electrified calciner.</p>
+<p><strong>Solids fed as</strong> is "A batch — a fixed amount charged into the bed" or "A continuous flow — a feed rate in and out". A batch is a fixed amount of solid sitting in the bed, converting over time. A flow is a continuous feed reacting against its own feed rate, and the residence time this implies shows up in the results rather than being entered. It also decides what each solid asks for below.</p>
+<p><strong>Solid</strong> takes one species or several, up to 6, each on its own row with its own particle physics. A blend of different particles genuinely segregates: each keeps its own fluidization velocity rather than sharing one, and the bed can be fluidized in one species while another still sits on the distributor. True density is looked up for each; the shape and porosity given turn that into the one the gas actually has to lift — a particle with 40 % internal porosity fluidizes as though it were 40 % lighter. Each row has:</p>
+<ul>
+<li><strong>Solid</strong>, a chemical name or formula (calcium carbonate by default).</li>
+<li><strong>Mean particle size</strong>, 200 µm by default, with its own unit choice of µm, mm or cm.</li>
+<li><strong>Sphericity</strong>, 0.86 by default: 1 is a perfect sphere, sand is about 0.86. The terminal-velocity correlation is fitted between 0.5 and 1 and says so when read outside that.</li>
+<li><strong>Particle void fraction</strong>, 0 by default: porosity inside each particle, 0 for a solid grain.</li>
+<li><strong>Voidage at minimum fluidization</strong>, 0.48 by default, typically 0.4 to 0.5, and it must be above that species' own bed voidage, because a settled bed is denser than the same bed at the point of lifting.</li>
+<li><strong>Mass fraction below 45 µm</strong>, 0 by default. This is what separates a Geldart A powder from a B, since the fines let a bed expand smoothly before it bubbles. It also stands in for the fines size in that species' own elutriation estimate.</li>
+<li><strong>Share of the bed, by mass</strong> (batch), or <strong>Feed rate</strong> (flow, 500 kg/h by default). Enter each share; the last one is worked out so they always add to 100.</li>
+</ul>
+<p><strong>Fluidizing gas</strong> takes one species or several, up to 6, each fed its own flow on its own basis, the way a real feed is actually specified: so many Nm³/h of nitrogen, so many kg/h of steam, rather than a composition entered as percentages plus one shared total that could disagree with each other. A single row is a pure gas. Each row has the gas name, <strong>Fed as</strong> (Volumetric flow at bed conditions, Mass flow, Molar flow or Normal Volumetric Flow) and the value. Only rates are offered, since a batch volume of gas has no superficial velocity. Air and the refrigerant blends cannot be a row, even alone, so enter nitrogen and oxygen separately.</p>
+<p><strong>Temperature</strong> and <strong>Pressure</strong> (20 °C and 1.01325 bar) are the bed's own, and the gas properties are taken there; see the next section.</p>
+<p><strong>Cross-section</strong> is Cylindrical, which asks for a <strong>Bed diameter</strong>, or Rectangular, which asks for a <strong>Bed width</strong> and <strong>Bed length</strong>. <strong>Bed height</strong> goes with the voidage or bulk density below, and together they give the solids inventory, which is what the pressure drop actually measures. <strong>Bed density given as</strong> is Bed voidage (0.45) or Bulk density (1450 kg/m³): two ways of saying one thing, each implying the other through the particle density, so it takes either and reports the other rather than letting them contradict.</p>
+<p><strong>Distributor</strong> takes the plate you actually have:</p>
+<ul>
+<li><strong>Distributor orifice diameter</strong>, 2 mm by default, with its own unit choice of mm, µm or cm, and <strong>Number of orifices</strong>, 750 by default. These are what a driller specifies, not a target velocity. Together they set the plate's velocity and pressure drop, and through Darton's correlation the bubble size above it: coarser holes make bigger bubbles.</li>
+<li><strong>Required distributor drop, as a fraction of the bed's</strong>, 0.3 by default (0.1 for a deep bed). This is the design target, independent of the plate above. Too small a share and the plate does not distribute: the gas finds the easiest path through the bed and the rest sits idle.</li>
+</ul>
+<p><strong>Expanded cross-section at the top</strong> is Off (the freeboard has the same cross-section as the bed) or On, which asks for a <strong>Freeboard diameter</strong> (or width and length) of 1.5 m by default. A freeboard wider than the bed drops the gas velocity so entrained particles disengage and fall back rather than leaving.</p>
+<p><strong>Reaction in the bed</strong> is a checkbox and an edit button, described under <a href="#reaction-the-freeboard-and-what-leaves">Reaction, The Freeboard And What Leaves</a>. It opens ticked, on a calcination.</p>
+<p>Press <strong>Calculate</strong>. Editing any input, or changing a unit, clears the answer.</p>
+<h2 id="the-gas-state-is-where-beds-go-wrong">The Gas State Is Where Beds Go Wrong</h2>
+<p>Both velocities depend on the gas density and viscosity, and both change sharply with temperature. Air at 850 °C is about a quarter the density and two and a half times the viscosity of air at ambient. A calciner therefore fluidizes at a lower superficial velocity than the same solid in cold air — so properties taken at ambient by mistake move the answer in the wrong direction, not merely by a little. The temperature and pressure entered here are the ones used.</p>
+<p>The same applies to the flow. A normal cubic metre at 850 °C occupies nearly four times its volume, so a normal flow read as an actual one understates the velocity fourfold and can make an entraining bed look barely fluidized. Choosing the right basis is what prevents that, and 'normal' means whatever reference you set on the <a href="/docs/Units-Tab/">Units</a> tab.</p>
+<h2 id="two-answers-for-the-minimum-fluidization-velocity">Two Answers For The Minimum Fluidization Velocity</h2>
+<p>Both routes turn on the same dimensionless group, the Archimedes number — the ratio of gravity's pull on the particle (net of buoyancy) to viscous drag:</p>
+<pre><code>Ar = g·ρ_g·(ρ_p − ρ_g)·d_p³ / μ_g²
+
+Ergun (Kunii &amp; Levenspiel):
+    Re_mf = (−b + √(b² + 4a·Ar)) / (2a)
+    a = 1.75 / (φ·ε_mf³),   b = 150(1 − ε_mf) / (ε_mf³·φ²)
+Wen &amp; Yu:
+    Re_mf = √(33.7² + 0.0408·Ar) − 33.7
+both give   u_mf = Re_mf·μ_g / (ρ_g·d_p)
+</code></pre>
+<p>ρ_p and ρ_g are the particle and gas densities, d_p the particle size, μ_g the gas viscosity, φ the sphericity, ε_mf the voidage at minimum fluidization. The Ergun form is exact given φ and ε_mf — but those are rarely measured, and guessing them is worse than a correlation fitted without them. Wen &amp; Yu folds both into its two fitted constants (33.7 and 0.0408) instead. For 200 µm sand in ambient air the two give 0.046 and 0.035 m/s, a 35 % spread. Both are shown rather than averaged, because that spread is a real statement about how well the velocity is known for your powder. Where φ and ε_mf are estimates, Wen &amp; Yu is the safer of the two.</p>
+<h2 id="the-terminal-velocity">The Terminal Velocity</h2>
+<p>Where a lifted particle stops accelerating and is simply carried along — Haider &amp; Levenspiel (1989), through the same Ar-like grouping in a dimensionless size d*:</p>
+<pre><code>d* = d_p·[ρ_g·g·(ρ_p − ρ_g) / μ_g²]^(1/3)
+u_t* = [18/d*² + (2.335 − 1.744φ)/√d*]⁻¹
+u_t = u_t*·[μ_g·g·(ρ_p − ρ_g) / ρ_g²]^(1/3)
+</code></pre>
+<p>Fitted for sphericity between 0.5 and 1 — flagged when a particle's φ falls outside it, per species.</p>
+<h2 id="pressure-drop-and-why-it-stops-changing">Pressure Drop, And Why It Stops Changing</h2>
+<p>Below minimum fluidization the bed rests on the distributor and the drop is Ergun's own packed-bed form, rising with the gas rate:</p>
+<pre><code>ΔP/H = 150·μ_g·u·(1 − ε)² / (φ²·d_p²·ε³)     viscous term
+     + 1.75·ρ_g·u²·(1 − ε) / (φ·d_p·ε³)       inertial term
+</code></pre>
+<p>At and above u_mf the gas carries the bed, and the drop is simply its weight per unit area:</p>
+<pre><code>ΔP = (ρ_p − ρ_g)·(1 − ε)·g·H          fluidized, independent of u
+</code></pre>
+<p>H is the bed height, ε its voidage, u the superficial velocity — the two forms meet exactly at u_mf, which is what defines u_mf in the first place. Above it, ΔP does not rise any further however fast the gas goes: expanding the bed raises its height exactly as much as it raises its voidage, so the solids inventory (1 − ε)·H is unchanged and so is the drop. This is why a measured pressure drop is such a useful diagnostic: one that falls as the gas rate rises means the bed is channelling or has lost inventory.</p>
+<h2 id="each-species-gets-its-own-velocity">Each Species Gets Its Own Velocity</h2>
+<p>With more than one solid, every one of the figures above — u_mf, both routes, u_t, regime, Geldart group, minimum bubbling velocity, elutriation, and the effect of a reaction — is reported once per species, in its own card, rather than averaged into one number. A settled-looking blend can still be a fine species already entraining over a coarse one that has not even lifted yet, and a single shared velocity would hide exactly that. When the species disagree on regime at the same gas rate, the result says so by name — that is the bed segregating, not a rounding difference. The terminal velocity is for each species' own mean particle size, so it bounds when that species is carried out, not when its dust is: elutriation is governed by the small end of its size distribution, and the fines-size figure reported alongside the mean-size one is the one that governs.</p>
+<h2 id="what-stays-one-number-for-the-whole-bed">What Stays One Number For The Whole Bed</h2>
+<p>Pressure drop, the solids inventory, bulk density and the distributor are properties of the one physical vessel, not of any single species, so they stay aggregate: a mass-weighted blend of each species' own envelope density (volume is additive, not mass, so this is a harmonic mean, not a simple average) and a similarly blended particle size stand in for 'the bed' in these calculations, the same way a Sauter mean diameter would. The Bed card reports this blended density; the Result card, the one pressure drop that follows from it. The Operating window is the range that fluidizes every species without entraining any of them — the highest u_mf and the lowest u_t across the blend, not a weighted average of either — and is flagged empty when no single gas rate can do that at once.</p>
+<p>Minimum bubbling velocity is Abrahamsen &amp; Geldart's ratio to u_mf, and is the Geldart A/B classification — a ratio above 1 expands before it bubbles (Group A), at or below 1 it bubbles as soon as it fluidizes (Group B):</p>
+<pre><code>u_mb / u_mf = 2300·ρ_g^0.126·μ_g^0.523·exp(0.716F)
+              / (d_p^0.8·g^0.934·(ρ_p − ρ_g)^0.934)
+</code></pre>
+<p>F is the mass fraction of fines below 45 µm. Above u_mb, Darton's correlation gives the bubble diameter at height h above the distributor, and it grows again in a crowd:</p>
+<pre><code>d_b = 0.54·(u₀ − u_mf)^0.4·(h + 4√A₀)^0.8 / g^0.2
+u_br = (u₀ − u_mf) + 0.711·√(g·d_b)
+</code></pre>
+<p>A₀ is the distributor area per orifice — a coarser plate makes bigger bubbles everywhere above it, which is why the Bubbling and Distributor cards cannot be sized apart from each other. The Bubbling card reports d_b at the bed surface, u_br, and how far the bed expands — flagging it when d_b grows enough to span the vessel and the bed slugs instead — using that same blended particle population, since a bubble rising through a mixed bed is a bed-scale phenomenon, not a per-species one. The Distributor card takes the orifice diameter and count you specify — what a real plate is actually made from — and reports the velocity and pressure drop that follow, alongside the drop a plate should take to distribute gas evenly (a fraction of the bed's own drop). When the plate you specified falls short of that, it's flagged: the gas will find the easiest path through the bed rather than spread across it.</p>
+<h2 id="reaction-the-freeboard-and-what-leaves">Reaction, The Freeboard And What Leaves</h2>
+<p>The reaction editor opens from the <strong>Reaction in the bed</strong> checkbox and its edit button. Its reactants are chosen from the solids and gases already fed above, and <strong>+ Add row</strong> adds products and inerts, each with a name, a phase (Solid, Liquid or Gas) and a role. A reactant no longer fed above takes an <strong>Excess %</strong> instead. <strong>Which reactant's feed rate is known</strong> picks the reference, and <strong>Conversion (%)</strong> sets how far it goes. <strong>Use reaction</strong> applies it, and <strong>Cancel</strong> leaves the previous one in force. An error, such as a row with no name or a conversion that is not a number, appears in the dialog.</p>
+<p>A calciner is the case this exists for, and it is the shipped default: CaCO₃ → CaO + CO₂ at 90 % conversion, fluidized by CO₂ itself rather than an inert diluent — the recycled product gas a real electrified calciner runs on. Turning the reaction on opens an editor where you name any number of reactant, product and inert species across any phase, seeded from every solid and gas row already entered. One reactant is picked as the reference; when the balanced equation is ambiguous, a split ratio resolves it, the same way the <a href="/docs/Reaction/">Reaction</a> mode does.</p>
+<p>Works in either mode, against a different anchor each way. A continuous flow reacts against its actual fed rate, and CaCO₃ → CaO + CO₂ puts a mole of gas into the freeboard for every mole converted, so the gas leaving is more than the gas that came in — a bed that fluidizes properly at the distributor can be entraining at the top. Each species' own card shows its u_mf and u_t recomputed on that outlet gas, flagged whenever the regime changes. A batch reacts against the solid amount currently charged into the bed, at the conversion given — its Reaction card reports totals (kg, not kg/h): the bed as charged, the bed after reaction (product formed plus whatever reactant did not convert), and the gas produced, assumed to have left via the fluidizing stream by the end of the batch. The fluidizing gas's own u_mf/u_t/elutriation figures stay at their pre-reaction values in batch mode, since there is no feed rate for the reaction's gas to blend into. In both modes, any fed species left out of the reaction's own rows — a carrier gas, an inert solid — passes straight through unreacted; a species that is both fed and one of the reaction's own rows (the default's own recycled CO₂, for instance) has its fed amount folded into the reaction's own balance rather than counted twice.</p>
+<p>The freeboard's cross-section is the bed's own unless an expanded top is given, in which case the extra area drops the velocity so entrained solids can disengage and fall back rather than leaving. This module does not compute a specific transport disengaging height, since that is read off a chart rather than a closed form; every elutriation rate given is the floor of what leaves, and the true rate is higher below it.</p>
+<p>Bed height is entered directly in both modes. In flow mode, the residence time it implies shows up in the results rather than being entered. The Solids balance card shows the feed, the total solid leaving the bed (accounting for anything converted to gas), and gas lost to reaction. Estimated elutriation appears separately in the Result section, as guidance on how much of that total is likely carried out overhead versus drawn from the bottom — flagged if the estimate would exceed the total that actually leaves.</p>
+<h2 id="what-comes-back">What comes back</h2>
+<p>The answer is grouped, and a card in amber is one that will not do what you asked of it.</p>
+<p><strong>One group per solid species</strong>, headed with its position, name and share of the bed. Each has its Regime, u_mf by both routes (Ergun and Wen &amp; Yu), the Terminal velocity, the ratio u₀ / u_mf, the Geldart group, the Minimum bubbling velocity, and the u_mf, u_t and Regime recomputed on the outlet gas <em>after reaction</em>. Elutriation is given at the mean size and at the fines size, and turns amber if the fines figure is larger. Regime reads "Fixed bed — the gas is too slow to lift the solids", "Fluidized", or "Entrainment — the gas carries solids out of the bed", and is amber unless the bed is fluidized. Velocities are given in m/s.</p>
+<p><strong>Result:</strong> the Superficial velocity, the Pressure drop and, in flow mode, an Estimated elutriation given as guidance only.</p>
+<p><strong>Bed:</strong> the blended particle density, bulk density, bed voidage, solids inventory, cross-sectional area, the Archimedes number on the Sauter mean, and in flow mode the Implied solids residence time.</p>
+<p><strong>Operating window:</strong> the gas rate that fluidizes every species and the rate at which one starts entraining, the turndown between them (amber below 1), and each rate as both a volumetric and a mass flow, alongside the gas you entered.</p>
+<p><strong>Bubbling:</strong> the bubble diameter at the surface, the bubble rise velocity and fraction, the expanded height (amber if the bed slugs), the expansion ratio H / H_mf, and how much freeboard that expansion needs.</p>
+<p><strong>Distributor:</strong> the required pressure drop and its share of the bed's, the actual drop (amber if it falls short), the orifice velocity, the orifice count and the pitch of a square array.</p>
+<p><strong>Freeboard</strong> (when expanded): its cross-section and the velocity in it. <strong>Reaction:</strong> see below. <strong>Solids balance</strong> (flow mode): the solids fed, the total leaving the bed and the amount lost as gas.</p>
+<p>Amber warnings, named by species, say when a species will sit on the distributor, will be carried out, is only just fluidized (below 1.5 times its u_mf, where a working bed runs at 2 to 5), or has a voidage at minimum fluidization below the bed voidage, which cannot be. The bed segregating, the freeboard entraining what the bed holds, a distributor that will not distribute, an empty operating window, and an elutriation estimate above what actually leaves are all flagged. Grey notes explain why the pressure drop does or does not rise with gas rate, that velocities are superficial, and that the terminal velocity bounds when the bed is carried out and not when its dust is.</p>
+<h2 id="limits">Limits</h2>
+<p>One mean particle size per species — a wide size distribution within one species still fluidizes progressively rather than at a single velocity, and no single diameter can express that. The terminal-velocity correlation's own sphericity range is checked per species, per <a href="#the-terminal-velocity">The Terminal Velocity</a> above.</p>
+<p>The reaction editor resolves one balanced equation (with a split ratio when it is ambiguous), not independent reactions running side by side. A batch reaction's reference must be a solid — the fluidizing gas has no batch total, only a flow — and a batch does not recompute a post-reaction bed height even though the reaction changes the solid's mass; before/after composition is reported, not a new geometry. Air and other pseudo-pure blends (refrigerants) can't be fed as the fluidizing gas at all, even alone — enter their real constituents instead (nitrogen and oxygen for air), since they have no CAS of their own and so can never be one component of the mixture a reaction's outlet gas may need to become. No heat transfer and no attrition — this case sizes the bed, bounds its operating window, and says what leaves it.</p>
+  </main>
+  </div>
+  <footer>
+    <div>
+      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

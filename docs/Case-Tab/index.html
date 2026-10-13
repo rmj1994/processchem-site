@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Case Tab | ProcessChem documentation</title>
+<meta name="description" content="Pick a case from the Select a case dropdown and the form becomes that case&#x27;s: a vessel being heated asks for its geometry and contents, a fluidized bed...">
+<link rel="canonical" href="https://processchem.no/docs/Case-Tab/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08171F" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Case Tab | ProcessChem documentation">
+<meta property="og:description" content="Pick a case from the Select a case dropdown and the form becomes that case&#x27;s: a vessel being heated asks for its geometry and contents, a fluidized bed...">
+<meta property="og:url" content="https://processchem.no/docs/Case-Tab/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+    </nav>
+  </header>
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/" aria-current="page">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Keeping your work</h2><ul>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+</ul>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="case-tab">Case Tab</h1>
+<h2 id="about">About</h2>
+<p>Real-world scenarios, each with its own inputs and its own answer, instead of one general form.</p>
+<p>Pick a case from the <strong>Select a case</strong> dropdown and the form becomes that case's: a vessel being heated asks for its geometry and contents, a fluidized bed asks for the solid and the gas fluidizing it. The <img alt="Open documentation icon" src="/docs/images/open-in-new.svg"> icon beside the dropdown opens the selected case's page in your browser, or this page if no case is chosen yet.</p>
+<p>These are engineering calculations with hazards attached, so each one flags what it is really for — the liquid-full vessel that gains 2.6 bar per °C, the auto-refrigeration that can embrittle a cylinder wall — rather than only returning a number.</p>
+<h2 id="cases">Cases</h2>
+<ul>
+<li><a href="/docs/Heater/">Heater</a> — heats or cools a batch or stream at constant pressure</li>
+<li><a href="/docs/Vessel-Heater/">Vessel Heater</a> — a sealed rigid vessel heated or cooled</li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a> — sizes a fluidized bed</li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a> — two streams exchanging heat</li>
+</ul>
+<h2 id="how-a-case-form-works">How a case form works</h2>
+<p>Nothing on this tab is a fixed form. Each case declares the inputs it needs, and the tab draws them, grouped under headings such as Fluid, Amount, Inlet and Duty.</p>
+<ul>
+<li><strong>Choices reshape the form.</strong> Picking "Specify: Duty" shows a duty field and hides the final-temperature one, and choosing a cylindrical or rectangular bed changes which dimensions are asked for. Only the fields that apply are shown.</li>
+<li><strong>Units follow the <a href="/docs/Units-Tab/">Units</a> tab.</strong> Each number field names its unit in its label, and changing a unit converts what is already typed. A few fields carry their own small unit list instead, such as particle size in µm, mm or cm, because a particle size typed in metres invites a lost zero.</li>
+<li><strong>Chemicals work as they do elsewhere.</strong> A chemical field takes a name, formula, CAS number or synonym and offers matching suggestions as you type. Where a case accepts a mixture, it is built the same way as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab.</li>
+<li><strong>Some fields explain themselves.</strong> A field with a note beside it carries a ⓘ; tap it for the reasoning behind the input.</li>
+<li><strong>Lists of rows.</strong> The Fluidized Bed takes up to 6 solids and up to 6 gases, each row with its own inputs. A <strong>+ Add</strong> button under the list adds a row (until the limit is reached) and a remove icon on each row deletes it.</li>
+</ul>
+<h2 id="results">Results</h2>
+<p>Tap Calculate and the answer appears under the form, grouped the way the inputs were. A value shown in amber is one the case wants you to look at twice: a bed that is not fluidizing, a vessel that has gone liquid-full, a distributor that will not distribute. Warnings sit below the values, and grey notes under them say how the answer was reached. The last line, "Solved with", names the method or data behind it.</p>
+<p>Editing any input, or changing a unit, clears the answer, so a result is never left on screen under inputs that no longer match it.</p>
+<h2 id="saving-your-inputs">Saving your inputs</h2>
+<p>The <strong>Open</strong>, <strong>Save</strong> and <strong>Reset</strong> buttons sit under the tab heading, and they act on the case you have selected. Save stores that case's inputs under a name of up to 40 characters, up to 25 sets per case; saving under an existing name replaces it. Open lists them, and lets you load, rename or delete each one. Reset puts only the selected case back to its original inputs, and leaves the other cases and your saved sets untouched. Saved sets are kept inside the app and are deleted with it, so to keep a copy safe, use <strong>Save to a file…</strong> in the Save dialog and <strong>Open from a file…</strong> in the Open list. A file holds one case's inputs and opens only when that case is selected; see <a href="/docs/Saving-and-Opening/">Saving and opening</a>.</p>
+<p>What you typed in each case is kept while you switch between cases, and comes back when the app starts, but the tab always opens on the case list rather than inside the last one you used. With no case chosen, the buttons ask you to choose one first.</p>
+  </main>
+  </div>
+  <footer>
+    <div>
+      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

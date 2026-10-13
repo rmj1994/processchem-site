@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ProcessChem: thermodynamics and process engineering calculator</title>
+<meta name="description" content="ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. For iPhone and iPad.">
+<link rel="canonical" href="https://processchem.no/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08171F" media="(prefers-color-scheme: dark)">
+<meta name="apple-itunes-app" content="app-id=6796077930">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="ProcessChem: thermodynamics and process engineering calculator">
+<meta property="og:description" content="Fluid properties, phase and reaction equilibrium, and unit-operation cases on your phone. No account, works offline.">
+<meta property="og:url" content="https://processchem.no/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/assets/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ProcessChem","operatingSystem":"iOS","applicationCategory":"UtilitiesApplication","description":"Thermodynamics and process engineering calculator: fluid properties, phase and reaction equilibrium, and unit-operation cases.","installUrl":"https://apps.apple.com/app/id6796077930","url":"https://processchem.no/","author":{"@type":"Person","name":"Ron M. Jacob"}}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#inside">What it does</a>
+      <a href="#companies">For companies</a>
+      <a href="/docs/">Documentation</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="hero">
+      <div>
+        <p class="tag" style="margin-bottom:18px">Thermodynamics &amp; process engineering</p>
+        <h1>Process calculations you can run on the plant floor.</h1>
+        <p class="lede">ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. It runs on your phone, with no account and no connection.</p>
+        <div class="cta">
+          <a class="btn fill" href="https://apps.apple.com/app/id6796077930"><small>Download on the</small>App Store</a>
+          <span class="btn line disabled" aria-disabled="true"><small>Google Play</small>Coming soon</span>
+        </div>
+        <p class="note">On iPhone and iPad today. Android is coming soon.</p>
+      </div>
+      <div class="stage"><div class="phone p-std" id="heroPhone" aria-label="Illustrative app screen"></div></div>
+    </div>
+
+    <div class="strip" aria-hidden="false">
+      <svg viewBox="0 0 1200 160" role="img" aria-label="Simplified process flow: feed vessel, pump, heat exchanger, control valve and fluidized bed reactor">
+        <!-- V-101 feed vessel -->
+        <path class="liq" d="M32 86 H108 V104 a28 28 0 0 1 -28 28 H60 a28 28 0 0 1 -28 -28 Z"/>
+        <rect class="eq" x="30" y="28" width="80" height="104" rx="28"/>
+        <text class="lbl" x="70" y="152" text-anchor="middle">V-101</text>
+        <!-- pipes -->
+        <path class="pipe" d="M110 100 H172 M208 100 H280 M380 100 H465 M495 100 H590"/>
+        <path class="pipe" d="M680 50 H1160"/>
+        <path class="pipe" d="M1150 44 L1160 50 L1150 56"/>
+        <!-- P-101 pump -->
+        <circle class="eq" cx="190" cy="100" r="18"/>
+        <path class="eq" d="M183 91 L201 100 L183 109 Z"/>
+        <text class="lbl" x="190" y="152" text-anchor="middle">P-101</text>
+        <!-- E-101 exchanger with utility stream -->
+        <rect class="eq" x="280" y="72" width="100" height="56" rx="6"/>
+        <polyline class="eq" points="294,100 312,84 332,116 352,84 366,100"/>
+        <path class="util" d="M310 72 V40 M350 128 V160"/>
+        <text class="lbl" x="330" y="152" text-anchor="middle">E-101</text>
+        <text class="lbl" x="320" y="38">utility</text>
+        <!-- FV-101 control valve -->
+        <path class="eq" d="M465 88 L495 112 V88 L465 112 Z"/>
+        <path class="eq" d="M480 100 V78 M466 78 a14 14 0 0 1 28 0 Z"/>
+        <text class="lbl" x="480" y="152" text-anchor="middle">FV-101</text>
+        <!-- R-101 fluidized bed -->
+        <rect class="eq" x="590" y="18" width="90" height="116" rx="30"/>
+        <path class="eq" d="M598 92 H672" stroke-dasharray="3 4"/>
+        <circle class="dot" cx="616" cy="64" r="2.6"/><circle class="dot" cx="634" cy="48" r="2.2"/>
+        <circle class="dot" cx="648" cy="70" r="2.8"/><circle class="dot" cx="626" cy="80" r="2.2"/>
+        <circle class="dot" cx="656" cy="52" r="2.2"/><circle class="dot" cx="640" cy="84" r="2.4"/>
+        <circle class="dot" cx="610" cy="48" r="2"/><circle class="dot" cx="662" cy="80" r="2"/>
+        <text class="lbl" x="635" y="152" text-anchor="middle">R-101</text>
+        <!-- instruments -->
+        <path class="eq" d="M790 50 V38 M960 50 V38"/>
+        <circle class="eq" cx="790" cy="24" r="14"/><circle class="eq" cx="960" cy="24" r="14"/>
+        <text class="lbl" x="790" y="28" text-anchor="middle">TI</text>
+        <text class="lbl" x="960" y="28" text-anchor="middle">PI</text>
+        <text class="lbl" x="1040" y="76">product</text>
+        <!-- animated flow over the main line -->
+        <path class="flow" d="M110 100 H172 M208 100 H280 M380 100 H465 M495 100 H590"/>
+        <path class="flow" d="M680 50 H1150"/>
+      </svg>
+    </div>
+  </main>
+
+  <section id="inside">
+    <div class="sec-head">
+      <h2>Four tabs, one engine.</h2>
+      <p>Every tab shares the same thermodynamic core, so a number you read in one place agrees with the answer in another.</p>
+    </div>
+    <div class="index">
+      <div class="row">
+        <h3>Property<span>Look up a fluid</span></h3>
+        <div>
+          <p>Density, heat capacity, viscosity, thermal conductivity, vapour pressure and more for thousands of chemicals and mixtures, with flash point, flammability limits and exposure limits alongside.</p>
+          <ul><li>density</li><li>Cp</li><li>viscosity</li><li>Hvap</li><li>Z factor</li><li>surface tension</li><li>hazard data</li></ul>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Thermo<span>Solve a state</span></h3>
+        <div>
+          <p>Flash a stream at any two properties, find the equilibrium composition of a reacting system, balance a reaction with its energy balance, or get the cell voltage of an electrolysis.</p>
+          <ul><li>Phase Equilibrium</li><li>Chemical Equilibrium</li><li>Reaction</li><li>Electrochemical Reaction</li></ul>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Case<span>Answer a plant question</span></h3>
+        <div>
+          <p>Start from the question an engineer actually asks. Give what you know and the case finds the rest, and it refuses a combination that cannot happen, such as heat flowing the wrong way.</p>
+          <ul><li>Heater</li><li>Vessel Heater</li><li>Fluidized Bed</li><li>Heat Exchanger</li></ul>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Units<span>Keep your own units</span></h3>
+        <div>
+          <p>Choose a unit for each quantity, so bar can sit beside °C or psi beside °F. Gas volumes convert at the Normal reference you pick: 0 °C, 15 °C or 20 °C.</p>
+          <ul><li>bara / barg</li><li>psi</li><li>Nm³/h</li><li>SCFM</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>What it stands on.</h2>
+      <p>The numbers come from published reference data and established models.</p>
+    </div>
+    <div class="stands">
+      <div><h3>Reference equations of state</h3><p>CoolProp's reference equations cover more than 100 fluids. Peng-Robinson with ChemSep interaction parameters handles the rest, and mixtures.</p></div>
+      <div><h3>Thermodynamic data</h3><p>NASA CEA coefficients for 1,820 species, plus tabulated data for cement and metallurgical minerals, feed the equilibrium and reaction solvers.</p></div>
+      <div><h3>Private by design</h3><p>No account, no ads, and no connection needed. Your calculations stay on your phone unless you save them to a file.</p></div>
+    </div>
+  </section>
+
+  <section id="companies">
+    <div class="sec-head">
+      <h2>One app, set up for your plant.</h2>
+      <p>A company code switches ProcessChem to your company's setup. Engineers see only the tabs and calculators they use, in your order, with your units and your standard cases already saved. Everyone else keeps the standard app.</p>
+    </div>
+    <div class="demo">
+      <div class="phone-col"><div class="phone p-std" id="demoPhone" aria-label="Illustrative app screen"></div></div>
+      <div>
+        <div class="seg" role="group" aria-label="Choose an example company">
+          <button type="button" aria-pressed="true" data-k="std">Standard app</button>
+          <button type="button" aria-pressed="false" data-k="acme">Acme Process Co.</button>
+          <button type="button" aria-pressed="false" data-k="nw">Northwind Chemicals</button>
+        </div>
+        <p class="fict">Fictional example companies. Illustrative screens.</p>
+        <dl id="facts"></dl>
+        <p class="after">We set this up with you: your tabs, your cases, your units and your standard setups. If your plant needs a calculator that does not exist yet, we can build it for you.</p>
+        <div class="cta"><a class="btn fill" href="mailto:contact@processchem.no"><small>Company setup</small>Talk to us</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="docs">
+    <div class="docs">
+      <div>
+        <h2 style="font-size:1.7rem;font-weight:800;margin-bottom:8px">Documented with the equations.</h2>
+        <p>Each tab and calculation has its own page that states the governing equations, the data sources and the limits of the method.</p>
+      </div>
+      <a class="btn line" href="/docs/"><small>Read the</small>Documentation</a>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div>
+      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var ICON = document.querySelector(".brand img").src;
+  var PROFILES = {
+    std: {
+      cls: "p-std", name: "ProcessChem", mark: null,
+      tabs: ["Property", "Thermo", "Case", "Units"],
+      cases: ["Heater", "Vessel Heater", "Fluidized Bed", "Heat Exchanger"],
+      units: ["bara", "°C", "Normal 20 °C"],
+      saved: [],
+      look: "ProcessChem blue and icon",
+      facts: {
+        Tabs: "Property, Thermo, Case, Units",
+        Cases: "All four, standard order",
+        Units: "bara, °C, Normal at 20 °C",
+        "Saved cases": "None",
+        Look: "ProcessChem blue and icon"
+      }
+    },
+    acme: {
+      cls: "p-acme", name: "Acme Process Co.", mark: "A",
+      tabs: ["Case", "Property", "Units"],
+      cases: ["Heat Exchanger", "Heater"],
+      units: ["psia", "°F", "SCFM"],
+      saved: ["Syngas preheater", "Feed cooler"],
+      facts: {
+        Tabs: "Case first, then Property and Units. Thermo hidden",
+        Cases: "Heat Exchanger, Heater",
+        Units: "psia, °F, SCFM",
+        "Saved cases": "Syngas preheater, Feed cooler",
+        Look: "Acme name, initial and red-orange accent"
+      }
+    },
+    nw: {
+      cls: "p-nw", name: "Northwind Chemicals", mark: "N",
+      tabs: ["Case", "Thermo", "Property", "Units"],
+      cases: ["Fluidized Bed", "Vessel Heater", "Heater"],
+      units: ["bara", "°C", "Nm³/h at 0 °C"],
+      saved: ["Dryer bed baseline", "Surge vessel heat-up"],
+      facts: {
+        Tabs: "Case, Thermo, Property, Units",
+        Cases: "Fluidized Bed, Vessel Heater, Heater",
+        Units: "bara, °C, Nm³/h at 0 °C",
+        "Saved cases": "Dryer bed baseline, Surge vessel heat-up",
+        Look: "Northwind name, initial and amber accent"
+      }
+    }
+  };
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  function phoneHtml(p) {
+    var mark = p.mark ? esc(p.mark) : '<img src="' + ICON + '" alt="">';
+    var tabs = p.tabs.map(function (t) { return '<span class="' + (t === "Case" ? "on" : "") + '">' + esc(t) + '</span>'; }).join("");
+    var opts = p.cases.map(function (c) { return '<div>' + esc(c) + '</div>'; }).join("");
+    var chips = p.units.map(function (u) { return '<span class="chip">' + esc(u) + '</span>'; }).join("");
+    var saved = p.saved.length
+      ? '<div class="sub">Saved by your company</div><div class="saved">' + p.saved.map(function (s) { return '<div><i></i>' + esc(s) + '</div>'; }).join("") + '</div>'
+      : '';
+    return '<div class="ex">example</div>' +
+      '<div class="head"><span class="mark">' + mark + '</span><span class="who">' + esc(p.name) + '</span></div>' +
+      '<div class="screen"><div class="ttl">Case</div>' +
+      '<div class="sel"><span>Select a case</span><span>▾</span></div>' +
+      '<div class="opts">' + opts + '</div>' +
+      '<div class="sub">Default units</div><div class="chips">' + chips + '</div>' + saved + '</div>' +
+      '<div class="bar">' + tabs + '</div>';
+  }
+
+  function paint(el, key) {
+    var p = PROFILES[key];
+    el.className = "phone " + p.cls;
+    el.innerHTML = phoneHtml(p);
+  }
+
+  function facts(key) {
+    var f = PROFILES[key].facts, out = "";
+    Object.keys(f).forEach(function (k) { out += '<div><dt>' + esc(k) + '</dt><dd>' + esc(f[k]) + '</dd></div>'; });
+    document.getElementById("facts").innerHTML = out;
+  }
+
+  paint(document.getElementById("heroPhone"), "std");
+  paint(document.getElementById("demoPhone"), "std");
+  facts("std");
+
+  var buttons = document.querySelectorAll(".seg button");
+  Array.prototype.forEach.call(buttons, function (b) {
+    b.addEventListener("click", function () {
+      Array.prototype.forEach.call(buttons, function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+      paint(document.getElementById("demoPhone"), b.getAttribute("data-k"));
+      facts(b.getAttribute("data-k"));
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Heat Exchanger | ProcessChem documentation</title>
+<meta name="description" content="A hot stream and a cold stream flowing past each other and exchanging heat — a shell-and-tube unit, a plate exchanger, any device where the two never...">
+<link rel="canonical" href="https://processchem.no/docs/Heat-Exchanger/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08171F" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Heat Exchanger | ProcessChem documentation">
+<meta property="og:description" content="A hot stream and a cold stream flowing past each other and exchanging heat — a shell-and-tube unit, a plate exchanger, any device where the two never...">
+<meta property="og:url" content="https://processchem.no/docs/Heat-Exchanger/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+    </nav>
+  </header>
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Keeping your work</h2><ul>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/" aria-current="page">Heat Exchanger</a></li>
+</ul>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="heat-exchanger">Heat Exchanger</h1>
+<h2 id="about">About</h2>
+<p>Two streams exchange heat: one cools, the other warms by the same amount. Give the duty, or one outlet temperature, and it finds the rest — and refuses a pairing that would need heat to flow backwards.</p>
+<h2 id="what-this-models">What This Models</h2>
+<p>A hot stream and a cold stream flowing past each other and exchanging heat — a shell-and-tube unit, a plate exchanger, any device where the two never mix. Whatever heat the hot stream gives up, the cold stream takes on: no loss to the surroundings is modelled, so the duty on one side always equals the duty on the other.</p>
+<h2 id="key-relations">Key Relations</h2>
+<pre><code>Q = ṅ_hot·(h_hot,in − h_hot,out)     heat the hot stream gives up
+Q = ṅ_cold·(h_cold,out − h_cold,in)  heat the cold stream picks up
+</code></pre>
+<p>The same Q both ways, by construction — no separate closure to check. Each Δh comes from the same relation the <a href="/docs/Heater/">Heater</a> case uses on its one stream, Δh = ∫Cp dT + Σ L_tr (sensible heat plus any latent heat crossed), run once per stream. Whichever you give — the duty, or one stream's own outlet — the other three unknowns follow from these two equations together.</p>
+<h2 id="counter-current">Counter-Current</h2>
+<p>The two streams are assumed to flow in opposite directions through the unit, the usual arrangement and the more efficient one. That choice only matters for the feasibility check below — the energy balance itself is the same either way.</p>
+<h2 id="inputs">Inputs</h2>
+<p>The form is grouped Hot stream, Cold stream and Duty. Each stream asks for the same things the <a href="/docs/Heater/#inputs">Heater</a> case asks for a single stream, given twice:</p>
+<ul>
+<li><strong>Substance</strong>, a chemical or a mixture built the same way as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab. The defaults are hot carbon dioxide and cold nitrogen, echoing a calciner giving up heat. Air is a blend with no heat-capacity data of its own, so use nitrogen and oxygen instead.</li>
+<li><strong>Flow given as</strong>, one of Mass flow, Molar flow, Volumetric flow or Normal Volumetric Flow, then the value. Only rates are offered: a batch heat exchanger is not a standard concept. Each stream has its own basis. The default is 1000 kg/h.</li>
+<li><strong>Inlet temperature</strong>, 900 °C for the hot stream and 20 °C for the cold, and <strong>Pressure</strong>, 1.01325 bar, held constant through the exchanger on each side.</li>
+</ul>
+<p><strong>Specify</strong> then chooses what you know:</p>
+<ul>
+<li><strong>Duty — find both outlet temperatures.</strong> Enter one <strong>Duty</strong>; it is always positive, since which stream is hot already says which way the heat goes.</li>
+<li><strong>Hot stream's outlet temperature — find the duty and the cold outlet.</strong> The outlet must be cooler than the hot inlet.</li>
+<li><strong>Cold stream's outlet temperature — find the duty and the hot outlet.</strong> The outlet must be warmer than the cold inlet.</li>
+</ul>
+<p>Press <strong>Calculate</strong>. Editing any input, or changing a unit, clears the answer.</p>
+<h2 id="what-comes-back">What comes back</h2>
+<p>A <strong>Duty</strong> line, then a group each for the <strong>Hot stream</strong> and the <strong>Cold stream</strong>: inlet and outlet temperature, initial and final phase, a Melting point or Boiling point line for each transition crossed, and when the phase changes the duty split into <em>of which sensible</em> and <em>of which latent</em>. Then the stream's mass flow, molar flow and volumetric flow at inlet conditions.</p>
+<p>Grey notes say that flow is assumed counter-current with no heat loss, so both sides carry the same duty, and that this is the energy balance only. If either stream changes phase, a note warns that the feasibility check below cannot see a pinch at the plateau. A failure inside one stream, such as a duty beyond what it can absorb, names the stream, so you are not left checking both.</p>
+<h2 id="when-it-refuses">When It Refuses</h2>
+<p>Heat only flows from hot to cold.</p>
+<pre><code>T_hot,out ≥ T_cold,in
+T_cold,out ≤ T_hot,in
+</code></pre>
+<p>In a counter-current unit those are the two ends where the streams pair up — asking for a pairing that breaks either one is refused rather than answered with a duty that would require heat to run backwards.</p>
+<p>That check only looks at the four inlet/outlet temperatures, not the shape of the temperature profile in between. If a stream changes phase partway through, the closest approach between the two streams can actually occur at that phase change rather than at either end — sizing an exchanger for that case needs the fuller method below, not this check alone.</p>
+<h2 id="what-this-does-not-do-yet">What This Does Not Do Yet</h2>
+<p>This is the energy balance only: how much heat moves, and what temperature each stream leaves at. It does not size the exchanger — no heat-transfer area, no tube count, no pressure drop, no fan or pump power, and no cost. Sizing needs the temperature profile along the unit and a heat-transfer coefficient, both a separate calculation from the one here.</p>
+  </main>
+  </div>
+  <footer>
+    <div>
+      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

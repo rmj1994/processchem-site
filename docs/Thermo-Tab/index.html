@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thermo Tab | ProcessChem documentation</title>
+<meta name="description" content="Phase Equilibrium / Flash — one chemical changing state: heated, cooled, compressed, expanded or throttled. Give the amount as a quantity for a sealed...">
+<link rel="canonical" href="https://processchem.no/docs/Thermo-Tab/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08171F" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Thermo Tab | ProcessChem documentation">
+<meta property="og:description" content="Phase Equilibrium / Flash — one chemical changing state: heated, cooled, compressed, expanded or throttled. Give the amount as a quantity for a sealed...">
+<meta property="og:url" content="https://processchem.no/docs/Thermo-Tab/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+    </nav>
+  </header>
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/" aria-current="page">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Keeping your work</h2><ul>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+</ul>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="thermo-tab">Thermo Tab</h1>
+<h2 id="about">About</h2>
+<p>Four ways of asking what happens to a substance, chosen from the <strong>Select a mode</strong> dropdown. The <img alt="Open documentation icon" src="/docs/images/open-in-new.svg"> icon beside it opens the selected mode's page in your browser, or this page if no mode is chosen yet.</p>
+<p><strong><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a> / Flash</strong> — one chemical changing state: heated, cooled, compressed, expanded or throttled. Give the amount as a quantity for a sealed vessel or as a rate for a flowing stream, and the basis decides which. Finds the final state with the heat and work.</p>
+<p><strong><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a> / Minimize Gibbs</strong> — a feed left to find its own minimum. You name the components; the app lists every compound their elements could form, you tick which may take part, and it finds the composition with the lowest total Gibbs energy. This is the mode for calcination, combustion products or ore reduction, where you do not already know what forms.</p>
+<p><strong><a href="/docs/Reaction/">Reaction</a></strong> — a reaction you already know. Name the reactants and products and the app balances the equation itself, applies your excess and conversion, and reports the full material balance with ΔH, ΔG and K.</p>
+<p><strong><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></strong> — the same reaction, driven by electricity or driving it. Adds the electrons transferred, the cell voltage, the electrical energy, the heat and, for a flow, the current of a monopolar or bipolar stack.</p>
+<p>The difference between Chemical Equilibrium and Reaction is who decides the products: Chemical Equilibrium works them out, Reaction takes them from you.</p>
+<h2 id="choosing-a-mode">Choosing a mode</h2>
+<p>The tab opens on the overview with no mode selected. Pick one from the dropdown and its form appears below. Every mode is built once and kept, so switching between them never loses what you typed in another.</p>
+<p>Changing a unit on the <a href="/docs/Units-Tab/">Units</a> tab converts the values in every mode, including the ones not on screen, so a mode you return to is already in the right units.</p>
+<h2 id="results">Results</h2>
+<p>Every mode shows its answer under a Calculate button. Editing any input clears the answer, so a result is never left on screen under inputs that no longer match it. A wrong or unreadable input is reported in a red "Error:" banner naming the field, and amber banners under a result are caveats worth reading: a phase-change warning, an extrapolated correlation, a mixture model's limits.</p>
+<h2 id="mixtures-and-chemical-names">Mixtures and chemical names</h2>
+<p>Wherever a mode asks for a chemical, it takes what the Property tab takes: a name, formula, CAS number or synonym, with matching suggestions as you type. Where a mode accepts a mixture, it is built the same way as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab.</p>
+<h2 id="saving-your-inputs">Saving your inputs</h2>
+<p>The <strong>Open</strong>, <strong>Save</strong> and <strong>Reset</strong> buttons sit under the tab heading, and they act on the mode you have selected, not on the whole tab. Save stores that mode's inputs under a name of up to 40 characters, up to 25 sets per mode; saving under an existing name replaces it. Open lists that mode's sets, and lets you load, rename or delete each one. Reset returns only the selected mode to its original inputs, so resetting Reaction leaves Phase Equilibrium as you left it, and it leaves your saved sets untouched. Saved sets are kept inside the app and are deleted with it, so to keep a copy safe, use <strong>Save to a file…</strong> in the Save dialog and <strong>Open from a file…</strong> in the Open list. A file holds one mode's inputs and opens only when that mode is selected; see <a href="/docs/Saving-and-Opening/">Saving and opening</a>.</p>
+<p>The values in each mode come back when the app starts, but the tab itself always opens on the overview. Choosing a mode reveals a form with your saved values already in it. With no mode chosen, the buttons ask you to choose a calculation first.</p>
+  </main>
+  </div>
+  <footer>
+    <div>
+      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

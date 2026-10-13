@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reaction | ProcessChem documentation</title>
+<meta name="description" content="A reaction you specify. You name the reactants and the products, and the coefficients follow from conserving every element — you never type them. You...">
+<link rel="canonical" href="https://processchem.no/docs/Reaction/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08171F" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Reaction | ProcessChem documentation">
+<meta property="og:description" content="A reaction you specify. You name the reactants and the products, and the coefficients follow from conserving every element — you never type them. You...">
+<meta property="og:url" content="https://processchem.no/docs/Reaction/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+    </nav>
+  </header>
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Keeping your work</h2><ul>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/" aria-current="page">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+</ul>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="reaction">Reaction</h1>
+<h2 id="about">About</h2>
+<p>Enter the reactants and products of a reaction you already know; balances it, applies your excess and conversion, and reports the outlet amounts with the heat of reaction and the equilibrium constant.</p>
+<h2 id="what-this-models">What This Models</h2>
+<p>A reaction you specify. You name the reactants and the products, and the coefficients follow from conserving every element — you never type them. You then anchor the calculation on one reference compound's amount, say how much excess the others carry, and the result is the full material balance together with the heat and the equilibrium constant.</p>
+<p>This is the opposite of the <a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a> mode. There you give a feed and the thermodynamics decides what forms. Here you have already decided what forms, and supply the conversion yourself. If you want to know whether your conversion is attainable rather than assume it, use Chemical Equilibrium.</p>
+<h2 id="inputs">Inputs</h2>
+<p>The form reads top to bottom as the reaction, the basis, and the conditions.</p>
+<p><strong>Calculate non-stoichiometric condition</strong> is the checkbox at the top; see <a href="#stoichiometric-or-not">Stoichiometric Or Not</a> below.</p>
+<p><strong>Reactants</strong> and <strong>Products</strong> each have a <strong>Number of</strong> dropdown, 1 to 6 of each, and a row per compound: a name (suggestions appear as you type), a phase of Gas, Liquid or Solid, and, when the box above is ticked, <strong>Excess %</strong> or <strong>Amount</strong> with its value. <strong>Inerts</strong> take 0 to 3 rows, name and phase and an amount, and appear only when the box is ticked. The default is calcination: one calcium carbonate solid giving calcium oxide (solid) and carbon dioxide (gas).</p>
+<p>The <strong>balanced equation</strong> appears under the compounds and updates as you type, so a typo or a set that cannot be balanced shows straight away in orange rather than after you press Calculate. Half a name is the normal state of a form being filled in, so it stays quiet until the names resolve.</p>
+<p>If the set can be balanced more than one way, a <strong>Split between</strong> section appears. It names the pairs of products that trade against each other, and asks for a percentage for each ratio: with carbon burning to both CO and CO₂, say, the share of the carbon that ends up as CO. It appears only when the balance is genuinely ambiguous, and only for pairs that settle it.</p>
+<p><strong>Calculation</strong> is "I have this feed" or "I need this much product" (see <a href="#the-two-modes">The Two Modes</a>). <strong>Reference compound</strong> lists the reactants for a feed you have, or the products for a production you want, because only one side can be the thing you supply. <strong>Amount as</strong> is Moles, Mass, Volume, Molar flow, Mass flow, Volumetric flow or Normal volumetric flow, with the reference amount beside it in the unit chosen on the <a href="/docs/Units-Tab/">Units</a> tab. A flow basis makes every result a rate.</p>
+<p><strong>Specify conversion of the limiting reactant</strong> takes a conversion in per cent. Left off, the reaction goes to complete conversion.</p>
+<p><strong>Feed enters at a different temperature</strong> takes a feed temperature, 25 °C by default. Left off, the feed is taken to be already at the reaction temperature and the duty is the heat of reaction alone.</p>
+<p><strong>Temperature</strong> and <strong>Pressure</strong> are the reaction conditions, 800 °C and 1.01325 bar by default. Press <strong>Calculate</strong>.</p>
+<h2 id="the-two-modes">The Two Modes</h2>
+<p>'I have this feed' takes the amounts you enter and works out what comes out. 'I need this much product' works backwards: you name the production you want and it sizes the feed to deliver it at your conversion.</p>
+<h2 id="stoichiometric-or-not">Stoichiometric Or Not</h2>
+<p>The checkbox at the top decides how much the form asks of you. Left unticked — the usual case — the reaction is taken as exactly stoichiometric: every reactant is present in precisely the ratio the balanced equation calls for, nothing is in excess, and no inert is carried. The excess and amount fields have nothing to say under that assumption, so they are hidden rather than left to be filled in.</p>
+<p>Tick it to describe a real feed instead: an excess of one reactant, a product already present, a compound in short supply, or a diluent passing through. The per-compound fields appear, and the two sections below describe them. Anything typed there applies only while the box is ticked — unticking it returns the calculation to pure stoichiometry rather than quietly keeping the last numbers entered.</p>
+<h2 id="excess-and-actual-amounts">Excess And Actual Amounts</h2>
+<p>These apply when the box above is ticked. Every compound except the reference can be given either way. Excess is a percentage over what the stoichiometry requires, so 20 % excess air means 1.2 times the oxygen the reaction needs, and 0 % means exactly enough. The excess is not consumed, so it appears in the outlet — that is what makes it visible in the masses.</p>
+<p>An actual amount is taken as entered instead. That means a compound can be put in short supply, in which case it becomes the limiting reactant and the reference is no longer fully converted. The result says which compound limited it and gives the conversion of each reactant separately, because with anything in excess they do not all convert to the same degree.</p>
+<h2 id="inerts">Inerts</h2>
+<p>Also only when the box above is ticked, an inert being by definition material beyond the stoichiometry. Anything that is present but does not react — the nitrogen in combustion air, a steam diluent — belongs in the inerts list, not among the reactants. It passes through untouched and takes no part in the balance, but it still counts toward the totals and the gas volume, which is what it is there for.</p>
+<h2 id="phase-matters">Phase Matters</h2>
+<p>Each compound carries the phase you choose, and it changes the answer. Burning methane to liquid water releases about 88 kJ per mole more than burning it to steam: that is the difference between a fuel's higher and lower heating value, and it is entirely down to which phase you pick.</p>
+<h2 id="what-comes-back">What comes back</h2>
+<p>The balanced equation heads the result, then a grid of cards:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Card</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ΔH (reaction), ΔG (reaction)</td>
+<td>Per mole of reaction as written, at your temperature.</td>
+</tr>
+<tr>
+<td>ΔS (reaction), K_eq</td>
+<td>The entropy change, and the dimensionless equilibrium constant.</td>
+</tr>
+<tr>
+<td>ΔH at 298.15 K, ΔG at 298.15 K</td>
+<td>The standard values, for checking against tables.</td>
+</tr>
+<tr>
+<td>Heat duty, Extent</td>
+<td>The duty (a power on a flow basis) and how many moles of reaction occurred.</td>
+</tr>
+</tbody>
+</table></div>
+<p>A blue note says what ΔH is per mole of the reference compound, that K depends on temperature alone, and whether the duty includes sensible heat. If a reactant limited the reaction, it is named.</p>
+<p>Then a <strong>Stream</strong> section gives every compound with its coefficient, and for each: mass in and out, moles in and out, volume in and out (or "no density on record for this phase" where a condensed compound has none, rather than a zero), its mass percent, its mole percent of the gas, and the percentage converted. Underneath, <strong>Total out</strong> sums the Gas, Solid and Liquid apart, since a condensed volume does not add like a gas partial volume, and finishes with an All line. The last line names where the thermodynamic data came from, and amber banners flag anything that weakens the result: a compound entered in a phase it does not hold at your temperature, a heat capacity used beyond the range it was fitted to, a reaction whose equilibrium favours the reactants (so the conversion is yours and not one the thermodynamics allows), and gas volumes above about 10 bar, where the ideal molar volume is approximate.</p>
+<h2 id="method">Method</h2>
+<p>Each compound's enthalpy and entropy at temperature come from its standard enthalpy of formation, its absolute entropy and its heat capacity, exactly as in the Chemical Equilibrium mode. The reaction's own properties are the sums of those, weighted by the balanced coefficients νᵢ.</p>
+<h2 id="key-relations">Key Relations</h2>
+<pre><code>ΔH_rxn = Σ νᵢ·hᵢ            heat of reaction, products minus feed
+ΔG°_rxn = Σ νᵢ·gᵢ           at standard-state activities
+ln K = −ΔG°_rxn / (RT)      equilibrium constant
+</code></pre>
+<p>νᵢ is positive for a product, negative for a reactant, and the reported heat duty is this same sum applied to the whole outlet and feed: enthalpy of the outlet less enthalpy of the feed. With no initial temperature given the feed is taken to be already at the reaction temperature, so the duty is the heat of reaction alone; give one and it includes the sensible heat as well.</p>
+<h2 id="about-the-equilibrium-constant">About The Equilibrium Constant</h2>
+<p>K depends on temperature alone. Pressure shifts where a real equilibrium settles, but it does not change K, and the value shown will not move when you change the pressure. Pressure does set the gas volumes.</p>
+<h2 id="what-it-refuses">What It Refuses</h2>
+<p>A set of compounds that cannot be balanced, or that can be balanced in more than one way — carbon and oxygen giving both CO and CO2 is the everyday case, and there is no single right answer to report. Ions are refused too: the balance conserves elements but not charge.</p>
+<h2 id="limitations">Limitations</h2>
+<p>One reaction at a time, with no kinetics and no reactor sizing. Gas volumes use the ideal molar volume RT/P, which is consistent with how the activities are modelled but approximate above about 10 bar. Heat capacity correlations extrapolate silently, so a compound entered in a phase it does not hold at your temperature is flagged rather than corrected.</p>
+  </main>
+  </div>
+  <footer>
+    <div>
+      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

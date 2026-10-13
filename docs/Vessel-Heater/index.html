@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vessel Heater | ProcessChem documentation</title>
+<meta name="description" content="A rigid, sealed vessel whose contents are heated or cooled — fire exposure, solar gain, steam-out, loss of cooling, or an ambient swing. The vessel...">
+<link rel="canonical" href="https://processchem.no/docs/Vessel-Heater/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08171F" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Vessel Heater | ProcessChem documentation">
+<meta property="og:description" content="A rigid, sealed vessel whose contents are heated or cooled — fire exposure, solar gain, steam-out, loss of cooling, or an ambient swing. The vessel...">
+<meta property="og:url" content="https://processchem.no/docs/Vessel-Heater/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+    </nav>
+  </header>
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Keeping your work</h2><ul>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Vessel-Heater/" aria-current="page">Vessel Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+</ul>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="vessel-heater">Vessel Heater</h1>
+<h2 id="about">About</h2>
+<p>A sealed rigid vessel is heated or cooled. Finds the resulting pressure, phase and liquid level, and flags the liquid-full overpressure hazard.</p>
+<h2 id="what-this-models">What This Models</h2>
+<p>A rigid, sealed vessel whose contents are heated or cooled — fire exposure, solar gain, steam-out, loss of cooling, or an ambient swing. The vessel does not vent and does not change volume, so both the total volume and the mass inside are constant and the molar volume is fixed.</p>
+<h2 id="inputs">Inputs</h2>
+<p>The form is grouped Fluid, Vessel, Contents and Heating / cooling.</p>
+<p><strong>Chemical name or formula</strong> takes a substance or a mixture, built the same way as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab. It opens on Propane.</p>
+<p><strong>Vessel volume from</strong> is Direct volume or Dimensions. Direct volume asks for one <strong>Vessel volume</strong>, 1000 L by default. Dimensions asks for:</p>
+<ul>
+<li><strong>Inside diameter</strong> (1 m) and <strong>Length (tangent to tangent)</strong> (2 m), the straight shell only, excluding the heads.</li>
+<li><strong>Head type:</strong> 2:1 elliptical, hemispherical or flat. Each head adds π·D³/24, π·D³/12 or nothing to the shell's π·D²·L/4.</li>
+<li><strong>Orientation:</strong> vertical or horizontal. It is recorded and does not change the volume or pressure here, but it sets how liquid level, wetted area and fill relate, which matters for relief and fire calculations.</li>
+</ul>
+<p>A flat-headed vessel needs a non-zero length, or its volume would be zero.</p>
+<p><strong>Contents given as</strong> is Mass or Initial pressure. Give a <strong>Mass in vessel</strong> (100 kg) and the app solves the initial state from it, or give an <strong>Initial pressure</strong> (10 bar) and the mass is back-calculated from the equation of state. <strong>Initial temperature</strong> is 20 °C.</p>
+<p><strong>Specify</strong> chooses the driver: <strong>Final temperature</strong> (80 °C), or <strong>Heat added / removed</strong>, where a positive value adds heat to the contents and a negative one removes it.</p>
+<p>Press <strong>Calculate</strong>. Editing any input, or changing a unit, clears the answer.</p>
+<h2 id="what-comes-back">What comes back</h2>
+<p>The results are grouped:</p>
+<ul>
+<li><strong>Vessel:</strong> the total volume, and for a vessel given by dimensions the shell and the two heads separately. Then the contents' mass and moles.</li>
+<li><strong>Initial state</strong> and <strong>Final state</strong>, each with Temperature, Pressure, Phase and Vapour fraction ("single phase" if there is only one), and the Liquid volume, Vapour volume and Liquid fill as a percentage of the vessel. Liquid fill turns amber at 99.5 % or more.</li>
+<li><strong>Energy:</strong> Heat added or Heat removed, and the Pressure rise between the two states.</li>
+</ul>
+<p>Amber warnings appear under the values. <strong>LIQUID-FULL</strong> fires when heating removes the vapour space that was there at the start; see <a href="#the-liquid-full-warning">The Liquid-Full Warning</a>. A final pressure above 1000 bara is flagged as far beyond ordinary equipment, with a reminder that the equation of state is being extrapolated. For a mixture, a warning says the liquid and vapour volume split uses bubble- and dew-point molar volumes that sit at different pressures (the temperature glide), so treat it as an approximation. An estimated or extrapolated density is called out too, because the mass in the vessel comes straight from it.</p>
+<p>The last line names the equation of state that produced the states.</p>
+<h2 id="method">Method</h2>
+<p>Constant volume and constant mass fix the molar volume; the final state then follows from the first law with no work term, in either direction.</p>
+<h2 id="key-relations">Key Relations</h2>
+<pre><code>V_m = V/n                    fixed, from the constant volume and mass
+Q = n·(U₂ − U₁)               final temperature given -&gt; duty found
+U₂ = U₁ + Q/n                 duty given -&gt; target U, then T solved
+</code></pre>
+<p>V_m is the molar volume, fixed for the whole calculation. Given a final temperature, the final state is a T,V_m flash and the duty follows directly. Given a duty instead, the target internal energy U₂ is known and the final temperature is found by root-finding on that same T,V_m flash.</p>
+<p>The two-phase region is handled explicitly rather than left to the equation of state: a plain T,V_m flash inside the saturation dome puts the liquid under tension and returns a negative pressure, so the saturation envelope is checked first and a two-phase state is solved at the vapour fraction x satisfying x·V_m,g + (1−x)·V_m,l = V_m — the fraction that reproduces the vessel's own molar volume.</p>
+<h2 id="the-liquid-full-warning">The Liquid-Full Warning</h2>
+<p>When heating drives the vapour fraction to zero, the vessel is liquid-full. Past that point there is no compressible vapour space left, and pressure rises almost vertically with temperature — a few degrees more can mean hundreds of bara. The calculation still reports a number, but it is extremely sensitive to both the temperature and the accuracy of the liquid density, so treat it as an indication that relief is required, not as a design pressure.</p>
+<h2 id="limitations">Limitations</h2>
+<p>The vessel is rigid (no elastic expansion of the shell, which in reality relieves a little of the hydraulic pressure rise), perfectly sealed, and uniform in temperature. Vessel wall heat capacity is not included, so a given duty heats the contents faster than it would in reality. There is no relief device — this is the unrelieved case, which is exactly what you size relief against.</p>
+  </main>
+  </div>
+  <footer>
+    <div>
+      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

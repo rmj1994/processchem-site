@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Heater | ProcessChem documentation</title>
+<meta name="description" content="A heater or cooler at constant pressure: an exchanger, a steam coil, a trim cooler. The fluid is free to expand as it warms, so the energy that matters...">
+<link rel="canonical" href="https://processchem.no/docs/Heater/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08171F" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Heater | ProcessChem documentation">
+<meta property="og:description" content="A heater or cooler at constant pressure: an exchanger, a steam coil, a trim cooler. The fluid is free to expand as it warms, so the energy that matters...">
+<meta property="og:url" content="https://processchem.no/docs/Heater/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+    </nav>
+  </header>
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Keeping your work</h2><ul>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/" aria-current="page">Heater</a></li>
+<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+</ul>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="heater">Heater</h1>
+<h2 id="about">About</h2>
+<p>Heats or cools a batch or a stream at constant pressure. Give a final temperature and it finds the duty, or give a duty and it finds the temperature reached — melting and boiling included.</p>
+<h2 id="what-this-models">What This Models</h2>
+<p>A heater or cooler at constant pressure: an exchanger, a steam coil, a trim cooler. The fluid is free to expand as it warms, so the energy that matters is its enthalpy.</p>
+<p>That is what separates this from the <a href="/docs/Vessel-Heater/">Vessel Heater</a> case. A sealed rigid vessel cannot expand, so heating it raises its pressure and the energy that matters is internal energy instead. Use this one for anything flowing through equipment or held at atmospheric pressure; use Vessel Heater for a closed cylinder or drum.</p>
+<h2 id="inputs">Inputs</h2>
+<p>The form is grouped Fluid, Amount, Inlet and Duty.</p>
+<p><strong>Chemical name or formula</strong> takes a substance or a mixture, built the same way as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab. It opens on Water. Air and the refrigerant blends have no heat-capacity data on record here, and are refused.</p>
+<p><strong>Amount as</strong> offers seven bases: Mass, Moles and Volume for a batch, and Mass flow, Molar flow, Volumetric flow and Normal Volumetric Flow for a stream. Its ⓘ says the same thing: a quantity heats a batch and reports an energy, a rate heats a stream and reports a power. It opens on a mass flow of 1000 kg/h. A volume or volumetric flow needs a density at the inlet conditions, and if none is available it says so and asks for a mass or moles instead.</p>
+<p><strong>Initial temperature</strong> (20 °C) and <strong>Pressure</strong> (1.01325 bar). The pressure is held constant throughout; the ⓘ reminds you that a heater lets the fluid expand rather than building pressure as a sealed vessel does. It is also used to place the boiling point, so water heated at 20 bara is not refused for "boiling at 100 °C" when its real boiling point at that pressure is about 212 °C.</p>
+<p><strong>Specify</strong> chooses the direction. "Final temperature — find the duty" shows a <strong>Final temperature</strong> field, 120 °C by default. "Duty — find the final temperature" shows a duty field instead: <strong>Heat added (negative to cool)</strong> in an energy unit for a batch, or <strong>Heat duty (negative to cool)</strong> in a power unit for a stream. Only the field that applies is shown. The duty direction is solved by root-finding the temperature whose enthalpy change matches the duty you gave.</p>
+<p>Press <strong>Calculate</strong>. Editing any input, or changing a unit, clears the answer.</p>
+<h2 id="what-comes-back">What comes back</h2>
+<p>The results are grouped:</p>
+<ul>
+<li><strong>Duty:</strong> Heat required (a batch) or Heat duty (a stream). When the range crosses a phase change it is split into <em>of which sensible</em> and <em>of which latent</em>. <strong>Mean heat capacity (sensible)</strong> is shown for checking a duty by hand.</li>
+<li><strong>Conditions:</strong> the initial and final temperature, the initial and final phase, and a <strong>Melting point</strong> or <strong>Boiling point</strong> line for each transition crossed.</li>
+<li><strong>Amount:</strong> the same amount every way, whichever basis you entered: mass, moles, and the volume at inlet conditions where a density exists. On a stream they read per hour.</li>
+</ul>
+<p>A grey note says the duty is the change in enthalpy at constant pressure, and, when the phase changes, that the latent heat is included and shown separately. The last line names the heat-capacity correlations used, and the tabulated latent heats where they applied.</p>
+<h2 id="duty-runs-out-mid-transition">Duty Runs Out Mid-Transition</h2>
+<p>If you specify a duty and it runs out part-way through melting or boiling, the temperature simply stops at the transition, because enthalpy jumps there. The result says so in amber, adds a line such as <strong>Fraction vaporised at 100.0 °C</strong> giving how much of the material changed phase, and warns that both phases are present at the end. That matters when you sized for one phase.</p>
+<p>A duty larger than the substance can absorb over the range its heat-capacity data covers, or one that runs past a phase change it has no latent heat for, is refused with a message suggesting a smaller duty or a specified final temperature.</p>
+<h2 id="mixtures">Mixtures</h2>
+<p>A mixture is accepted as long as <strong>no component melts or boils inside the range asked for</strong>. Its duty is then the mole-weighted sum of each component's sensible heat, which is exact for an ideal mixture. A composition entered by mass is converted to moles first, because the duty is per mole of mixture. If any component does change phase in the range, the calculation is refused by name, for example "water boils at 100 °C, inside the range asked for", and suggests keeping the range on one side of it or heating that component on its own, since a mixture changes phase across a range rather than at one point.</p>
+<h2 id="phase-changes-are-included">Phase Changes Are Included</h2>
+<p>Unlike the <a href="/docs/Thermo-Tab/">Thermo</a> tab, which refuses a range that crosses a melting or boiling point, this case walks the range in segments — integrating the solid, liquid or gas heat capacity as appropriate — and adds the latent heat at each boundary it crosses.</p>
+<h2 id="key-relations">Key Relations</h2>
+<pre><code>Q = n·Δh                  duty is the enthalpy change, constant P
+Δh = ∫Cp dT + Σ L_tr       sensible part plus each latent heat crossed
+</code></pre>
+<p>n is the amount (or flow); Cp is the heat capacity of whichever phase the range is in at that point; L_tr is the latent heat added at each melting or boiling point the range crosses. Given a duty instead of a final temperature, the same relation is root-found for the T whose Δh matches it. Heating water from -20 °C to 150 °C gives about 3.13 MJ/kg, of which roughly five sixths is L_tr — melting the ice and boiling the water — rather than the ∫Cp dT term. The duty is reported split into its sensible and latent parts for exactly that reason, and the transition temperatures are shown.</p>
+<p>The enthalpy of vaporisation is read at the boiling point rather than at the starting temperature, which matters: water reads 2257 kJ/kg at 100 °C against 2442 kJ/kg at 25 °C.</p>
+<h2 id="mean-heat-capacity">Mean Heat Capacity</h2>
+<p>Cp_mean = (∫Cp dT)/(T₂ − T₁) — reported for checking a duty by hand, and it is the sensible heat divided by the temperature span only. Folding L_tr into it would give a number that looks like a heat capacity, is not one, and is wrong by however much of the duty went into the phase change.</p>
+<h2 id="limitations">Limitations</h2>
+<p>A mixture that stays in one phase across the range is fine (see <a href="#mixtures">Mixtures</a>), but one whose components melt or boil in it is refused: a mixture boils across a range rather than at a point, so its latent heat cannot be placed at a single boundary. A solid that decomposes rather than melting is refused by name — calcium carbonate calcines to CaO and CO2 rather than turning into a liquid, and the enthalpy of fusion listed against it does not describe anything that happens. Heat capacity correlations extrapolate silently outside their fitted range, so treat a duty far outside ordinary process conditions as indicative.</p>
+<p>A handful of common plastics (HDPE, LDPE, polypropylene, PET, PVC) can be entered by name here too, heated over their solid range. None of them has a verified melt-phase model behind it, so a range reaching into or through the melt is refused rather than guessed — real resin properties also vary by grade, which the <a href="/docs/Property-Tab/">Property</a> tab's entry for each one says more about.</p>
+  </main>
+  </div>
+  <footer>
+    <div>
+      <strong style="color:var(--ink)">ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

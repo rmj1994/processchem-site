@@ -76,31 +76,48 @@ p { margin: 0; }
 .btn.line { background: transparent; color: var(--ink); }
 .hero .note { margin-top: 14px; font: 400 13px/1.4 var(--mono); color: var(--muted); }
 
-/* phone */
-.phone { width: 270px; flex: none; border: 9px solid var(--ink); border-radius: 38px; background: var(--surface); overflow: hidden; display: flex; flex-direction: column; height: 540px; position: relative; }
-.phone .head { display: flex; align-items: center; gap: 8px; padding: 16px 14px 10px; }
-.phone .mark { width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; font: 800 13px/1 var(--display); color: #fff; background: var(--pa); flex: none; overflow: hidden; }
-.phone .mark img { width: 100%; height: 100%; display: block; }
-.phone .who { font: 700 14px/1.1 var(--display); letter-spacing: -0.01em; }
-.phone .screen { flex: 1; padding: 6px 14px 10px; overflow: hidden; display: flex; flex-direction: column; gap: 10px; }
-.phone .ttl { font: 800 20px/1.1 var(--display); letter-spacing: -0.02em; }
-.phone .sel { border: 1.5px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; }
-.phone .opts { border: 1.5px solid var(--pa); border-radius: 8px; overflow: hidden; }
-.phone .opts div { padding: 8px 10px; font-size: 13.5px; font-weight: 500; border-top: 1px solid var(--line); }
-.phone .opts div:first-child { border-top: 0; }
-.phone .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.phone .chip { font: 500 10.5px/1.2 var(--mono); padding: 4px 7px; border-radius: 5px; background: var(--mint-soft); color: var(--ink); }
-.phone .sub { font: 500 10.5px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
-.phone .saved div { font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; }
-.phone .saved i { width: 8px; height: 10px; background: var(--pa); border-radius: 1px 1px 0 0; display: block; flex: none; }
-.phone .bar { display: flex; border-top: 1px solid var(--line); background: var(--surface); }
-.phone .bar span { flex: 1; text-align: center; padding: 10px 2px 12px; font-size: 11px; font-weight: 500; color: var(--muted); }
-.phone .bar span.on { color: var(--pa); font-weight: 600; box-shadow: inset 0 3px 0 var(--pa); }
-.phone .ex { position: absolute; right: 10px; top: 12px; font: 500 9px/1 var(--mono); color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+/* phone: real screenshots, and an HTML replica of the app for the company demo */
+.device { --frame: #101b22; width: 100%; max-width: 290px; border: 9px solid var(--frame); border-radius: 40px; background: var(--frame); box-shadow: 0 0 0 1px var(--line), 0 24px 48px -24px rgba(0,0,0,.45); overflow: hidden; margin: 0; }
+.device img { display: block; width: 100%; height: auto; border-radius: 30px; }
 .hero .stage { display: flex; justify-content: center; }
-.p-std { --pa: var(--p-std); }
-.p-acme { --pa: var(--p-acme); }
-.p-nw { --pa: var(--p-nw); }
+
+/* The real app is always light, so the replica uses fixed light values */
+.app { --app-bg: #F8FAFF; --app-ink: #1B1B1F; --app-muted: #5F6368; --app-line: #C9CDD6; --app-nav: #EEF0F6; --app-pill: #DCE3F3; --app-btn: #F1F3FA; --app-btn-ink: #3D5A86; --app-menu: #EEEFF4;
+  --frame: #101b22; width: 100%; max-width: 290px; height: 590px; border: 9px solid var(--frame); border-radius: 40px; background: var(--app-bg); color: var(--app-ink); overflow: hidden; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 0 1px var(--line), 0 24px 48px -24px rgba(0,0,0,.45); font-family: Roboto, "Helvetica Neue", Arial, sans-serif; }
+.app .body { flex: 1; padding: 22px 14px 0; overflow: hidden; display: flex; flex-direction: column; gap: 8px; }
+.app .co { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 10px; background: var(--app-menu); }
+.app .co .mark { width: 24px; height: 24px; border-radius: 6px; display: grid; place-items: center; font: 700 12px/1 var(--display); color: #fff; background: var(--pa); overflow: hidden; flex: none; }
+.app .co .mark img { width: 100%; height: 100%; display: block; }
+.app .co b { font: 700 13px/1.1 var(--display); }
+.app .ttl { text-align: center; font: 500 21px/1.1 Roboto, "Helvetica Neue", Arial, sans-serif; margin-top: 2px; }
+.app .sub { text-align: center; font-size: 11.5px; color: var(--app-muted); }
+.app .btns { display: flex; gap: 7px; padding-block: 7px; border-block: 1px solid var(--app-line); }
+.app .btns span { flex: 1; text-align: center; padding: 7px 0; border-radius: 999px; background: var(--app-btn); color: var(--app-btn-ink); font-size: 12px; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,.18); }
+.app .btns span.save { background: #5C6F7C; color: #fff; }
+.app .sel { display: flex; justify-content: space-between; align-items: center; border: 1.3px solid var(--app-ink); border-radius: 5px; padding: 9px 10px; font-size: 13px; color: var(--app-muted); }
+.app .menu { border-radius: 4px; background: var(--app-menu); box-shadow: 0 2px 6px rgba(0,0,0,.22); margin-top: -4px; }
+.app .menu div { padding: 9px 10px; font-size: 12.5px; }
+.app .menu.pa { box-shadow: 0 2px 6px rgba(0,0,0,.22), inset 0 0 0 1.3px var(--pa); }
+.app .chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.app .chip { font: 500 10px/1.2 var(--mono); padding: 4px 7px; border-radius: 5px; background: var(--app-pill); color: var(--app-ink); }
+.app .lab { font: 500 10px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--app-muted); margin-top: 2px; }
+.app .saved div { font-size: 12.5px; padding: 6px 0; border-bottom: 1px solid var(--app-line); display: flex; align-items: center; gap: 8px; }
+.app .saved i { width: 8px; height: 10px; background: var(--pa); border-radius: 1px 1px 0 0; flex: none; }
+.app .nav { display: flex; background: var(--app-nav); padding: 8px 4px 10px; }
+.app .nav span { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10.5px; color: var(--app-ink); }
+.app .nav span i { display: grid; place-items: center; width: 46px; height: 24px; border-radius: 12px; }
+.app .nav span.on i { background: var(--app-pill); }
+.app .nav svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.app .tag-ex { position: absolute; left: 0; right: 0; text-align: center; top: 7px; font: 500 8.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--app-muted); }
+.p-std { --pa: #0F47A0; }
+.p-acme { --pa: #C4411F; }
+.p-nw { --pa: #A86400; }
+
+/* screens gallery */
+.shots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; border-top: 2px solid var(--ink); padding-top: 28px; }
+.shots figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.shots figcaption { font: 500 12px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); text-align: center; }
+.shots figcaption b { display: block; font: 700 17px/1.2 var(--display); letter-spacing: -0.01em; text-transform: none; color: var(--ink); margin-bottom: 4px; }
 
 /* flow strip */
 .strip { margin-top: 8px; border-block: 1px solid var(--line); overflow-x: auto; }
@@ -154,6 +171,8 @@ footer a { text-decoration: none; }
 footer a:hover { color: var(--ink); }
 footer .links { display: flex; gap: 22px; flex-wrap: wrap; }
 
+@media (max-width: 980px) { .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .shots { grid-template-columns: minmax(0, 1fr); } .device, .app { max-width: 260px; } }
 @media (max-width: 860px) {
   .hero, .sec-head, .row, .demo { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .hero .stage { order: 2; }

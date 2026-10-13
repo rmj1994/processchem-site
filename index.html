@@ -31,6 +31,7 @@
   <header class="top">
     <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
     <nav class="nav" aria-label="Main">
+      <a href="#screens">The app</a>
       <a href="#inside">What it does</a>
       <a href="#companies">For companies</a>
       <a href="/docs/">Documentation</a>
@@ -49,7 +50,7 @@
         </div>
         <p class="note">On iPhone and iPad today. Android is coming soon.</p>
       </div>
-      <div class="stage"><div class="phone p-std" id="heroPhone" aria-label="Illustrative app screen"></div></div>
+      <div class="stage"><figure class="device"><img src="/assets/screens/case-heater-results.jpg" width="774" height="1674" alt="ProcessChem Heater case: heat duty, conditions and amounts for water heated from 20 to 120 degrees Celsius"></figure></div>
     </div>
 
     <div class="strip" aria-hidden="false">
@@ -96,6 +97,31 @@
       </svg>
     </div>
   </main>
+
+  <section id="screens">
+    <div class="sec-head">
+      <h2>See it on the phone.</h2>
+      <p>These are screens from the app, not mock-ups. Property results for ethanol, the four Thermo modes, the Case list, and the Units tab.</p>
+    </div>
+    <div class="shots">
+      <figure>
+        <div class="device"><img src="/assets/screens/property-results.jpg" width="774" height="1674" loading="lazy" alt="Property tab: results for ethanol, including density, heat capacity, viscosity and boiling point"></div>
+        <figcaption><b>Property</b>Look up a fluid</figcaption>
+      </figure>
+      <figure>
+        <div class="device"><img src="/assets/screens/thermo-modes.jpg" width="774" height="1674" loading="lazy" alt="Thermo tab with the mode list: Phase Equilibrium, Chemical Equilibrium, Reaction and Electrochemical Reaction"></div>
+        <figcaption><b>Thermo</b>Solve a state</figcaption>
+      </figure>
+      <figure>
+        <div class="device"><img src="/assets/screens/case-list.jpg" width="774" height="1674" loading="lazy" alt="Case tab with the case list: Heater, Vessel Heater, Fluidized Bed and Heat Exchanger"></div>
+        <figcaption><b>Case</b>Answer a plant question</figcaption>
+      </figure>
+      <figure>
+        <div class="device"><img src="/assets/screens/units.jpg" width="774" height="1674" loading="lazy" alt="Units tab: choose a unit for temperature, pressure, mass, volume, energy and more"></div>
+        <figcaption><b>Units</b>Keep your own units</figcaption>
+      </figure>
+    </div>
+  </section>
 
   <section id="inside">
     <div class="sec-head">
@@ -152,7 +178,7 @@
       <p>A company code switches ProcessChem to your company's setup. Engineers see only the tabs and calculators they use, in your order, with your units and your standard cases already saved. Everyone else keeps the standard app.</p>
     </div>
     <div class="demo">
-      <div class="phone-col"><div class="phone p-std" id="demoPhone" aria-label="Illustrative app screen"></div></div>
+      <div class="phone-col"><div class="app p-std" id="demoPhone" aria-label="Illustrative app screen"></div></div>
       <div>
         <div class="seg" role="group" aria-label="Choose an example company">
           <button type="button" aria-pressed="true" data-k="std">Standard app</button>
@@ -241,26 +267,35 @@
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
 
+  var ICONS = {
+    Property: '<svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg>',
+    Thermo: '<svg viewBox="0 0 24 24"><path d="M12 3a2 2 0 0 0-2 2v8a4 4 0 1 0 4 0V5a2 2 0 0 0-2-2z"/></svg>',
+    Case: '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9zM9 11h6M9 15h6"/></svg>',
+    Units: '<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/></svg>'
+  };
+
   function phoneHtml(p) {
-    var mark = p.mark ? esc(p.mark) : '<img src="' + ICON + '" alt="">';
-    var tabs = p.tabs.map(function (t) { return '<span class="' + (t === "Case" ? "on" : "") + '">' + esc(t) + '</span>'; }).join("");
+    var company = p.mark ? '<div class="co"><span class="mark">' + esc(p.mark) + '</span><b>' + esc(p.name) + '</b></div>' : '';
+    var tabs = p.tabs.map(function (t) {
+      return '<span class="' + (t === "Case" ? "on" : "") + '"><i>' + ICONS[t] + '</i>' + esc(t) + '</span>';
+    }).join("");
     var opts = p.cases.map(function (c) { return '<div>' + esc(c) + '</div>'; }).join("");
-    var chips = p.units.map(function (u) { return '<span class="chip">' + esc(u) + '</span>'; }).join("");
+    var chips = p.mark ? '<div class="lab">Default units</div><div class="chips">' + p.units.map(function (u) { return '<span class="chip">' + esc(u) + '</span>'; }).join("") + '</div>' : '';
     var saved = p.saved.length
-      ? '<div class="sub">Saved by your company</div><div class="saved">' + p.saved.map(function (s) { return '<div><i></i>' + esc(s) + '</div>'; }).join("") + '</div>'
+      ? '<div class="lab">Saved by your company</div><div class="saved">' + p.saved.map(function (s) { return '<div><i></i>' + esc(s) + '</div>'; }).join("") + '</div>'
       : '';
-    return '<div class="ex">example</div>' +
-      '<div class="head"><span class="mark">' + mark + '</span><span class="who">' + esc(p.name) + '</span></div>' +
-      '<div class="screen"><div class="ttl">Case</div>' +
-      '<div class="sel"><span>Select a case</span><span>▾</span></div>' +
-      '<div class="opts">' + opts + '</div>' +
-      '<div class="sub">Default units</div><div class="chips">' + chips + '</div>' + saved + '</div>' +
-      '<div class="bar">' + tabs + '</div>';
+    return '<div class="tag-ex">example</div><div class="body">' + company +
+      '<div class="ttl">🏭 Case</div>' +
+      '<div class="sub">Real-world scenarios, start to finish</div>' +
+      '<div class="btns"><span>Open</span><span class="save">Save</span><span>Reset</span></div>' +
+      '<div class="sel"><span>Select a case</span><span>▴</span></div>' +
+      '<div class="menu' + (p.mark ? ' pa' : '') + '">' + opts + '</div>' + chips + saved + '</div>' +
+      '<div class="nav">' + tabs + '</div>';
   }
 
   function paint(el, key) {
     var p = PROFILES[key];
-    el.className = "phone " + p.cls;
+    el.className = "app " + p.cls;
     el.innerHTML = phoneHtml(p);
   }
 
@@ -270,7 +305,6 @@
     document.getElementById("facts").innerHTML = out;
   }
 
-  paint(document.getElementById("heroPhone"), "std");
   paint(document.getElementById("demoPhone"), "std");
   facts("std");
 

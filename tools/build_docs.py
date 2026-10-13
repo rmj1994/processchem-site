@@ -156,7 +156,7 @@ FOOT = """  <footer>
     </div>
     <div class="links">
       <a href="/docs/">Documentation</a>
-      <a href="https://gist.github.com/rmj1994/724c8b4777371417a2cbaf03278f3db3">Privacy policy</a>
+      <a href="/privacy/">Privacy policy</a>
     </div>
   </footer>
 </div>
@@ -177,6 +177,21 @@ def nav_html(nav, current: str) -> str:
         out.append("</ul>")
     out.append("</nav>")
     return "\n".join(out)
+
+
+def build_privacy() -> str:
+    """The privacy policy, kept in privacy/PRIVACY.md and published at /privacy/."""
+    src = SITE / "privacy" / "PRIVACY.md"
+    text = src.read_text()
+    out = SITE / "privacy" / "index.html"
+    body = render(text)
+    page = (
+        HEAD.format(title="Privacy policy | ProcessChem", desc="ProcessChem collects no personal data. How the app and this website handle information.",
+                    canon=BASE + "/privacy/", base=BASE).replace(' aria-current="page"', "")
+        + '  <main id="main" class="article" style="padding-block:24px 40px">\n' + body + "\n  </main>\n" + FOOT
+    )
+    out.write_text(page)
+    return BASE + "/privacy/"
 
 
 def build(source: Path):
@@ -225,7 +240,8 @@ def build(source: Path):
         built.append(name)
 
     # sitemap, robots, 404
-    urls = [BASE + "/"] + [BASE + page_url(n) for n in sorted(built, key=lambda n: (n != HOME_MD, n))]
+    privacy_url = build_privacy()
+    urls = [BASE + "/", privacy_url] + [BASE + page_url(n) for n in sorted(built, key=lambda n: (n != HOME_MD, n))]
     (SITE / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n"
@@ -244,7 +260,7 @@ def build(source: Path):
 
 def check(built, problems):
     """Every internal link/anchor resolves, images exist, nothing loads off-site."""
-    html_files = [SITE / "index.html", SITE / "404.html"] + sorted((SITE / "docs").rglob("index.html"))
+    html_files = [SITE / "index.html", SITE / "404.html", SITE / "privacy" / "index.html"] + sorted((SITE / "docs").rglob("index.html"))
     ids = {}
 
     def url_to_file(url_path: str):

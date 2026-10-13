@@ -153,7 +153,7 @@ FOOT = """  <footer>
     <div>
       <strong style="color:var(--ink)">ProcessChem</strong><br>
       Built by Ron M. Jacob<br>
-      <a href="mailto:contact@processchem.no" style="font-family:var(--mono);font-size:13px">contact@processchem.no</a>
+      <a href="mailto:ronmjacob1994@gmail.com" style="font-family:var(--mono);font-size:13px">ronmjacob1994@gmail.com</a>
     </div>
     <div class="links">
       <a href="/docs/">Documentation</a>

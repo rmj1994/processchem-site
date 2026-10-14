@@ -100,7 +100,7 @@ See it on the phone.
 
 ### Introduction {#screens.p}
 
-These are screens from the app, not mock-ups. Property results for ethanol, the four Thermo modes, the Case list, and the Units tab.
+These are actual screens from the app. Property results for ethanol, the four Thermo modes, the Case list, and the Units tab.
 
 ### Property: picture description {#screens.property.alt}
 

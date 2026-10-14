@@ -7,6 +7,12 @@
   },
   "files": [
     {
+      "word": "Website - Landing page.docx",
+      "sources": [
+        "site:content/landing.md"
+      ]
+    },
+    {
       "word": "Docs - Tabs and overview.docx",
       "sources": [
         "wiki:ProcessChem-Documentation.md",
@@ -37,7 +43,15 @@
     },
     {
       "word": "Website - Privacy policy.docx",
-      "sources": ["site:privacy/PRIVACY.md"]
+      "sources": [
+        "site:privacy/PRIVACY.md"
+      ]
+    },
+    {
+      "word": "Store - Google Play listing.docx",
+      "sources": [
+        "app:store/play-listing.md"
+      ]
     }
   ]
 }

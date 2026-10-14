@@ -216,54 +216,83 @@ def _straight(s: str) -> str:
 
 
 def inl(nodes) -> str:
-    out = []
-    for n in nodes:
-        t, c = n["t"], n.get("c")
-        if t == "Str":
-            out.append(_straight(c))
-        elif t in ("Space", "SoftBreak"):
-            out.append(" ")
-        elif t == "LineBreak":
-            out.append("\n")
-        elif t == "Emph":
-            out.append("*" + inl(c) + "*")
-        elif t == "Strong":
-            out.append("**" + inl(c) + "**")
-        elif t in ("Underline", "Strikeout", "Superscript", "Subscript", "SmallCaps"):
-            out.append("<%s>%s</%s>" % (t, inl(c), t))
-        elif t == "Quoted":
-            q = '"' if c[0]["t"] == "DoubleQuote" else "'"
-            out.append(q + inl(c[1]) + q)
-        elif t == "Code":
-            out.append("`" + _straight(c[1]) + "`")
-        elif t == "Link":
-            inner = inl(c[1])
-            # bold/italic around a link and inside a link mean the same thing: compare them alike
-            for mark in ("**", "*"):
-                if inner.startswith(mark) and inner.endswith(mark) and len(inner) > 2 * len(mark) \
-                        and mark not in inner[len(mark):-len(mark)].replace("**", ""):
-                    out.append(mark + "[" + inner[len(mark):-len(mark)] + "](" + c[2][0] + ")" + mark)
-                    break
+    """Canonical text of inline content, formatting compared per character.
+
+    Word and Markdown nest bold/italic/code/links differently for the same visible result
+    (for example bold text that contains inline code), so each character carries a set of
+    formats, spaces carry only 'code'/'link', and runs of equal formats are merged.
+    """
+    chars = []   # (character, frozenset of formats)
+
+    def put(ch, fmt):
+        if "code" in fmt:
+            fmt = frozenset(x for x in fmt if x == "code" or x.startswith("a:"))
+        if ch.isspace() and ch != "\n":
+            if chars and chars[-1][0] == " ":
+                return
+            ch = " "
+            fmt = frozenset(x for x in fmt if x == "code" or x.startswith("a:"))
+        chars.append((ch, fmt))
+
+    def walk(ns, fmt):
+        for n in ns:
+            t, c = n["t"], n.get("c")
+            if t == "Str":
+                for ch in _straight(c):
+                    put(ch, fmt)
+            elif t in ("Space", "SoftBreak"):
+                put(" ", fmt)
+            elif t == "LineBreak":
+                put("\n", frozenset())
+            elif t == "Emph":
+                walk(c, fmt | {"i"})
+            elif t == "Strong":
+                walk(c, fmt | {"b"})
+            elif t in ("Underline", "Strikeout", "Superscript", "Subscript", "SmallCaps"):
+                walk(c, fmt | {t})
+            elif t == "Quoted":
+                q = '"' if c[0]["t"] == "DoubleQuote" else "'"
+                put(q, fmt)
+                walk(c[1], fmt)
+                put(q, fmt)
+            elif t == "Code":
+                for ch in _straight(c[1]):
+                    put(ch, fmt | {"code"})
+            elif t == "Link":
+                walk(c[1], fmt | {"a:" + c[2][0]})
+            elif t == "Image":
+                for ch in "![" + inl(c[1]) + "](" + c[2][0] + ")":
+                    put(ch, fmt)
+            elif t in ("Span", "Cite"):
+                walk(c[1], fmt)
+            elif t == "Math":
+                for ch in "$" + c[1] + "$":
+                    put(ch, fmt)
+            elif t == "RawInline":
+                for ch in c[1]:
+                    put(ch, fmt)
+            elif t == "Note":
+                for ch in "[^note]":
+                    put(ch, fmt)
             else:
-                out.append("[" + inner + "](" + c[2][0] + ")")
-        elif t == "Image":
-            out.append("![" + inl(c[1]) + "](" + c[2][0] + ")")
-        elif t == "Span":
-            out.append(inl(c[1]))
-        elif t == "Math":
-            out.append("$" + c[1] + "$")
-        elif t == "RawInline":
-            out.append(c[1])
-        elif t == "Note":
-            out.append("[^note]")
-        elif t == "Cite":
-            out.append(inl(c[1]))
-        else:
-            out.append("?" + t)
-    s = "".join(out)
-    s = re.sub(r"\*\*\*\*", "", s)             # adjacent bold runs
-    s = re.sub(r"[ \t]+", " ", s)
-    return s.strip()
+                for ch in "?" + t:
+                    put(ch, fmt)
+
+    walk(nodes, frozenset())
+    while chars and chars[0][0] == " ":
+        chars.pop(0)
+    while chars and chars[-1][0] == " ":
+        chars.pop()
+    out, i = [], 0
+    while i < len(chars):
+        j = i
+        while j < len(chars) and chars[j][1] == chars[i][1]:
+            j += 1
+        text = "".join(ch for ch, _ in chars[i:j])
+        fmt = chars[i][1]
+        out.append("⟦" + ",".join(sorted(fmt)) + "|" + text + "⟧" if fmt else text)
+        i = j
+    return "".join(out)
 
 
 def blk(nodes) -> str:
@@ -364,13 +393,21 @@ def polish(block: Block, keep_curly: bool) -> str:
 
 # --------------------------------------------------------------------------- merge
 
+ATTR_RE = re.compile(r"\s*\{#[^}]*\}\s*$")
+
+
+def _canon_text(b: Block) -> str:
+    """Block text as compared: heading markers like {#hero.h1} are bookkeeping, not wording."""
+    return ATTR_RE.sub("", b.text) if b.kind == "heading" else b.text
+
+
 def merge(original: str, imported: str, icons: dict):
     """Original text with only the really edited blocks replaced. Returns (text, n_changed)."""
     keep_curly = any(c in original for c in CURLY)
     ob = segment(tokenise(original))
     nb = segment(imported)
-    oc = canon_groups([b.text for b in ob])
-    nc = canon_groups([b.text for b in nb])
+    oc = canon_groups([_canon_text(b) for b in ob])
+    nc = canon_groups([_canon_text(b) for b in nb])
     sm = difflib.SequenceMatcher(None, oc, nc, autojunk=False)
     out, changed = [], 0
     for op, i1, i2, j1, j2 in sm.get_opcodes():
@@ -384,6 +421,10 @@ def merge(original: str, imported: str, icons: dict):
             text = polish(nbk, keep_curly)
             if k < len(old):
                 sep = old[k].sep
+                if nbk.kind == "heading" and old[k].kind == "heading":
+                    m = ATTR_RE.search(old[k].text)
+                    if m and not ATTR_RE.search(text):
+                        text = text + " " + m.group(0).strip()   # keep the hidden marker
             else:
                 prev = out[-1] if out else None
                 if prev is None:
@@ -739,6 +780,13 @@ Claude shows you exactly what changed before anything is written.
 - Do not paste pictures or text boxes. They are not supported and the import stops with a message.
 - Do not rename or move these files.
 
+## The landing page file
+
+- The landing page file has grey-blue labels (headings) with the text underneath. Change the
+  **text** freely. You may reword a label, but do not delete a label or add a new one.
+- Each text has exactly **one paragraph**. Lists of small tags are bullet points: add or remove bullets.
+- The first lines (page title, search description, link preview) are what Google and LinkedIn show.
+
 ## New pages or new text slots
 
 Ask Claude to add them first, so the website and documentation know where they belong.
@@ -816,6 +864,52 @@ def check_links(cfg, new_texts: dict):
     return problems
 
 
+def check_landing(cfg, text: str):
+    """The landing text must still fit the page template (every slot present, one paragraph each)."""
+    root = cfg["roots_path"]["site"]
+    template = root / "index.template.html"
+    if not template.exists():
+        return []
+    sys.path.insert(0, str(HERE))
+    import build_docs
+    try:
+        build_docs.render_landing(template.read_text(encoding="utf-8"), build_docs.parse_landing(text))
+    except ValueError as err:
+        return [f"landing: {err}"]
+    return []
+
+
+def check_play_limits(text: str):
+    """Play Console limits written as '(max N)' next to a value or code block must still hold."""
+    problems = []
+    lines = text.split("\n")
+    for i, ln in enumerate(lines):
+        m = re.search(r"\(max (\d+)\)", ln)
+        if not m:
+            continue
+        limit, value = int(m.group(1)), None
+        if ln.lstrip().startswith("|"):
+            q = re.search(r"`([^`]+)`", ln)
+            value = q.group(1) if q else None
+        else:
+            j = i + 1
+            while j < len(lines) and not lines[j].startswith("```"):
+                if re.match(r"^#{1,6}\s", lines[j]):
+                    break
+                j += 1
+            if j < len(lines) and lines[j].startswith("```"):
+                k = j + 1
+                body = []
+                while k < len(lines) and not lines[k].startswith("```"):
+                    body.append(lines[k])
+                    k += 1
+                value = "\n".join(body).strip("\n")
+        if value is not None and len(value) > limit:
+            what = re.sub(r"[#|`*]", "", ln).strip()[:50]
+            problems.append(f"play-listing: '{what}' is {len(value)} characters; the limit is {limit}")
+    return problems
+
+
 def check_tokens(stem, text, icons):
     return [f"{stem}: unknown icon token {{{{icon:{n}}}}}" for n in TOKEN_RE.findall(text)
             if n not in icons]
@@ -823,7 +917,7 @@ def check_tokens(stem, text, icons):
 
 # --------------------------------------------------------------------------- import
 
-def cmd_import(cfg, apply=False, force=False, process_all=False, quiet=False):
+def cmd_import(cfg, apply=False, force=False, process_all=False, quiet=False, rebuild=False):
     manifest = load_manifest(cfg)
     wd = cfg["word_dir_path"]
     icons = all_icon_table(cfg)
@@ -885,6 +979,10 @@ def cmd_import(cfg, apply=False, force=False, process_all=False, quiet=False):
         if "<table" in text:
             problems_all.append(f"{stem}: a table became HTML; keep tables simple (one paragraph per cell)")
     problems_all.extend(check_links(cfg, texts))
+    if "play-listing" in texts:
+        problems_all.extend(check_play_limits(texts["play-listing"]))
+    if "landing" in texts:
+        problems_all.extend(check_landing(cfg, texts["landing"]))
     diff_text = []
     for path, (ref, stem, original, new, n) in pending.items():
         diff_text.append("".join(difflib.unified_diff(
@@ -902,6 +1000,13 @@ def cmd_import(cfg, apply=False, force=False, process_all=False, quiet=False):
                 manifest[entry["word"]]["sources"] = {
                     r: sha256(source_path(cfg, r)) for r in entry["sources"]}
         save_manifest(cfg, manifest)
+        if rebuild and pending:
+            res = subprocess.run([sys.executable, "-I", str(HERE / "build_docs.py"), "--source",
+                                  str(cfg["roots_path"]["wiki"])], capture_output=True, text=True, cwd=SITE)
+            report += "\n## Website rebuild\n\n```\n" + (res.stdout + res.stderr).strip() + "\n```\n"
+            if res.returncode != 0:
+                problems_all.append("the website rebuild reported a problem (see above); the Markdown "
+                                    "files were written, please review before committing")
     if not quiet:
         print(report)
     return {"changed": results, "problems": problems_all, "notes": notes,
@@ -991,6 +1096,7 @@ def cmd_selftest():
                 dst = Path(roots[root]) / rel
                 dst.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(source_path(cfg0, ref), dst)
+        shutil.copy2(SITE / "index.template.html", Path(roots["site"]) / "index.template.html")
         cfg = load_config(overrides={"word_dir": str(tmp / "word"), "roots": roots})
         wd = cfg["word_dir_path"]
         originals = {str(source_path(cfg, r)): source_path(cfg, r).read_text(encoding="utf-8")
@@ -1078,6 +1184,61 @@ def cmd_selftest():
               f"{r['problems']}")
         fresh()
 
+
+        # landing page copy (slots are headings with hidden markers; text lives under them)
+        _edit_docx_text(wd / "Website - Landing page.docx", "Process calculations you can run on the plant floor.",
+                        "Process calculations for the plant floor.")
+        r = run(); e = edited(r)
+        new = e.get("landing.md", "")
+        a, rm, d = _diff_counts(by_name["landing.md"][1], new)
+        check("landing: a headline edit changes exactly one line", (a, rm) == (1, 1) and not r["problems"], f"{(a, rm)} {r['problems']}")
+        sys.path.insert(0, str(HERE))
+        import build_docs
+        page = build_docs.render_landing((Path(roots["site"]) / "index.template.html").read_text(encoding="utf-8"),
+                                         build_docs.parse_landing(new))
+        check("landing: the new headline reaches the rendered page", "Process calculations for the plant floor." in page)
+        fresh()
+
+        from_markdown("Website - Landing page.docx",
+                      lambda md: md.replace("### Headline {#hero.h1}", "### Main headline {#hero.h1}", 1))
+        r = run(); e = edited(r)
+        check("landing: renaming a label keeps its hidden marker",
+              "### Main headline {#hero.h1}" in e.get("landing.md", ""), str(r["problems"]))
+        fresh()
+
+        from_markdown("Website - Landing page.docx",
+                      lambda md: md.replace("- surface tension\n", "- surface tension\n- boiling point\n", 1))
+        r = run(); e = edited(r)
+        a, rm, d = _diff_counts(by_name["landing.md"][1], e.get("landing.md", ""))
+        page = build_docs.render_landing((Path(roots["site"]) / "index.template.html").read_text(encoding="utf-8"),
+                                         build_docs.parse_landing(e.get("landing.md", "")))
+        check("landing: a new tag in a list adds one line and one tag on the page",
+              (a, rm) == (1, 0) and "<li>boiling point</li>" in page and not r["problems"], f"{(a, rm)} {r['problems']}")
+        fresh()
+
+        from_markdown("Website - Landing page.docx",
+                      lambda md: md.replace("Process calculations you can run on the plant floor.",
+                                            "Process calculations you can run on the plant floor.\n\nA second paragraph.", 1))
+        r = run()
+        check("guard: two paragraphs in one text slot are refused", any("exactly one paragraph" in p for p in r["problems"]), str(r["problems"]))
+        fresh()
+
+        from_markdown("Website - Landing page.docx",
+                      lambda md: md.replace("## Menu", "### A brand new slot\n\nSome text.\n\n## Menu", 1))
+        r = run()
+        check("guard: a new slot without a marker is refused", any("hidden marker" in p for p in r["problems"]), str(r["problems"]))
+        fresh()
+
+
+        long_value = "x" * 90
+        from_markdown("Store - Google Play listing.docx",
+                      lambda md: md.replace("`Thermodynamics, reactions and process calculators for engineers. Works offline.`",
+                                            "`" + long_value + "`", 1))
+        r = run()
+        check("guard: a Play short description over 80 characters is refused",
+              any("limit is 80" in p for p in r["problems"]), str(r["problems"]))
+        fresh()
+
         # apply writes, records the new state, and a second import finds nothing
         _edit_docx_text(wd / "Docs - Cases.docx", "Heats or cools a batch", "Heats or cools a BATCH")
         r = cmd_import(cfg, apply=True, process_all=True, quiet=True)
@@ -1156,7 +1317,7 @@ def main(argv=None):
                 for s in stale:
                     print(f"    changed source: {s}")
         elif args.cmd == "import":
-            res = cmd_import(cfg, apply=args.apply, force=args.force, process_all=args.all)
+            res = cmd_import(cfg, apply=args.apply, force=args.force, process_all=args.all, rebuild=True)
             sys.exit(1 if res["problems"] else 0)
     except SyncError as err:
         print("Stopped: " + str(err))

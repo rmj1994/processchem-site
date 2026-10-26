@@ -55,7 +55,7 @@ TOKENS_START = "/* app-tokens:start"
 TOKENS_END = "/* app-tokens:end */"
 
 # Wording that only makes sense on the GitHub wiki itself.
-HOME_FIXES = (("This wiki is its documentation.", "This is its documentation."),)
+HOME_FIXES = (("This wiki is its documentation", "This is its documentation"),)
 HOME_DROP_SECTIONS = ("Contributing",)
 
 

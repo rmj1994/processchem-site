@@ -200,9 +200,22 @@ FOOT = """</div>
 """
 
 
-def nav_html(nav, current: str) -> str:
+#: The phone-width bar that opens the page list (site.js toggles it; wide screens hide it).
+TOGGLE = (
+    '<button class="docs-toggle" type="button" aria-expanded="false" aria-controls="docs-list">'
+    '<svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>'
+    '<span class="what">Contents</span><span class="cur">{title}</span>'
+    '<svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></button>'
+)
+
+
+def nav_html(nav, current: str, page_title: str = "") -> str:
     home_cur = ' aria-current="page"' if current == HOME_MD else ""
+    titles = {page: title for _, items in nav for title, page in items}
+    here = "Overview" if current == HOME_MD else titles.get(current, page_title or current.replace("-", " "))
     out = ['<nav class="docs-nav" aria-label="Documentation">',
+           TOGGLE.format(title=html.escape(here)),
+           '<div class="docs-nav-list" id="docs-list">',
            f'<ul><li><a href="/docs/"{home_cur}>Overview</a></li></ul>']
     for heading, items in nav:
         out.append(f"<h2>{html.escape(heading)}</h2><ul>")
@@ -210,6 +223,7 @@ def nav_html(nav, current: str) -> str:
             cur = ' aria-current="page"' if page == current else ""
             out.append(f'<li><a href="{page_url(page)}"{cur}>{html.escape(title)}</a></li>')
         out.append("</ul>")
+    out.append("</div>")
     out.append("</nav>")
     return "\n".join(out)
 
@@ -366,7 +380,7 @@ def build(source: Path):
         page = (
             HEAD.format(title=html.escape(full_title), desc=html.escape(description_of(text)), canon=canon, base=BASE)
             + '  <div class="docs-layout">\n'
-            + nav_html(nav, name) + "\n"
+            + nav_html(nav, name, title) + "\n"
             + f'  <main id="main" class="article">\n{crumb}\n{body}\n  </main>\n  </div>\n'
             + FOOT
         )

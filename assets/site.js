@@ -51,19 +51,45 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
-  // Mobile menu
-  var btn = document.querySelector(".menu-btn");
-  var nav = document.querySelector(".site-head .nav");
-  if (btn && nav) {
-    btn.addEventListener("click", function () {
-      var open = nav.classList.toggle("open");
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    [].forEach.call(nav.querySelectorAll("a"), function (a) {
-      a.addEventListener("click", function () {
-        nav.classList.remove("open");
-        btn.setAttribute("aria-expanded", "false");
-      });
-    });
+  // The header's height, for things that stick just below it (the docs Contents bar).
+  if (head) {
+    var setHead = function () { root.style.setProperty("--head-h", head.offsetHeight + "px"); };
+    setHead();
+    if ("ResizeObserver" in window) new ResizeObserver(setHead).observe(head);
+    else window.addEventListener("resize", setHead);
   }
+
+  // Fold-out panels: the header menu and, on docs pages, the Contents list. Only one is
+  // open at a time; a link tap, Escape or a tap elsewhere closes it.
+  var panels = [];
+  function panel(button, list, onOpen) {
+    if (!button || !list) return;
+    var p = {
+      close: function () { list.classList.remove("open"); button.setAttribute("aria-expanded", "false"); }
+    };
+    button.addEventListener("click", function () {
+      var open = !list.classList.contains("open");
+      panels.forEach(function (o) { o.close(); });
+      if (open) {
+        list.classList.add("open");
+        button.setAttribute("aria-expanded", "true");
+        if (onOpen) onOpen();
+      }
+    });
+    [].forEach.call(list.querySelectorAll("a"), function (a) { a.addEventListener("click", p.close); });
+    p.owns = function (el) { return button.contains(el) || list.contains(el); };
+    panels.push(p);
+  }
+  panel(document.querySelector(".menu-btn"), document.querySelector(".site-head .nav"));
+  var docsList = document.querySelector(".docs-nav-list");
+  panel(document.querySelector(".docs-toggle"), docsList, function () {
+    var cur = docsList.querySelector('[aria-current="page"]');
+    if (cur) docsList.scrollTop = cur.offsetTop - docsList.clientHeight / 2;
+  });
+  document.addEventListener("click", function (e) {
+    panels.forEach(function (p) { if (!p.owns(e.target)) p.close(); });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") panels.forEach(function (p) { p.close(); });
+  });
 })();

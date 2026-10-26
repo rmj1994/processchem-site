@@ -247,7 +247,6 @@ section.s { padding-block: clamp(56px, 8vw, 112px) clamp(8px, 2vw, 24px); }
 @media (max-width: 560px) { .shots { grid-template-columns: minmax(0, 1fr); } .device, .app { max-width: 260px; } }
 
 /* documentation */
-/* documentation */
 .docs-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; align-items: start; padding-block: 24px 40px; }
 .docs-nav { position: sticky; top: 92px; max-height: calc(100vh - 110px); overflow-y: auto; font-size: 14.5px; }
 .docs-nav h2 { font: 500 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 22px 0 8px; }
@@ -278,9 +277,25 @@ section.s { padding-block: clamp(56px, 8vw, 112px) clamp(8px, 2vw, 24px); }
 .docs-note { font: 400 13px/1.5 var(--mono); color: var(--muted); border-top: 1px solid var(--line); margin-top: 40px; padding-top: 14px; }
 .crumb { font: 500 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
 .crumb a { text-decoration: none; }
+.docs-toggle { display: none; }
+/* Phone width: the page list folds into a sticky "Contents" bar under the header, so the
+   article starts at the top. Without site.js the list simply shows above the article. */
 @media (max-width: 860px) {
-  .docs-layout { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .docs-nav { position: static; max-height: none; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+  .docs-layout { display: block; padding-top: 0; }
+  .docs-nav { position: static; max-height: none; overflow: visible; border-bottom: 1px solid var(--line); padding-block: 16px; margin-bottom: 20px; }
+  .js .docs-nav { position: sticky; top: var(--head-h, 62px); z-index: 50; margin: 0 -20px 20px; padding: 8px 20px; border-bottom: 1px solid var(--line); background: rgba(248,250,255,.92); backdrop-filter: saturate(1.5) blur(14px); -webkit-backdrop-filter: saturate(1.5) blur(14px); }
+  .js .docs-toggle { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 0 14px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: 500 15px/1.2 var(--body); text-align: left; cursor: pointer; }
+  .docs-toggle svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .docs-toggle .what { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .docs-toggle .what::after { content: "·"; margin-left: 10px; }
+  .docs-toggle .cur { flex: 1; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .docs-toggle .chev { color: var(--muted); transition: transform .2s; }
+  .docs-toggle[aria-expanded="true"] { border-color: var(--brand); }
+  .docs-toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .js .docs-nav-list { display: none; position: absolute; left: 12px; right: 12px; top: calc(100% + 6px); max-height: calc(100vh - var(--head-h, 62px) - 90px); max-height: calc(100dvh - var(--head-h, 62px) - 90px); overflow-y: auto; overscroll-behavior: contain; padding: 16px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 24px 48px -24px rgba(15,71,160,.5); }
+  .js .docs-nav-list.open { display: block; }
+  .docs-nav-list a { padding-block: 8px; }
+  html:has(.docs-nav) { scroll-padding-top: calc(var(--head-h, 62px) + 76px); }
 }
 @media print { .docs-nav, .site-head, .site-foot { display: none; } }
 

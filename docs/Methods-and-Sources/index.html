@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Methods and Sources | ProcessChem documentation</title>
+<meta name="description" content="Data source Methods used">
+<link rel="canonical" href="https://processchem.no/docs/Methods-and-Sources/">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F8FAFF">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Methods and Sources | ProcessChem documentation">
+<meta property="og:description" content="Data source Methods used">
+<meta property="og:url" content="https://processchem.no/docs/Methods-and-Sources/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="/#screens">The app</a>
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+      <a class="cta-link" href="https://apps.apple.com/app/id6796077930">Get the app</a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+<div class="wrap">
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<button class="docs-toggle" type="button" aria-expanded="false" aria-controls="docs-list"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg><span class="what">Contents</span><span class="cur">Methods and data sources</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></button>
+<div class="docs-nav-list" id="docs-list">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/" aria-current="page">Methods and data sources</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+</ul>
+</div>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="methods-and-sources">Methods and Sources</h1>
+<h2 id="about">About</h2>
+<p>Every number ProcessChem shows can tell you where it came from: the ⓘ beside a Property value opens its data source, and the <strong>Methods used</strong> row at the foot of a result lists the methods behind it. Where more than one method exists, you can pick another and the result is calculated again with it.</p>
+<div class="doc-shots"><figure><a href="/docs/images/screens/property-source.jpg"><img src="/docs/images/screens/property-source.jpg" alt="Data source" width="600" height="1298" loading="lazy"></a><figcaption>Data source</figcaption></figure><figure><a href="/docs/images/screens/phase-results.jpg"><img src="/docs/images/screens/phase-results.jpg" alt="Methods used" width="600" height="1298" loading="lazy"></a><figcaption>Methods used</figcaption></figure></div>
+<h2 id="where-the-data-come-from">Where the data come from</h2>
+<ul>
+<li><strong>CoolProp</strong> reference equations of state, the most accurate available, for the 100-plus pure fluids CoolProp covers: water, the common gases, light hydrocarbons, refrigerants and more.</li>
+<li><strong>Peng-Robinson</strong> cubic equation of state for other fluids, and for mixtures, with fitted binary interaction parameters from ChemSep.</li>
+<li><strong>thermo / chemicals</strong> (Caleb Bell's libraries) for property correlations fitted to measured data, drawn from DIPPR, Perry's and the literature.</li>
+<li><strong>NASA CEA</strong> thermodynamic data for 1,820 species, used where the other libraries have none.</li>
+<li><strong>Tabulated data</strong> for the cement clinker minerals (from Barin, <em>Thermochemical Data of Pure Substances</em>) and curated values for plastics.</li>
+<li><strong>Laliberté</strong> electrolyte-solution model for aqueous solutions such as sodium hydroxide in water.</li>
+</ul>
+<p>The <a href="/docs/Property-Tab/">Property</a> page lists what can be looked up and what each value reads when no data exist.</p>
+<h2 id="the-data-source-sheet">The data source sheet</h2>
+<p>On the <a href="/docs/Property-Tab/">Property</a> results, tap the ⓘ beside a value (Phase, Density, specific heat capacity, vapor pressure, enthalpy of vaporization, enthalpy and Gibbs energy of formation, viscosity, thermal conductivity, surface tension or electrical conductivity). A sheet headed "Where this value comes from" opens, titled after the value, such as <strong>Density source</strong>. It shows:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>What it says</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Substance</strong></td>
+<td>The chemical and the state the value is for, such as "Ethanol, liquid at 20.0 °C".</td>
+</tr>
+<tr>
+<td><strong>Method</strong></td>
+<td>The correlation or model that gave the value, such as "CoolProp HEOS (reference equation of state)".</td>
+</tr>
+<tr>
+<td><strong>Library</strong></td>
+<td>Which data library that method belongs to (see <a href="#where-the-data-come-from">Where the data come from</a>).</td>
+</tr>
+<tr>
+<td><strong>Valid range</strong></td>
+<td>The temperature range the method was fitted over, in your temperature unit, or "not recorded for this method".</td>
+</tr>
+</tbody>
+</table></div>
+<p>Where a range is known, a line under it says whether your temperature is inside it. Outside, the line is amber: the value is extrapolated.</p>
+<p>A note at the foot says what kind of value it is. Most say the value comes from a correlation, or a model, fitted to measured data for this chemical rather than a generalized estimate. The enthalpy and Gibbs energy of formation also give their reference condition: 298.15 K (25 °C) and 1 bara, with each element in its standard reference state at zero, so these values do not change with the temperature and pressure you entered.</p>
+<p>When a value is low-confidence, the sheet is titled with "accuracy" instead of "source", such as <strong>Density accuracy</strong> (<strong>Phase accuracy</strong> rather than <strong>Phase determination</strong>), and its icon and note are amber, saying what limits the value.</p>
+<h3 id="changing-a-propertys-method">Changing a property's method</h3>
+<p>For vapor pressure, specific heat capacity, viscosity, thermal conductivity, enthalpy of vaporization and surface tension, the sheet ends with <strong>Change method</strong> when the libraries have more than one method for that chemical. Each method shows its library and valid range; methods whose range covers your temperature come first, and ranges your temperature falls outside are in amber. The method in use has a tick.</p>
+<p>Tap another method and the properties are calculated again with it. Once you have picked one, <strong>Use the app's default</strong> goes back to the app's own choice. A picked method lasts until you look up a different substance, which starts from the app's own choices again; it is not part of a saved set.</p>
+<h2 id="methods-used">Methods used</h2>
+<p>Most results end with a <strong>Methods used</strong> row: "See or change how this was calculated". Tap it to open a sheet listing what the result was calculated with. Where there is another method to pick, its choices sit under it as chips; tap one and the result is calculated again with it. Where there is nothing to pick, the sheet only says what was used.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Calculation</th>
+<th>What the sheet lists</th>
+<th>What you can change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></td>
+<td><strong>Equation of state</strong></td>
+<td>For a single substance with a CoolProp reference equation: <strong>Reference equation (CoolProp)</strong> (the default) or <strong>Peng-Robinson cubic</strong>. A mixture is always solved with Peng-Robinson and fitted interaction parameters.</td>
+</tr>
+<tr>
+<td><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></td>
+<td><strong>Method</strong> (Gibbs energy minimisation over the allowed species) and <strong>Species data</strong>, the source of each species' data</td>
+<td>Nothing; what changes the answer is which species are allowed</td>
+</tr>
+<tr>
+<td><a href="/docs/Reaction/">Reaction</a>, <a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></td>
+<td><strong>Method</strong> (ΔH, ΔG and K from each species' formation data at the reaction temperature) and <strong>Thermochemical data</strong>, one record per species</td>
+<td>Nothing; each species has one record</td>
+</tr>
+<tr>
+<td><a href="/docs/Heater/">Heater</a>, <a href="/docs/Heat-Exchanger/">Heat Exchanger</a></td>
+<td><strong>Heat capacity</strong> for each phase of each substance (on the Heat Exchanger, of the hot and the cold stream)</td>
+<td>The heat-capacity correlation for that phase, where there is more than one. A mixture uses ideal mixing of each component's own correlations, with nothing to pick.</td>
+</tr>
+<tr>
+<td><a href="/docs/Vessel-Heater/">Vessel Heater</a></td>
+<td><strong>Equation of state</strong> for the substance</td>
+<td><strong>Reference equation (CoolProp)</strong> or <strong>Peng-Robinson cubic</strong>, for a substance with a reference equation</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="/docs/Fluidized-Bed/">Fluidized Bed</a> has no <strong>Methods used</strong> row, and on <a href="/docs/Property-Tab/">Property</a> each value's method is changed from its own ⓘ sheet instead.</p>
+<p>The reference equation is the most accurate where it exists; Peng-Robinson is the general cubic the app uses for everything else. Picking Peng-Robinson for a substance with a reference equation is a way to see how much the choice of model moves the answer. Like a method picked on Property, a pick here is not part of a saved set.</p>
+  </main>
+  </div>
+</div>
+<footer class="band cut-top site-foot">
+  <div class="wrap">
+    <div>
+      <strong>ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:ronmjacob1994@gmail.com" style="font-family:var(--mono);font-size:13px">ronmjacob1994@gmail.com</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="/privacy/">Privacy policy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

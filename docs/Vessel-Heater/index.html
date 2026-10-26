@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Vessel Heater | ProcessChem documentation</title>
-<meta name="description" content="A rigid, sealed vessel whose contents are heated or cooled — fire exposure, solar gain, steam-out, loss of cooling, or an ambient swing. The vessel...">
+<meta name="description" content="Inputs Results">
 <link rel="canonical" href="https://processchem.no/docs/Vessel-Heater/">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F8FAFF">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ProcessChem">
 <meta property="og:title" content="Vessel Heater | ProcessChem documentation">
-<meta property="og:description" content="A rigid, sealed vessel whose contents are heated or cooled — fire exposure, solar gain, steam-out, loss of cooling, or an ambient swing. The vessel...">
+<meta property="og:description" content="Inputs Results">
 <meta property="og:url" content="https://processchem.no/docs/Vessel-Heater/">
 <meta property="og:image" content="https://processchem.no/assets/og-image.png">
 <link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,8 +47,10 @@
 <li><a href="/docs/Case-Tab/">Case</a></li>
 <li><a href="/docs/Units-Tab/">Units</a></li>
 </ul>
-<h2>Keeping your work</h2><ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -68,31 +70,35 @@
 <div class="crumb"><a href="/docs/">Documentation</a></div>
 <h1 id="vessel-heater">Vessel Heater</h1>
 <h2 id="about">About</h2>
-<p>A sealed rigid vessel is heated or cooled. Finds the resulting pressure, phase and liquid level, and flags the liquid-full overpressure hazard.</p>
+<p>A sealed rigid vessel is heated or cooled. Finds the heat needed and the resulting pressure, phase and liquid level, and flags the liquid-full overpressure hazard.</p>
+<div class="doc-shots"><figure><a href="/docs/images/screens/vessel-inputs.jpg"><img src="/docs/images/screens/vessel-inputs.jpg" alt="Inputs" width="600" height="1298" loading="lazy"></a><figcaption>Inputs</figcaption></figure><figure><a href="/docs/images/screens/vessel-results.jpg"><img src="/docs/images/screens/vessel-results.jpg" alt="Results" width="600" height="1298" loading="lazy"></a><figcaption>Results</figcaption></figure></div>
 <h2 id="what-this-models">What This Models</h2>
 <p>A rigid, sealed vessel whose contents are heated or cooled — fire exposure, solar gain, steam-out, loss of cooling, or an ambient swing. The vessel does not vent and does not change volume, so both the total volume and the mass inside are constant and the molar volume is fixed.</p>
 <h2 id="inputs">Inputs</h2>
-<p>The form is grouped Fluid, Vessel, Contents and Heating / cooling.</p>
-<p><strong>Chemical name or formula</strong> takes a substance or a mixture, built the same way as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab. It opens on Propane.</p>
-<p><strong>Vessel volume from</strong> is Direct volume or Dimensions. Direct volume asks for one <strong>Vessel volume</strong>, 1000 L by default. Dimensions asks for:</p>
+<p>The form opens with a <strong>Set-up</strong> picture of the vessel with its contents, the starting temperature ("now"), the target temperature, and the mass inside. It fills in as you type, with a <strong>?</strong> for the final temperature when you give the heat instead. Below it the form is grouped <strong>Fluid</strong>, <strong>Vessel</strong>, <strong>Contents</strong> and <strong>Heating / cooling</strong>. Every number has its own unit menu inside its field.</p>
+<p><strong>Fluid</strong> is a <strong>Single substance</strong> / <strong>Mixture</strong> switch. A single substance goes in <strong>Substance</strong>, which opens on Propane. A mixture is built the same way as on the <a href="/docs/Property-Tab/">Property</a> tab, with its shares given as <strong>Mole %</strong> or <strong>Mass %</strong>, or as <strong>Amounts</strong>: each component's own mass, in which case <strong>Mass in vessel</strong> steps aside and the mass is their sum.</p>
+<p><strong>Vessel</strong> is a <strong>Volume</strong> / <strong>Dimensions</strong> switch. Volume asks for one <strong>Vessel volume</strong>, 1000 L by default. Dimensions asks for:</p>
 <ul>
-<li><strong>Inside diameter</strong> (1 m) and <strong>Length (tangent to tangent)</strong> (2 m), the straight shell only, excluding the heads.</li>
-<li><strong>Head type:</strong> 2:1 elliptical, hemispherical or flat. Each head adds π·D³/24, π·D³/12 or nothing to the shell's π·D²·L/4.</li>
-<li><strong>Orientation:</strong> vertical or horizontal. It is recorded and does not change the volume or pressure here, but it sets how liquid level, wetted area and fill relate, which matters for relief and fire calculations.</li>
+<li><strong>Inside diameter</strong> (1 m) and <strong>Length (tangent to tangent)</strong> (2 m), side by side. The length is the straight shell only, excluding the heads, as its ⓘ says.</li>
+<li>The head type, a switch of <strong>Elliptical</strong> (2:1), <strong>Hemispherical</strong> or <strong>Flat</strong>. Each head adds π·D³/24, π·D³/12 or nothing to the shell's π·D²·L/4.</li>
+<li>The orientation, <strong>Vertical</strong> or <strong>Horizontal</strong>. It is recorded and does not change the volume or pressure here, but it sets how liquid level, wetted area and fill relate, which matters for relief and fire calculations. The results repeat this in amber.</li>
 </ul>
 <p>A flat-headed vessel needs a non-zero length, or its volume would be zero.</p>
-<p><strong>Contents given as</strong> is Mass or Initial pressure. Give a <strong>Mass in vessel</strong> (100 kg) and the app solves the initial state from it, or give an <strong>Initial pressure</strong> (10 bar) and the mass is back-calculated from the equation of state. <strong>Initial temperature</strong> is 20 °C.</p>
-<p><strong>Specify</strong> chooses the driver: <strong>Final temperature</strong> (80 °C), or <strong>Heat added / removed</strong>, where a positive value adds heat to the contents and a negative one removes it.</p>
-<p>Press <strong>Calculate</strong>. Editing any input, or changing a unit, clears the answer.</p>
+<p><strong>Contents</strong> is a <strong>Mass</strong> / <strong>Pressure</strong> switch. Give a <strong>Mass in vessel</strong> (100 kg) and the app solves the initial state from it, or give an <strong>Initial pressure</strong> (10 bar) and the mass is back-calculated from the equation of state. <strong>Initial temperature</strong> is 20 °C, and sits beside the initial pressure when that is what you give.</p>
+<p><strong>Heating / cooling</strong> is a <strong>Final temperature</strong> / <strong>Heat added</strong> switch. Final temperature asks for the temperature to reach (80 °C) and finds the heat. Heat added asks for <strong>Heat added (negative to cool)</strong> and finds the temperature reached; as the note under it says, use a negative number to cool.</p>
+<p>Press <strong>Calculate</strong>, pinned at the bottom of the screen. Editing any input, or changing a unit, clears the answer, and you are back at the inputs.</p>
 <h2 id="what-comes-back">What comes back</h2>
-<p>The results are grouped:</p>
+<p>The results open on their own screen. At the top an <strong>Inputs</strong> strip sums up what was calculated ("Propane · 100 kg · 20 °C → 80 °C"), and <strong>Edit</strong> takes you back to the form.</p>
+<p>The answer comes first, in a dark card: <strong>Heat to add</strong>, with a sentence saying what the phase did, such as "Stays liquid+gas the whole way" or "Liquid+Gas at the start, liquid at the end". Tap the unit beside the number to change it. Under it is a picture of the vessel, labelled with its final phase, beside a thermometer running from the initial to the final temperature.</p>
+<p>Three tiles follow: <strong>Final temp.</strong>, <strong>Final phase</strong>, and <strong>Per kg</strong>, the heat divided by the mass in the vessel. Then the values, grouped:</p>
 <ul>
-<li><strong>Vessel:</strong> the total volume, and for a vessel given by dimensions the shell and the two heads separately. Then the contents' mass and moles.</li>
+<li><strong>Vessel:</strong> the <strong>Vessel volume</strong>, and for a vessel given by dimensions the <strong>Shell</strong> and the <strong>Heads (2)</strong> separately. Then the <strong>Contents</strong> (the mass inside) and its <strong>Moles</strong>.</li>
 <li><strong>Initial state</strong> and <strong>Final state</strong>, each with Temperature, Pressure, Phase and Vapour fraction ("single phase" if there is only one), and the Liquid volume, Vapour volume and Liquid fill as a percentage of the vessel. Liquid fill turns amber at 99.5 % or more.</li>
-<li><strong>Energy:</strong> Heat added or Heat removed, and the Pressure rise between the two states.</li>
+<li><strong>Energy:</strong> <strong>Heat added</strong> (or <strong>Heat removed</strong> when cooling), and the <strong>Pressure rise</strong> between the two states.</li>
 </ul>
+<p>Every value with a unit has its own unit menu; changing one changes only that row.</p>
 <p>Amber warnings appear under the values. <strong>LIQUID-FULL</strong> fires when heating removes the vapour space that was there at the start; see <a href="#the-liquid-full-warning">The Liquid-Full Warning</a>. A final pressure above 1000 bara is flagged as far beyond ordinary equipment, with a reminder that the equation of state is being extrapolated. For a mixture, a warning says the liquid and vapour volume split uses bubble- and dew-point molar volumes that sit at different pressures (the temperature glide), so treat it as an approximation. An estimated or extrapolated density is called out too, because the mass in the vessel comes straight from it.</p>
-<p>The last line names the equation of state that produced the states.</p>
+<p><strong>Solved with:</strong> names the equation of state that produced the states. <strong>Methods used</strong> at the foot opens a sheet showing it; for a single substance that has a reference equation, you can switch between <strong>Reference equation (CoolProp)</strong> and <strong>Peng-Robinson cubic</strong>, and the case calculates again. See <a href="/docs/Methods-and-Sources/">Methods and Sources</a>.</p>
 <h2 id="method">Method</h2>
 <p>Constant volume and constant mass fix the molar volume; the final state then follows from the first law with no work term, in either direction.</p>
 <h2 id="key-relations">Key Relations</h2>

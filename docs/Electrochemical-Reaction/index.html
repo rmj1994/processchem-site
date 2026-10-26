@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Electrochemical Reaction | ProcessChem documentation</title>
-<meta name="description" content="The thermodynamics of an electrochemical cell: what voltage a reaction needs to be driven at, or produces when it drives, and what heat goes with it....">
+<meta name="description" content="Inputs Results">
 <link rel="canonical" href="https://processchem.no/docs/Electrochemical-Reaction/">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F8FAFF">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ProcessChem">
 <meta property="og:title" content="Electrochemical Reaction | ProcessChem documentation">
-<meta property="og:description" content="The thermodynamics of an electrochemical cell: what voltage a reaction needs to be driven at, or produces when it drives, and what heat goes with it....">
+<meta property="og:description" content="Inputs Results">
 <meta property="og:url" content="https://processchem.no/docs/Electrochemical-Reaction/">
 <meta property="og:image" content="https://processchem.no/assets/og-image.png">
 <link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,8 +47,10 @@
 <li><a href="/docs/Case-Tab/">Case</a></li>
 <li><a href="/docs/Units-Tab/">Units</a></li>
 </ul>
-<h2>Keeping your work</h2><ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -69,61 +71,73 @@
 <h1 id="electrochemical-reaction">Electrochemical Reaction</h1>
 <h2 id="about">About</h2>
 <p>A reaction driven by electricity, or driving it. Balances the equation as the Reaction mode does, then reports the cell voltage, the electrical energy, the heat, and the current for a monopolar or bipolar stack.</p>
+<div class="doc-shots"><figure><a href="/docs/images/screens/electro-inputs.jpg"><img src="/docs/images/screens/electro-inputs.jpg" alt="Inputs" width="600" height="1298" loading="lazy"></a><figcaption>Inputs</figcaption></figure><figure><a href="/docs/images/screens/electro-results.jpg"><img src="/docs/images/screens/electro-results.jpg" alt="Results" width="600" height="1298" loading="lazy"></a><figcaption>Results</figcaption></figure></div>
 <h2 id="what-this-models">What This Models</h2>
-<p>The thermodynamics of an electrochemical cell: what voltage a reaction needs to be driven at, or produces when it drives, and what heat goes with it. Enter the reaction exactly as in the <a href="/docs/Reaction/">Reaction</a> mode, add how many electrons it transfers and how the cells are wired.</p>
+<p>The thermodynamics of an electrochemical cell: what voltage a reaction needs to be driven at, or produces when it drives, and what heat goes with it. Enter the reaction exactly as in the <a href="/docs/Reaction/">Reaction</a> mode and say how the cells are wired; the electrons it transfers are counted for you.</p>
 <p>It works in both directions and tells them apart itself. A reaction with a positive Gibbs energy has to be driven — an electrolyser. One with a negative Gibbs energy drives — a battery or fuel cell. The equations are the same; only the wording changes.</p>
 <h2 id="inputs">Inputs</h2>
-<p>The top of the form is the <a href="/docs/Reaction/#inputs">Reaction</a> form unchanged: reactants, products, inerts, the live balanced equation, the reference compound and its amount, conversion, and the temperature and pressure. Everything there behaves as described on that page. The defaults differ, opening on water electrolysis, 2H₂O → 2H₂ + O₂, with a reference amount of 1 on a molar-flow basis at 25 °C.</p>
-<p>A <strong>Cell</strong> section then sits above the Calculate button:</p>
+<p>The form reads top to bottom as the set-up, the reaction, how much, the cell and the conditions, with <strong>Calculate</strong> pinned at the bottom. Most of it is the <a href="/docs/Reaction/#inputs">Reaction</a> form, and behaves as described on that page. The defaults differ, opening on water electrolysis, 2H₂O → 2H₂ + O₂, with 1 mol/s of water fed at 25 °C.</p>
+<p><strong>Set-up</strong> is a picture of the cell, with the products named at their electrodes.</p>
+<p><strong>Equation</strong> is the balanced equation with its element-by-element check line, as on the Reaction page.</p>
+<p><strong>Reactants and products</strong> is folded under one row; tap it to open the compound rows, with their phase badges, <strong>+ Add reactant</strong>, <strong>+ Add product</strong> and, when extra amounts are on, the inerts.</p>
+<p><strong>How much</strong> is <strong>I have this feed</strong> or <strong>I need this product</strong>, chips to choose the reference compound where there is more than one, and its amount in a field labelled after it, such as "H₂O fed" or "H₂ produced", with a unit button. Under it, <strong>Excess or extra amounts</strong> and <strong>Not all of it reacts</strong> work as on the Reaction page.</p>
+<p><strong>Cell</strong> opens with the line "Electrons are counted from the oxidation states of the balanced equation." Then:</p>
 <ul>
-<li><strong>Electrons</strong> takes the electrons transferred, for the equation as balanced. Leave it blank to have them counted, as described below. If you fill it in, it must be a whole number greater than zero.</li>
 <li><strong>Cells in the stack</strong> is a whole number, at least 1. The default is 1.</li>
-<li><strong>Wiring</strong> is Monopolar (parallel) or Bipolar (series); see <a href="#monopolar-and-bipolar">Monopolar And Bipolar</a>.</li>
-<li><strong>Current efficiency (%)</strong> is the share of the charge doing the intended reaction, greater than 0 and at most 100. At 100 % every electron makes product. Below it, extra current is needed for the same output, so the current and the electrical power scale by 100 divided by the efficiency, while the reversible voltage does not change.</li>
+<li><strong>Current efficiency</strong> is the share of the charge doing the intended reaction, in per cent, greater than 0 and at most 100. At 100 % every electron makes product. Below it, extra current is needed for the same output, so the current and the electrical power scale by 100 divided by the efficiency, while the reversible voltage does not change.</li>
+<li><strong>Wiring</strong> is <strong>Monopolar</strong> (parallel) or <strong>Bipolar</strong> (series); see <a href="#monopolar-and-bipolar">Monopolar And Bipolar</a>.</li>
 </ul>
-<p>An impossible entry, such as a fractional electron count, zero cells or an efficiency of 120 %, is refused with a message saying what is wrong.</p>
+<p><strong>Conditions</strong> is <strong>Feed enters at</strong> and <strong>Products leave at</strong>, as on the Reaction page.</p>
+<p>An impossible entry, such as zero cells or an efficiency of 120 %, is refused with a message saying what is wrong.</p>
 <h2 id="the-electrons-are-counted-for-you">The Electrons Are Counted For You</h2>
-<p>Leave the electrons field blank and they are worked out from the oxidation states of the balanced equation, then reported as a result. Water balances as 2H₂O → 2H₂ + O₂: four hydrogens go from +1 to 0, gaining one electron each, while two oxygens go from −2 to 0, losing two each — four gained, four lost, so four transferred.</p>
-<p>This matters because the number belongs to the equation as balanced, not to the half-reaction you remember. 2H⁺ + 2e⁻ → H₂ is two electrons per molecule of hydrogen, and this equation makes two of them. Entering two would give 2.46 V instead of 1.23 V — and 2.46 V looks perfectly ordinary, between chlor-alkali's 2.19 and magnesium's 2.48, so nothing downstream could have caught it.</p>
-<p>Fill the field in only to override the count. It is then labelled as yours on the result, so a derived figure and an asserted one never look alike.</p>
-<p>It declines rather than guessing in two cases. A reaction that moves no electrons at all — calcination, say — has none to count. And where the rules contradict themselves, as in a peroxide, where hydrogen at +1 and oxygen at −2 leave a molecule that does not add up to zero, it says so instead of returning a confident wrong number.</p>
+<p>The electrons are always worked out from the oxidation states of the balanced equation, then reported as a result. There is no field to type them in. Water balances as 2H₂O → 2H₂ + O₂: four hydrogens go from +1 to 0, gaining one electron each, while two oxygens go from −2 to 0, losing two each — four gained, four lost, so four transferred.</p>
+<p>This matters because the number belongs to the equation as balanced, not to the half-reaction you remember. 2H⁺ + 2e⁻ → H₂ is two electrons per molecule of hydrogen, and this equation makes two of them. Two electrons would give 2.46 V instead of 1.23 V — and 2.46 V looks perfectly ordinary, between chlor-alkali's 2.19 and magnesium's 2.48, so nothing downstream could have caught it. Counting from the equation removes that trap.</p>
+<p>It declines rather than guessing in two cases. A reaction that moves no electrons at all — calcination, say — has none to count. And where the rules contradict themselves, as in a peroxide, where hydrogen at +1 and oxygen at −2 leave a molecule that does not add up to zero, it says so instead of returning a confident wrong number. The reaction's own result is still shown, with the message under it.</p>
 <h2 id="what-comes-back">What comes back</h2>
-<p>The reaction's own result appears first, exactly as on the <a href="/docs/Reaction/#what-comes-back">Reaction</a> page. Under it a <strong>Cell</strong> card opens by saying which way the reaction goes: "This reaction has to be driven — it consumes electricity" for an electrolyser, or "This reaction runs on its own — the cell produces electricity" for a battery or fuel cell. Then:</p>
+<p>The <strong>Inputs</strong> strip repeats the equation, the amount and the number of cells, for example "2 H₂O → 2 H₂ + O₂ · 1 mol/s water · 1 cell".</p>
+<p>The headline card, <strong>Cell · reversible voltage</strong>, gives E_rev in volts and says which way the reaction goes: "This reaction has to be driven: it needs at least 1.229 V per cell" for an electrolyser, or "This reaction runs on its own: the cell gives up to … V" for a battery or fuel cell.</p>
+<p><strong>Cell voltage</strong> draws the scale between the reversible and the thermoneutral voltage, with a sentence on what happens between and beyond the two marks: for an electrolyser, between them the cell draws heat from its surroundings, and above the thermoneutral voltage the extra energy becomes heat.</p>
+<p>Up to three tiles follow: <strong>Current</strong> (A, kA or MA) and <strong>Power (min.)</strong>, the power at the reversible voltage, both only on a flow basis, and <strong>Energy per kg</strong> of the product (the reference if it is a product, else the first product), in kWh/kg, MJ/kg, kJ/kg or BTU/lb. A batch has no rate in it and so has no current or power; a note says to give the amount as a flow to get one.</p>
+<p>The <strong>Cell</strong> card then gives:</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>Card</th>
+<th>Row</th>
 <th>What it shows</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Electrons transferred</td>
-<td>The count, marked "(entered)" if you overrode it.</td>
-</tr>
-<tr>
-<td>Electron count</td>
-<td>"Counted from the equation" or "Entered by you", so a derived figure and an asserted one never look alike.</td>
+<td>The count, with the note "Counted from the equation".</td>
 </tr>
 <tr>
 <td>Volts per electron</td>
-<td>The reversible voltage divided by the electrons. It is there as a check: entering a half-reaction's electrons where the balanced equation needs twice as many gives a number an engineer recognises as wrong, rather than one that is merely unfamiliar.</td>
+<td>The reversible voltage divided by the electrons. It is there as a check: a count that is double or half what the reaction needs gives a number an engineer recognises as wrong, rather than one that is merely unfamiliar.</td>
 </tr>
 <tr>
 <td>Reversible voltage, Thermoneutral voltage</td>
 <td>E_rev and E_tn from the relations below.</td>
 </tr>
 <tr>
-<td>Electrical energy (ΔG)</td>
-<td>Energy per mole of reaction.</td>
+<td>Stack voltage</td>
+<td>The voltage across the whole stack, from the wiring.</td>
 </tr>
 <tr>
-<td>Reversible heat (TΔS), Heat direction</td>
-<td>The heat exchanged, and whether it is absorbed (an endothermic cell) or released.</td>
+<td>Electrical energy (ΔG)</td>
+<td>Energy per mole of reaction as written.</td>
+</tr>
+<tr>
+<td>Reversible heat (TΔS)</td>
+<td>The heat exchanged, labelled absorbed (an endothermic cell) or released.</td>
+</tr>
+<tr>
+<td>Wiring</td>
+<td>The cell count and whether it is series or parallel, on a flow basis.</td>
 </tr>
 </tbody>
 </table></div>
-<p>Given a flow basis, four more cards follow: <strong>Current</strong>, <strong>Stack voltage</strong>, <strong>Power</strong> and <strong>Wiring</strong> (the cell count and whether it is series or parallel). A batch has no rate in it and so has no current, power or stack voltage.</p>
+<p><strong>Methods used</strong> shows the method and where each compound's data came from. <strong>The reaction</strong> at the foot folds away the reaction's own result — heat duty, ΔH, ΔG and K, the Stream table and the Reaction card — exactly as on the <a href="/docs/Reaction/#what-comes-back">Reaction</a> page; tap it to open. An amber note appears if the reversible voltage falls outside the 0.5–5 V that practical cells occupy.</p>
 <h2 id="method">Method</h2>
 <p>Two relations carry everything, plus Faraday's law for the current.</p>
 <h2 id="key-relations">Key Relations</h2>

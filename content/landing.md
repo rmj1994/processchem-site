@@ -62,7 +62,7 @@ Process calculations you can run on the plant floor.
 
 ### Introduction {#hero.lede}
 
-ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. It runs on your phone, with no account and no connection, and every answer shows the method behind it.
+ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. It runs on your phone, with no account and no connection, and its answers say how they were worked out.
 
 ### App Store button: small text {#hero.appstore_small}
 
@@ -257,7 +257,7 @@ What it stands on.
 
 ### Introduction {#stands.p}
 
-The numbers come from published reference data and established models, and every result names the method it used.
+The numbers come from published reference data and established models, and the results say which methods and data they used.
 
 ### First point: title {#stands.one.title}
 

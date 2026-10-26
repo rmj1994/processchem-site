@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Heater | ProcessChem documentation</title>
-<meta name="description" content="A heater or cooler at constant pressure: an exchanger, a steam coil, a trim cooler. The fluid is free to expand as it warms, so the energy that matters...">
+<meta name="description" content="Inputs Results">
 <link rel="canonical" href="https://processchem.no/docs/Heater/">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F8FAFF">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ProcessChem">
 <meta property="og:title" content="Heater | ProcessChem documentation">
-<meta property="og:description" content="A heater or cooler at constant pressure: an exchanger, a steam coil, a trim cooler. The fluid is free to expand as it warms, so the energy that matters...">
+<meta property="og:description" content="Inputs Results">
 <meta property="og:url" content="https://processchem.no/docs/Heater/">
 <meta property="og:image" content="https://processchem.no/assets/og-image.png">
 <link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,8 +47,10 @@
 <li><a href="/docs/Case-Tab/">Case</a></li>
 <li><a href="/docs/Units-Tab/">Units</a></li>
 </ul>
-<h2>Keeping your work</h2><ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -68,28 +70,34 @@
 <div class="crumb"><a href="/docs/">Documentation</a></div>
 <h1 id="heater">Heater</h1>
 <h2 id="about">About</h2>
-<p>Heats or cools a batch or a stream at constant pressure. Give a final temperature and it finds the duty, or give a duty and it finds the temperature reached — melting and boiling included.</p>
+<p>Heats or cools a batch or a stream at constant pressure. Give an outlet temperature and it finds the duty, or give a duty and it finds the temperature reached, with melting and boiling included.</p>
+<div class="doc-shots"><figure><a href="/docs/images/screens/heater-inputs.jpg"><img src="/docs/images/screens/heater-inputs.jpg" alt="Inputs" width="600" height="1298" loading="lazy"></a><figcaption>Inputs</figcaption></figure><figure><a href="/docs/images/screens/heater-results.jpg"><img src="/docs/images/screens/heater-results.jpg" alt="Results" width="600" height="1298" loading="lazy"></a><figcaption>Results</figcaption></figure></div>
 <h2 id="what-this-models">What This Models</h2>
 <p>A heater or cooler at constant pressure: an exchanger, a steam coil, a trim cooler. The fluid is free to expand as it warms, so the energy that matters is its enthalpy.</p>
 <p>That is what separates this from the <a href="/docs/Vessel-Heater/">Vessel Heater</a> case. A sealed rigid vessel cannot expand, so heating it raises its pressure and the energy that matters is internal energy instead. Use this one for anything flowing through equipment or held at atmospheric pressure; use Vessel Heater for a closed cylinder or drum.</p>
 <h2 id="inputs">Inputs</h2>
-<p>The form is grouped Fluid, Amount, Inlet and Duty.</p>
-<p><strong>Chemical name or formula</strong> takes a substance or a mixture, built the same way as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab. It opens on Water. Air and the refrigerant blends have no heat-capacity data on record here, and are refused.</p>
-<p><strong>Amount as</strong> offers seven bases: Mass, Moles and Volume for a batch, and Mass flow, Molar flow, Volumetric flow and Normal Volumetric Flow for a stream. Its ⓘ says the same thing: a quantity heats a batch and reports an energy, a rate heats a stream and reports a power. It opens on a mass flow of 1000 kg/h. A volume or volumetric flow needs a density at the inlet conditions, and if none is available it says so and asks for a mass or moles instead.</p>
-<p><strong>Initial temperature</strong> (20 °C) and <strong>Pressure</strong> (1.01325 bar). The pressure is held constant throughout; the ⓘ reminds you that a heater lets the fluid expand rather than building pressure as a sealed vessel does. It is also used to place the boiling point, so water heated at 20 bara is not refused for "boiling at 100 °C" when its real boiling point at that pressure is about 212 °C.</p>
-<p><strong>Specify</strong> chooses the direction. "Final temperature — find the duty" shows a <strong>Final temperature</strong> field, 120 °C by default. "Duty — find the final temperature" shows a duty field instead: <strong>Heat added (negative to cool)</strong> in an energy unit for a batch, or <strong>Heat duty (negative to cool)</strong> in a power unit for a stream. Only the field that applies is shown. The duty direction is solved by root-finding the temperature whose enthalpy change matches the duty you gave.</p>
-<p>Press <strong>Calculate</strong>. Editing any input, or changing a unit, clears the answer.</p>
+<p>The form opens with a <strong>Set-up</strong> picture: the fluid entering at the inlet temperature, the heater, and the fluid leaving. It fills in as you type, with a <strong>?</strong> on whatever the calculation will find: the heat when you give the outlet temperature, the outlet temperature when you give the duty. Below it the form is grouped <strong>Fluid</strong>, <strong>Amount</strong>, <strong>Inlet</strong> and <strong>Find</strong>. Every number has its own unit menu inside its field.</p>
+<p><strong>Fluid</strong> is a <strong>Single substance</strong> / <strong>Mixture</strong> switch. A single substance goes in <strong>Substance</strong>, which opens on Water. A mixture is built the same way as on the <a href="/docs/Property-Tab/">Property</a> tab, with its shares given as <strong>Mole %</strong> or <strong>Mass %</strong>, or as <strong>Amounts</strong>: each component's own amount, in any of the units the Amount field offers. With amounts, the separate Amount field steps aside and the total is their sum. A component given as a volume is taken as that pure component at the inlet temperature and pressure. Air and the refrigerant blends have no heat-capacity data of their own, so on their own they are refused. As one component of a mixture they are accepted and split into their constituents (air into nitrogen, oxygen and argon).</p>
+<p><strong>Amount</strong> is one field, opening on a <strong>Mass flow</strong> of 1000 kg/h. As the note under it says, "Mass, moles or volume: pick any unit". The unit menu groups every unit under its kind: Mass flow, Molar flow, Volumetric flow and Normal Volumetric Flow for a stream, and Mass, Moles and Volume for a batch. Picking a unit of another kind switches the basis, and the field's label changes to match. Each kind keeps its own number, so nothing is converted across kinds. A rate heats a stream and reports a power; a quantity heats a batch and reports an energy. A volume or volumetric flow needs a density at the inlet conditions, and if none is available it says so and asks for a mass or moles instead.</p>
+<p><strong>Inlet</strong> has <strong>Temperature</strong> (20 °C) and <strong>Pressure</strong> (1.01325 bara) side by side. The pressure is held constant throughout; its ⓘ reminds you that a heater lets the fluid expand rather than building pressure as a sealed vessel does. It is also used to place the boiling point, so water heated at 20 bara is not refused for "boiling at 100 °C" when its real boiling point at that pressure is about 212 °C.</p>
+<p><strong>Find</strong> is a switch. <strong>The duty</strong> shows an <strong>Outlet temperature</strong> field, 120 °C by default, and finds the heat needed to get there. <strong>Outlet temperature</strong> shows a <strong>Duty</strong> field instead and finds the temperature reached. The duty is a power when the amount is a rate and an energy when it is a batch quantity. Enter a negative duty to cool. The duty direction is solved by root-finding the temperature whose enthalpy change matches the duty you gave.</p>
+<p>Press <strong>Calculate</strong>, pinned at the bottom of the screen. Editing any input, or changing a unit, clears the answer, and you are back at the inputs.</p>
 <h2 id="what-comes-back">What comes back</h2>
-<p>The results are grouped:</p>
+<p>The results open on their own screen. At the top an <strong>Inputs</strong> strip sums up what was calculated ("Water · 1000 kg/h · 20 °C → 120 °C"), and <strong>Edit</strong> takes you back to the form.</p>
+<p>The answer comes first, in a dark card: <strong>Heat duty</strong> for a stream, <strong>Heat required</strong> for a batch, or <strong>Heat removed</strong> when cooling, with a sentence saying what happened to the phase. For example, "Liquid in, gas out: 86 % of it goes into boiling", or "Stays liquid the whole way". Tap the unit beside the number to change it.</p>
+<p>Under it the set-up picture comes back, now filled in with the inlet and outlet temperatures, each labelled with its phase, and the duty.</p>
+<p>A <strong>Heating curve</strong> (or <strong>Cooling curve</strong>) card plots temperature against the heat added or removed. Flat steps on it are phase changes, and the card says so. When the range crosses a phase change, a bar under the chart splits the duty into its sensible and latent parts, with each part's share in per cent.</p>
+<p>Then the values, grouped:</p>
 <ul>
-<li><strong>Duty:</strong> Heat required (a batch) or Heat duty (a stream). When the range crosses a phase change it is split into <em>of which sensible</em> and <em>of which latent</em>. <strong>Mean heat capacity (sensible)</strong> is shown for checking a duty by hand.</li>
-<li><strong>Conditions:</strong> the initial and final temperature, the initial and final phase, and a <strong>Melting point</strong> or <strong>Boiling point</strong> line for each transition crossed.</li>
-<li><strong>Amount:</strong> the same amount every way, whichever basis you entered: mass, moles, and the volume at inlet conditions where a density exists. On a stream they read per hour.</li>
+<li><strong>Duty:</strong> Heat duty (a stream) or Heat required (a batch). When the range crosses a phase change it is split into <em>of which sensible</em> and <em>of which latent</em>. <strong>Mean heat capacity (sensible)</strong> is shown for checking a duty by hand.</li>
+<li><strong>Conditions:</strong> <strong>Initial → final temperature</strong> and <strong>Initial → final phase</strong> on one row each, and a <strong>Melting point</strong> or <strong>Boiling point</strong> line for each transition crossed.</li>
+<li><strong>Amount:</strong> the same amount every way, whichever basis you entered: mass, moles, and the volume at inlet conditions where a density exists. On a stream they are flows.</li>
 </ul>
-<p>A grey note says the duty is the change in enthalpy at constant pressure, and, when the phase changes, that the latent heat is included and shown separately. The last line names the heat-capacity correlations used, and the tabulated latent heats where they applied.</p>
+<p>Every value with a unit has its own unit menu; changing one changes only that row.</p>
+<p>A grey note says the duty is the change in enthalpy at constant pressure, and that a sealed rigid vessel behaves differently. When the phase changes, a second note says the latent heat is included and shown separately. <strong>Solved with:</strong> names the heat-capacity correlations used, and the tabulated latent heats where they applied. <strong>Methods used</strong> at the foot opens a sheet where you can see, and for a single substance change, the heat-capacity method used for each phase; picking another one calculates again. See <a href="/docs/Methods-and-Sources/">Methods and Sources</a>.</p>
 <h2 id="duty-runs-out-mid-transition">Duty Runs Out Mid-Transition</h2>
-<p>If you specify a duty and it runs out part-way through melting or boiling, the temperature simply stops at the transition, because enthalpy jumps there. The result says so in amber, adds a line such as <strong>Fraction vaporised at 100.0 °C</strong> giving how much of the material changed phase, and warns that both phases are present at the end. That matters when you sized for one phase.</p>
-<p>A duty larger than the substance can absorb over the range its heat-capacity data covers, or one that runs past a phase change it has no latent heat for, is refused with a message suggesting a smaller duty or a specified final temperature.</p>
+<p>If you specify a duty and it runs out part-way through melting or boiling, the temperature simply stops at the transition, because enthalpy jumps there. The result says so in amber, adds a line such as <strong>Fraction vaporised at 100.0 °C</strong> giving how much of the material changed phase, and warns that both phases are present at the end. The heating curve ends part-way along its flat step, at the duty you entered. That matters when you sized for one phase.</p>
+<p>A duty larger than the substance can absorb over the range its heat-capacity data covers, or one that runs past a phase change it has no latent heat for, is refused with a message suggesting a smaller duty or a specified outlet temperature.</p>
 <h2 id="mixtures">Mixtures</h2>
 <p>A mixture is accepted as long as <strong>no component melts or boils inside the range asked for</strong>. Its duty is then the mole-weighted sum of each component's sensible heat, which is exact for an ideal mixture. A composition entered by mass is converted to moles first, because the duty is per mole of mixture. If any component does change phase in the range, the calculation is refused by name, for example "water boils at 100 °C, inside the range asked for", and suggests keeping the range on one side of it or heating that component on its own, since a mixture changes phase across a range rather than at one point.</p>
 <h2 id="phase-changes-are-included">Phase Changes Are Included</h2>
@@ -98,7 +106,7 @@
 <pre><code>Q = n·Δh                  duty is the enthalpy change, constant P
 Δh = ∫Cp dT + Σ L_tr       sensible part plus each latent heat crossed
 </code></pre>
-<p>n is the amount (or flow); Cp is the heat capacity of whichever phase the range is in at that point; L_tr is the latent heat added at each melting or boiling point the range crosses. Given a duty instead of a final temperature, the same relation is root-found for the T whose Δh matches it. Heating water from -20 °C to 150 °C gives about 3.13 MJ/kg, of which roughly five sixths is L_tr — melting the ice and boiling the water — rather than the ∫Cp dT term. The duty is reported split into its sensible and latent parts for exactly that reason, and the transition temperatures are shown.</p>
+<p>n is the amount (or flow); Cp is the heat capacity of whichever phase the range is in at that point; L_tr is the latent heat added at each melting or boiling point the range crosses. Given a duty instead of an outlet temperature, the same relation is root-found for the T whose Δh matches it. Heating water from -20 °C to 150 °C gives about 3.13 MJ/kg, of which roughly five sixths is L_tr — melting the ice and boiling the water — rather than the ∫Cp dT term. The duty is reported split into its sensible and latent parts for exactly that reason, and the transition temperatures are shown.</p>
 <p>The enthalpy of vaporisation is read at the boiling point rather than at the starting temperature, which matters: water reads 2257 kJ/kg at 100 °C against 2442 kJ/kg at 25 °C.</p>
 <h2 id="mean-heat-capacity">Mean Heat Capacity</h2>
 <p>Cp_mean = (∫Cp dT)/(T₂ − T₁) — reported for checking a duty by hand, and it is the sensible heat divided by the temperature span only. Folding L_tr into it would give a number that looks like a heat capacity, is not one, and is wrong by however much of the duty went into the phase change.</p>

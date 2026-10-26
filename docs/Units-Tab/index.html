@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Units Tab | ProcessChem documentation</title>
-<meta name="description" content="Changing a unit converts what you have already typed rather than reinterpreting it, and clears any results, which were calculated in the old units....">
+<meta name="description" content="Units Converter">
 <link rel="canonical" href="https://processchem.no/docs/Units-Tab/">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F8FAFF">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ProcessChem">
 <meta property="og:title" content="Units Tab | ProcessChem documentation">
-<meta property="og:description" content="Changing a unit converts what you have already typed rather than reinterpreting it, and clears any results, which were calculated in the old units....">
+<meta property="og:description" content="Units Converter">
 <meta property="og:url" content="https://processchem.no/docs/Units-Tab/">
 <meta property="og:image" content="https://processchem.no/assets/og-image.png">
 <link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,8 +47,10 @@
 <li><a href="/docs/Case-Tab/">Case</a></li>
 <li><a href="/docs/Units-Tab/" aria-current="page">Units</a></li>
 </ul>
-<h2>Keeping your work</h2><ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -68,125 +70,215 @@
 <div class="crumb"><a href="/docs/">Documentation</a></div>
 <h1 id="units-tab">Units Tab</h1>
 <h2 id="about">About</h2>
-<p>Choose the unit for each quantity separately. There is no global SI/Imperial switch, because engineers mix bar with °C and psi with °F.</p>
-<p>Changing a unit converts what you have already typed rather than reinterpreting it, and clears any results, which were calculated in the old units. This holds on every tab: a value typed as 20 bar on the Property tab becomes 290.08 psi if you switch pressure to psi, not 20 psi. The <img alt="Open documentation icon" src="/docs/images/open-in-new.svg"> icon beside the tab heading opens this page in your browser.</p>
-<h2 id="choosing-a-unit">Choosing a unit</h2>
-<p>Every physical quantity the app shows has its own dropdown. The first unit in each list is the default.</p>
+<p>Choose the unit for each quantity separately, or set them all at once from a preset. There is no single SI/Imperial switch, because engineers mix bar with °C and psi with °F.</p>
+<div class="doc-shots"><figure><a href="/docs/images/screens/units.jpg"><img src="/docs/images/screens/units.jpg" alt="Units" width="600" height="1298" loading="lazy"></a><figcaption>Units</figcaption></figure><figure><a href="/docs/images/screens/units-converter.jpg"><img src="/docs/images/screens/units-converter.jpg" alt="Converter" width="600" height="1298" loading="lazy"></a><figcaption>Converter</figcaption></figure></div>
+<p>Changing a unit converts what you have already typed rather than reinterpreting it. This holds on every tab: a value typed as 20 bar on the Property tab becomes 290.08 psi if you switch pressure to psi, not 20 psi. Any calculation showing a result goes back to its inputs, because that result was calculated in the old units; tap Calculate again for an up-to-date one. The <strong>Docs ↗</strong> pill in the header opens this page.</p>
+<h2 id="presets">Presets</h2>
+<p>The row of chips at the top sets every quantity at once: <strong>Process (default)</strong>, <strong>Strict SI</strong>, <strong>Metric</strong>, <strong>British</strong> and <strong>US</strong>. The row scrolls sideways to show them all. The chip of the preset your choices match is highlighted; change any one quantity afterwards and no chip is, since the mix is no longer that preset.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
+<th>Preset</th>
+<th>Temperature</th>
+<th>Pressure</th>
+<th>Energy, power</th>
+<th>Flows</th>
+<th>Others</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Process (default)</td>
+<td>°C</td>
+<td>bara</td>
+<td>J, W</td>
+<td>kg/h, mol/s, m³/h, NL/min</td>
+<td>The first unit in each list below</td>
+</tr>
+<tr>
+<td>Strict SI</td>
+<td>K</td>
+<td>Pa</td>
+<td>J, W</td>
+<td>kg/s, mol/s, m³/s, Nm³/h</td>
+<td>m, s, Pa·s, kg/m³</td>
+</tr>
+<tr>
+<td>Metric</td>
+<td>°C</td>
+<td>bara</td>
+<td>kJ, kW</td>
+<td>kg/h, kmol/h, m³/h, Nm³/h</td>
+<td>mm, h, mPa·s, kmol, mbar drops</td>
+</tr>
+<tr>
+<td>British</td>
+<td>°F</td>
+<td>psi</td>
+<td>BTU, BTU/h</td>
+<td>lb/h, lbmol/h, imp gpm, SCFM</td>
+<td>ft, h, cP, lb, imp gal</td>
+</tr>
+<tr>
+<td>US</td>
+<td>°F</td>
+<td>psig</td>
+<td>BTU, BTU/h</td>
+<td>lb/h, lbmol/h, US gpm, SCFM</td>
+<td>ft, h, cP, lb, US gal, inH₂O drops</td>
+</tr>
+</tbody>
+</table></div>
+<p>A preset is only a starting point: any quantity can still be changed on its own afterwards.</p>
+<h2 id="choosing-a-unit">Choosing a unit</h2>
+<p>The quantities are grouped in cards: <strong>Temperature &amp; pressure</strong>, <strong>Amount &amp; flow</strong>, <strong>Energy &amp; heat</strong>, <strong>Fluid properties</strong>, and <strong>Size, time &amp; velocity</strong>. A folded card lists the units in use; tap its heading to open it. Each quantity is a row with its name, how many units it offers, and the unit in use. Tap the unit to choose another.</p>
+<p>The search box, "Find a quantity or unit, e.g. psi", finds a quantity by its name or by any of its units, and opens every card with a match.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Group</th>
 <th>Quantity</th>
 <th>Units</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>Temperature &amp; pressure</td>
 <td>Temperature</td>
-<td>°C, K, °F</td>
+<td>°C, K, °F, °R</td>
 </tr>
 <tr>
+<td></td>
 <td>Pressure</td>
-<td>bara, barg, kPa, MPa, psi, atm</td>
+<td>bara, barg, kPa, MPa, psi, atm, Pa, mbar, psig, kgf/cm², mmHg, torr, inHg</td>
 </tr>
 <tr>
+<td></td>
 <td>Pressure drop</td>
-<td>kPa, Pa, mbar, bar, psi</td>
+<td>kPa, Pa, mbar, bar, psi, mmH₂O, inH₂O, mmHg</td>
 </tr>
 <tr>
+<td>Amount &amp; flow</td>
 <td>Mass</td>
-<td>kg, g, lb, tonne</td>
+<td>kg, g, lb, tonne, mg, oz, short ton, long ton</td>
 </tr>
 <tr>
-<td>Volume</td>
-<td>L, m³, ft³, US gal</td>
-</tr>
-<tr>
-<td>Energy</td>
-<td>J, kJ, MJ, BTU, kWh</td>
-</tr>
-<tr>
-<td>Power</td>
-<td>W, kW, MW, hp</td>
-</tr>
-<tr>
-<td>Density</td>
-<td>kg/m³, g/cm³, lb/ft³</td>
-</tr>
-<tr>
+<td></td>
 <td>Amount</td>
-<td>mol, kmol</td>
+<td>mol, kmol, mmol, lbmol</td>
 </tr>
 <tr>
+<td></td>
+<td>Volume</td>
+<td>L, m³, ft³, US gal, mL, imp gal, bbl</td>
+</tr>
+<tr>
+<td></td>
 <td>Mass flow</td>
-<td>kg/h, kg/s, t/h, lb/h</td>
+<td>kg/h, kg/s, t/h, lb/h, kg/min, g/s, t/d, lb/s</td>
 </tr>
 <tr>
+<td></td>
 <td>Molar flow</td>
-<td>mol/s, kmol/h</td>
+<td>mol/s, kmol/h, mol/h, kmol/s, lbmol/h</td>
 </tr>
 <tr>
+<td></td>
 <td>Volumetric flow</td>
-<td>m³/h, L/min, ft³/h</td>
+<td>m³/h, L/min, ft³/h, m³/s, m³/d, L/s, L/h, US gpm, imp gpm, bbl/d, ft³/min</td>
 </tr>
 <tr>
+<td></td>
 <td>Normal volumetric flow</td>
-<td>NL/min, NL/h, Nm³/h, Nm³/min, Nft³/h, Nft³/min, Sm³/h, SCFM</td>
+<td>NL/min, NL/h, Nm³/h, Nm³/min, Nft³/h, Nft³/min, Nm³/d, Sm³/h, SCFM, MMSCFD</td>
 </tr>
 <tr>
-<td>Viscosity</td>
-<td>Pa·s, cP</td>
+<td>Energy &amp; heat</td>
+<td>Energy</td>
+<td>J, kJ, MJ, BTU, kWh, GJ, Wh, MWh, cal, kcal, MMBTU, therm</td>
 </tr>
 <tr>
-<td>Thermal conductivity</td>
-<td>W/(m·K)</td>
+<td></td>
+<td>Power</td>
+<td>W, kW, MW, hp, GW, BTU/h, MMBTU/h, kcal/h, TR</td>
 </tr>
 <tr>
-<td>Electrical conductivity</td>
-<td>S/m, mS/cm, S/cm, µS/cm</td>
-</tr>
-<tr>
-<td>Enthalpy of vaporization</td>
-<td>J/kg, kJ/kg</td>
-</tr>
-<tr>
-<td>Surface tension</td>
-<td>N/m, mN/m</td>
-</tr>
-<tr>
-<td>Enthalpy/Gibbs energy of formation</td>
-<td>J/mol, kJ/mol, J/kg, kJ/kg</td>
-</tr>
-<tr>
+<td></td>
 <td>Specific heat capacity</td>
-<td>J/(kg·K), kJ/(kg·K), J/(mol·K), kJ/(mol·K)</td>
+<td>J/(kg·K), kJ/(kg·K), J/(mol·K), kJ/(mol·K), kcal/(kg·K), BTU/(lb·°F)</td>
 </tr>
 <tr>
+<td></td>
+<td>Enthalpy of vaporization</td>
+<td>J/kg, kJ/kg, MJ/kg, kcal/kg, BTU/lb</td>
+</tr>
+<tr>
+<td></td>
+<td>Enthalpy/Gibbs energy of formation</td>
+<td>J/mol, kJ/mol, J/kg, kJ/kg, kcal/mol, BTU/lbmol, BTU/lb</td>
+</tr>
+<tr>
+<td>Fluid properties</td>
+<td>Density</td>
+<td>kg/m³, g/cm³, lb/ft³, g/L, kg/L, lb/US gal</td>
+</tr>
+<tr>
+<td></td>
+<td>Viscosity</td>
+<td>Pa·s, cP, mPa·s, P, lb/(ft·s)</td>
+</tr>
+<tr>
+<td></td>
+<td>Thermal conductivity</td>
+<td>W/(m·K), mW/(m·K), kcal/(h·m·K), BTU/(h·ft·°F)</td>
+</tr>
+<tr>
+<td></td>
+<td>Electrical conductivity</td>
+<td>S/m, mS/cm, S/cm, µS/cm, mS/m</td>
+</tr>
+<tr>
+<td></td>
+<td>Surface tension</td>
+<td>N/m, mN/m, dyn/cm</td>
+</tr>
+<tr>
+<td>Size, time &amp; velocity</td>
 <td>Length</td>
-<td>m, mm, cm, µm, inch, ft</td>
+<td>m, mm, cm, µm, inch, ft, km, mil</td>
 </tr>
 <tr>
+<td></td>
 <td>Area</td>
 <td>m², mm², cm², in², ft²</td>
 </tr>
 <tr>
+<td></td>
 <td>Time</td>
-<td>s, min, h</td>
+<td>s, min, h, d</td>
+</tr>
+<tr>
+<td></td>
+<td>Velocity</td>
+<td>m/s, cm/s, mm/s, km/h, ft/s, ft/min</td>
 </tr>
 </tbody>
 </table></div>
-<p>Two of these deserve a note. <strong>barg</strong> is gauge pressure, an offset from atmospheric rather than a scale factor, so 0 barg is 1.01325 bara. <strong>Pressure drop</strong> is separate from Pressure because a drop has no gauge form, and its natural size, a fluidized bed's or a distributor plate's, is far smaller than the pressure it is measured against.</p>
+<p>A few of these deserve a note. <strong>barg</strong> and <strong>psig</strong> are gauge pressures, an offset from atmospheric rather than a scale factor, so 0 barg is 1.01325 bara. <strong>Pressure drop</strong> is separate from Pressure because a drop has no gauge form, and its natural size, a fluidized bed's or a distributor plate's, is far smaller than the pressure it is measured against. <strong>Velocity</strong> is a gas velocity, such as a fluidized bed's superficial, minimum-fluidization and terminal velocities.</p>
 <p>Where a quantity can be shown per unit mass or per mole (specific heat capacity, and the enthalpy and Gibbs energy of formation), the app needs the chemical's molecular weight to switch between the two, and takes it from the chemical you are looking at.</p>
-<h2 id="normal--standard-reference">Normal / standard reference</h2>
-<p>The Normal-flow reference defaults to 20 °C and 1 atm and is worth checking against your instrument: "normal" conditions are not standardised, and a 0 °C reference reads about 7 % higher in mass terms. DIN 1343 uses 0 °C, while standard-litre mass flow controllers commonly use 20 °C or 25 °C.</p>
-<p>Set it with <strong>Normal reference temperature (°C)</strong> and <strong>Normal reference pressure (bara)</strong>. The value is committed when you leave the field, not on every keystroke, so a half-typed number never becomes the live reference. A pressure at or below zero, or a temperature at or below absolute zero, is refused with a message and the old reference stays in force.</p>
-<p>NL/min, NL/h, Nm³/h, Nm³/min, Nft³/h and Nft³/min are all measured at your reference. <strong>Sm³/h</strong> and <strong>SCFM</strong> are the exception: they keep their own standards (Sm³ is ISO 13443 at 15 °C and 101.325 kPa, SCFM is 60 °F and 14.696 psia) because that is what those names mean on an instrument. Selecting one puts a second reference state in play next to yours, and the conversion between the two is applied for you.</p>
+<h3 id="the-defaults-here-and-the-units-on-each-field">The defaults here and the units on each field</h3>
+<p>What you choose here is the default for the whole app. Each number field on the other tabs also has its own unit menu, and each result value can be tapped to show it in another unit. A field follows this tab until you pick a unit in the field itself; from then on that field keeps its own unit, and later changes here leave it alone. A unit picked on a result value applies to that one value while the app is open. Neither ever changes the choices on this tab.</p>
+<h2 id="normal-reference">Normal reference</h2>
+<p>The <strong>Normal reference</strong> card, at the foot of the tab, sets the temperature and pressure that normal flows are measured at; its heading shows the current reference. It defaults to 20 °C and 1.01325 bara (1 atm) and is worth checking against your instrument: "normal" conditions are not standardised, and a 0 °C reference reads about 7 % higher in mass terms. DIN 1343 uses 0 °C, while standard-litre mass flow controllers commonly use 20 °C or 25 °C.</p>
+<p>Tap the card to open it and type the <strong>Temperature</strong> (°C) and <strong>Pressure</strong> (bara). The value is committed when you leave the field, not on every keystroke, so a half-typed number never becomes the live reference. A pressure at or below zero, or a temperature at or below absolute zero, is refused with a message and the old reference stays in force.</p>
+<p>NL/min, NL/h, Nm³/h, Nm³/min, Nm³/d, Nft³/h and Nft³/min are all measured at your reference. <strong>Sm³/h</strong>, <strong>SCFM</strong> and <strong>MMSCFD</strong> are the exception: they keep their own standards (Sm³ is ISO 13443 at 15 °C and 101.325 kPa; SCFM and MMSCFD, million standard cubic feet per day, are at 60 °F and 14.696 psia) because that is what those names mean on an instrument or a pipeline. Selecting one puts a second reference state in play next to yours, and the conversion between the two is applied for you.</p>
 <p>Every place a normal flow can be entered (Phase Equilibrium, Reaction, Heater, Heat Exchanger, Fluidized Bed) uses this one reference, and each says which reference is in force.</p>
-<h2 id="unit-convertor">Unit Convertor</h2>
-<p>The <strong>Unit Convertor</strong> button opens a standalone converter: choose a quantity, type a value, pick From and To units, and the answer appears as you type. The swap button exchanges the two units.</p>
+<h2 id="unit-converter">Unit converter</h2>
+<p><strong>Unit converter</strong>, under the search box, opens a converter sheet. Choose a quantity from the chips along the top, type a value, and pick the unit it is in from the chips under it. The value appears at once in every other unit of that quantity, and changes as you type. It starts on pressure, in the unit chosen on this tab.</p>
 <p>It is independent of the tab's own choices. Looking a figure up from a datasheet never changes the units the rest of the app displays in.</p>
-<p>Quantities whose units need a chemical's molecular weight to convert (specific heat capacity, and the enthalpy and Gibbs energy of formation) are left out, because a general converter has no substance to take the weight from. The dialog lists which ones are absent.</p>
+<p>Quantities whose units need a chemical's molecular weight to convert (specific heat capacity, and the enthalpy and Gibbs energy of formation) are left out, because a general converter has no substance to take the weight from.</p>
 <h2 id="saving-your-choices">Saving your choices</h2>
-<p>The <strong>Open</strong>, <strong>Save</strong> and <strong>Reset</strong> buttons sit under the tab heading. Save stores every unit choice and the Normal reference together under a name of up to 40 characters, up to 25 sets; saving under an existing name replaces it. Open lists them, and lets you load, rename or delete each one. The set you last saved or opened comes back when the app starts, and units are restored before any other tab so the values on those tabs land in the right units. Reset returns every quantity to its default and the reference to 20 °C and 1 atm, and leaves your saved sets untouched. Saved sets are kept inside the app and are deleted with it, so to keep a copy safe, use <strong>Save to a file…</strong> in the Save dialog and <strong>Open from a file…</strong> in the Open list; see <a href="/docs/Saving-and-Opening/">Saving and opening</a>.</p>
+<p>The <strong>⋯</strong> menu in the header saves and opens your unit choices. <strong>Save…</strong> stores every unit choice and the Normal reference together under a name of up to 40 characters, up to 25 sets, either <strong>In the app</strong> or in <strong>Files / iCloud</strong> as a file; saving under an existing name replaces it. Sets saved in the app are listed under <strong>Recent</strong> at the top of the menu, and <strong>Open a saved set…</strong> lists them all. The set you last saved or opened comes back when the app starts, and units are restored before any other tab so the values on those tabs land in the right units. <strong>Reset to defaults</strong> returns every quantity to the Process (default) preset and the reference to 20 °C and 1 atm, and leaves your saved sets untouched. Sets saved in the app are deleted with it, so keep a file of anything you want to keep; see <a href="/docs/Saving-and-Opening/">Saving and opening</a>.</p>
   </main>
   </div>
 </div>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Phase Equilibrium | ProcessChem documentation</title>
-<meta name="description" content="A substance moving from one state to another, either as a fixed amount in a vessel or piston, or as a steady stream through a device. Both are the same...">
+<meta name="description" content="Inputs Results">
 <link rel="canonical" href="https://processchem.no/docs/Phase-Equilibrium/">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F8FAFF">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ProcessChem">
 <meta property="og:title" content="Phase Equilibrium | ProcessChem documentation">
-<meta property="og:description" content="A substance moving from one state to another, either as a fixed amount in a vessel or piston, or as a steady stream through a device. Both are the same...">
+<meta property="og:description" content="Inputs Results">
 <meta property="og:url" content="https://processchem.no/docs/Phase-Equilibrium/">
 <meta property="og:image" content="https://processchem.no/assets/og-image.png">
 <link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,8 +47,10 @@
 <li><a href="/docs/Case-Tab/">Case</a></li>
 <li><a href="/docs/Units-Tab/">Units</a></li>
 </ul>
-<h2>Keeping your work</h2><ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/" aria-current="page">Phase Equilibrium</a></li>
@@ -69,21 +71,32 @@
 <h1 id="phase-equilibrium">Phase Equilibrium</h1>
 <h2 id="about">About</h2>
 <p>One chemical changes state — heated, cooled, compressed, expanded or throttled. Give the amount as a quantity for a sealed vessel or as a rate for a flowing stream; finds the final state and the heat and work.</p>
+<div class="doc-shots"><figure><a href="/docs/images/screens/phase-inputs.jpg"><img src="/docs/images/screens/phase-inputs.jpg" alt="Inputs" width="600" height="1298" loading="lazy"></a><figcaption>Inputs</figcaption></figure><figure><a href="/docs/images/screens/phase-results.jpg"><img src="/docs/images/screens/phase-results.jpg" alt="Results" width="600" height="1298" loading="lazy"></a><figcaption>Results</figcaption></figure></div>
 <h2 id="what-this-models">What This Models</h2>
 <p>A substance moving from one state to another, either as a fixed amount in a vessel or piston, or as a steady stream through a device. Both are the same equation of state answering the same question; what separates them is whether you have a quantity or a rate.</p>
 <h2 id="inputs">Inputs</h2>
-<p><strong>Component</strong> and <strong>Name or Formula</strong> choose the chemical, or a mixture of up to 6, exactly as on the <a href="/docs/Property-Tab/#inputs">Property</a> tab. The default is Nitrogen.</p>
-<p><strong>Amount as</strong> is the one dropdown that decides everything else. Its seven choices are Mass, Moles and Volume (a quantity, for a vessel) and Mass flow, Molar flow, Volumetric flow and Normal Volumetric Flow (a rate, for a stream). Type the value beside it, in the unit chosen on the <a href="/docs/Units-Tab/">Units</a> tab. Switching between a quantity and a rate carries the chemical and the starting temperature and pressure across, so the form does not reset.</p>
-<p><strong>Initial Temperature</strong> and <strong>Initial Pressure</strong> (inlet, for a stream) start at 20 °C and 1 bar.</p>
-<p><strong>Specify</strong> pins down the final state. On a quantity basis you can give the final temperature, pressure or volume; on a rate basis only the outlet temperature or pressure, since a stream has no volume of its own. The default is a final pressure of 10 bar.</p>
-<p><strong>Calculation type</strong> (labelled <strong>Device / process</strong> for a stream) is the path taken: Constant Volume, Constant Temperature, Constant Pressure, Adiabatic (Isentropic) or Isenthalpic (Throttle). Constant Volume is offered for a quantity only. A type that contradicts what you pinned down is greyed out rather than removed, so it stays visible why it is unavailable: a specified final temperature rules out Constant Temperature and Isenthalpic, a specified final pressure rules out Constant Pressure, and a specified final volume rules out Constant Volume. If your current choice becomes unavailable, it is cleared and a hint explains why.</p>
-<p><strong>Isentropic efficiency (%)</strong> appears only for Adiabatic. 100 % is the reversible ideal; a real compressor or turbine is lower.</p>
-<p>Press <strong>Calculate</strong> to solve. Editing any input, or changing a unit, clears the result.</p>
+<p>The form is three cards, <strong>Substance</strong>, <strong>Start</strong> and <strong>Process</strong>, with <strong>Calculate</strong> pinned at the bottom. Every number has its own unit menu beside it, starting in the unit chosen on the <a href="/docs/Units-Tab/">Units</a> tab.</p>
+<h3 id="substance">Substance</h3>
+<p><strong>Single substance</strong> or <strong>Mixture</strong> is the switch at the top. For a single substance, type it in <strong>Name or formula</strong>; suggestions appear as you type, and chemicals you used recently are offered as chips. The default is Nitrogen.</p>
+<p>For a <strong>Mixture</strong>, name each component in its own row, up to 6, with <strong>+ Add component</strong> for another row and ✕ to remove one. <strong>Given as</strong> says what the numbers beside the names are:</p>
+<ul>
+<li><strong>Mole %</strong> or <strong>Mass %</strong>: shares. Type every share but the last; the last is whatever makes 100 %, and the total reads "Total 100 % ✓" once every name and share is in. Switching between the two converts the shares you typed.</li>
+<li><strong>Amounts</strong>: each component's own amount. One menu sets the unit for all of them, grouped by kind (mass, moles, volume and the four flows), and the total is their sum, so the <strong>Amount as</strong> chips and the amount field below are hidden. A volume is each component as the pure substance at the start temperature and pressure, converted to moles when you press Calculate.</li>
+</ul>
+<p><strong>Amount as</strong> is the row of chips that decides everything else. Its seven choices are <strong>Mass</strong>, <strong>Moles</strong> and <strong>Volume</strong> (a quantity, for a vessel) and <strong>Mass flow</strong>, <strong>Molar flow</strong>, <strong>Volumetric flow</strong> and <strong>Normal flow</strong> (a rate, for a stream). Type the value in the field under the chips. Switching between a quantity and a rate carries the chemical and the starting temperature and pressure across, so the form does not reset.</p>
+<h3 id="start">Start</h3>
+<p><strong>Temperature</strong> and <strong>Pressure</strong>, side by side, starting at 20 °C and 1 bar. On a rate basis they are the inlet conditions.</p>
+<h3 id="process">Process</h3>
+<p><strong>Held constant</strong> is the path taken: <strong>Pressure</strong>, <strong>Volume</strong>, <strong>Temperature</strong>, <strong>Adiabatic (isentropic)</strong> or <strong>Isenthalpic (throttle)</strong>. <strong>Volume</strong> is offered for a quantity only. The default is adiabatic.</p>
+<p><strong>End point you know</strong> pins down the final state. On a quantity basis it is <strong>Final T</strong>, <strong>Final P</strong> or <strong>Final V</strong>; on a rate basis only <strong>Outlet Temperature</strong> or <strong>Outlet Pressure</strong>, since a stream has no volume of its own. Type the value in the field under it. The default is a final pressure of 10 bar.</p>
+<p>A path that contradicts the end point you chose is greyed out rather than removed, so it stays visible why it is unavailable: a final temperature rules out holding the temperature and the isenthalpic throttle, a final pressure rules out holding the pressure, and a final volume rules out holding the volume. If your current choice becomes unavailable, it is cleared and an amber hint explains why.</p>
+<p><strong>Isentropic efficiency</strong> appears only for adiabatic. 100 % is the reversible ideal; a real compressor or turbine is lower.</p>
+<p>Press <strong>Calculate</strong>. The results open on their own screen; <strong>Edit</strong> on the <strong>Inputs</strong> strip at the top takes you back to the form. <a href="/docs/Getting-Around/">Getting Around</a> explains how the screens fit together.</p>
 <h2 id="the-amount-decides-which">The Amount Decides Which</h2>
 <p>Enter a mass, a number of moles or a volume and this is a closed system: a fixed amount in a vessel, where the work is n times the change in internal energy. Enter a mass flow, molar flow, volumetric flow or normal flow and it is an open system: a stream through a compressor, turbine, exchanger or valve, where the shaft work is the molar flow times the change in enthalpy. You do not choose between them separately — the amount you have already says which one you mean.</p>
 <h2 id="what-changes-with-it">What Changes With It</h2>
 <p>Constant volume is offered only for a quantity. A flowing stream has no volume of its own, only a rate, so holding it constant means nothing — and for the same reason a final volume can only be asked for on a quantity basis. Everything else is common to both: constant pressure, constant temperature, adiabatic with an isentropic efficiency, and isenthalpic throttling.</p>
-<p>The normal-flow reference defaults to 20 °C and 1 atm and is editable on the <a href="/docs/Units-Tab/">Units</a> tab. Check it against your instrument: "normal" conditions are not standardised, and a 0 °C reference reads about 7 % higher in mass terms.</p>
+<p>The normal-flow reference defaults to 20 °C and 1 atm and is editable under <strong>Normal reference</strong> on the <a href="/docs/Units-Tab/">Units</a> tab. Check it against your instrument: "normal" conditions are not standardised, and a 0 °C reference reads about 7 % higher in mass terms.</p>
 <h2 id="method">Method</h2>
 <p>Given the initial state and the path, the final state is solved directly from the equation of state, and the energy follows from the first law, with the sign convention that positive means energy added to the fluid.</p>
 <h2 id="key-relations">Key Relations</h2>
@@ -92,8 +105,10 @@
 </code></pre>
 <p>n is the fixed amount; ṅ the flow rate. U is internal energy, h is enthalpy — the open-system form carries h rather than U because a flowing stream does flow work on its surroundings just by moving, and h = U + Pv already accounts for it. Isenthalpic (a throttle) is the special case h₂ = h₁: no work, no heat, and the temperature still changes — the Joule–Thomson effect. Combinations that contradict each other — isenthalpic against a specified final temperature, say — are greyed out rather than silently answered.</p>
 <h2 id="what-comes-back">What comes back</h2>
-<p>The answer is a grid of cards under a heading naming the calculation type and the chemical.</p>
-<p>For a quantity (a vessel):</p>
+<p>The <strong>Inputs</strong> strip at the top repeats what you asked, for example "Nitrogen · 1.0 kg · adiabatic · 1.0 → 10.0 bara".</p>
+<p>The headline card gives the larger of the two energies, in words rather than signs: <strong>Work on fluid</strong> or <strong>Work by fluid</strong> for a quantity, <strong>Power in</strong> or <strong>Power out</strong> for a stream, and <strong>Heat in</strong> or <strong>Heat out</strong> for either. Under it a sentence says what happened to the phase: "It stays gas: 20 °C → 290.2 °C", or "From liquid to gas: it crosses the boiling curve". When the crossing happens at constant pressure, the sentence adds the temperature at which it boils, "… at 99.97 °C".</p>
+<p>Three tiles follow: <strong>Final phase</strong> (<strong>Outlet phase</strong> for a stream) with its vapour share, the other energy, and <strong>Final volume</strong> (<strong>Outlet flow</strong> for a stream). Tap the ⓘ on the phase tile to see which equation of state produced it. Tap any unit on the results to show that value in another unit.</p>
+<p>For a quantity (a vessel), the cards below are:</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -103,28 +118,20 @@
 </thead>
 <tbody>
 <tr>
-<td>Mass, Amount</td>
-<td>The same quantity both ways, whichever you entered.</td>
+<td>Amount</td>
+<td>Mass and Moles: the same quantity both ways, whichever you entered.</td>
 </tr>
 <tr>
-<td>Initial Volume, Final Volume</td>
-<td>The volume changes in every process except constant volume, and by orders of magnitude when a liquid boils.</td>
+<td>Volume</td>
+<td>Initial volume and Final volume. The volume changes in every process except constant volume, and by orders of magnitude when a liquid boils.</td>
 </tr>
 <tr>
-<td>Final Temperature, Final Pressure</td>
-<td>The end state.</td>
+<td>End state</td>
+<td>Final temperature and Final pressure.</td>
 </tr>
 <tr>
-<td>Heat added (Q), Work on fluid (W)</td>
-<td>Positive means energy added to the fluid. Tap the ⓘ for the sign convention and formula.</td>
-</tr>
-<tr>
-<td>Initial Phase, Final Phase</td>
-<td>Tap the ⓘ to see which equation of state produced it.</td>
-</tr>
-<tr>
-<td>Initial and Final Liquid / Vapour</td>
-<td>The split of the material between phases.</td>
+<td>Phases</td>
+<td>Initial and Final phase, and the liquid / vapour split at the start and at the end.</td>
 </tr>
 </tbody>
 </table></div>
@@ -138,33 +145,28 @@
 </thead>
 <tbody>
 <tr>
-<td>Mass Flow, Molar Flow</td>
-<td>The stream both ways.</td>
+<td>Flow</td>
+<td>Mass flow, Molar flow and Normal flow. Normal flow is read at your Normal reference, and is N/A for a solid, or a fluid that is not a gas at that reference.</td>
 </tr>
 <tr>
-<td>Normal Flow</td>
-<td>Read at your Normal reference, which the ⓘ names. N/A for a solid, or a fluid that is not a gas at that reference.</td>
+<td>Volumetric flow</td>
+<td>Inlet and Outlet, side by side, because for a compressor the ratio is the point and line sizing needs the outlet figure.</td>
 </tr>
 <tr>
-<td>Inlet Volumetric, Outlet Volumetric</td>
-<td>Side by side, because for a compressor the ratio is the point and line sizing needs the outlet figure.</td>
+<td>Outlet state</td>
+<td>Temperature and Pressure.</td>
 </tr>
 <tr>
-<td>Outlet Temperature, Outlet Pressure</td>
-<td>The end state.</td>
-</tr>
-<tr>
-<td>Heat duty (Q̇), Shaft power (Ẇ)</td>
-<td>Powers, in the unit chosen for Power.</td>
-</tr>
-<tr>
-<td>Inlet and Outlet Phase, Liquid / Vapour</td>
-<td>As above.</td>
+<td>Phases</td>
+<td>Inlet and Outlet phase, and the liquid / vapour split in and out.</td>
 </tr>
 </tbody>
 </table></div>
-<p>A blue banner repeats the path, "From 20 °C, 1 bar to …". A single-phase state reads 100 % / 0 % or 0 % / 100 % for its liquid/vapour split. Anything in between means the state sits under the saturation dome, where temperature and pressure are no longer independent. A supercritical fluid reads N/A, because above the critical point there is no liquid-vapour boundary to be either side of.</p>
-<p>The equation of state is CoolProp's reference equation where one exists for the fluid, and Peng-Robinson where none does, which is a general cubic and less accurate, especially for liquid densities. Amber banners flag an extrapolated range or a mixture-model caveat, and a note under the result names the mixture model used.</p>
+<p>A single-phase state reads 100% / 0% or 0% / 100% for its liquid / vapour split. Anything in between means the state sits under the saturation dome, where temperature and pressure are no longer independent. A supercritical fluid reads N/A, because above the critical point there is no liquid-vapour boundary to be either side of.</p>
+<p>For a mixture, a card for each phase present at the start or the end, <strong>Gas phase</strong> and <strong>Liquid phase</strong>, lists every component with its share of that phase and its amount, <strong>In</strong> (at the start) beside <strong>Out</strong> (at the end). The <strong>Share</strong> menu above the table switches between mol % and mass %, and the <strong>Amount</strong> menu sets the unit of the amounts. Where the mixture splits into two phases, the card's title says what share of the moles that phase holds.</p>
+<p>Amber banners flag an extrapolated range or a mixture-model caveat, and a note names the mixture model used. The line <strong>Solved with:</strong> names the equation of state, and <strong>Methods used</strong> at the foot opens the methods sheet.</p>
+<h2 id="equation-of-state">Equation Of State</h2>
+<p>The equation of state is CoolProp's reference equation where one exists for the fluid, and Peng-Robinson where none does, which is a general cubic and less accurate, especially for liquid densities. For a single substance that has a reference equation, <strong>Methods used</strong> lets you switch between <strong>Reference equation (CoolProp)</strong> and <strong>Peng-Robinson cubic</strong>; the result is calculated again with your pick. A mixture is always solved with Peng-Robinson and fitted interaction parameters. <a href="/docs/Methods-and-Sources/">Methods and Sources</a> has more on the methods.</p>
 <h2 id="solids-and-solutions">Solids And Solutions</h2>
 <p>Neither equation of state models a solid, so a chemical that is solid at your conditions is treated separately: heating or cooling it needs no equation of state, only the integral of its heat capacity. Only a <strong>final temperature</strong> can be asked for. A target pressure or volume is refused, because compressing a solid is a mechanical process this mode does not model. If the range would cross a melting point, or a sublimation or decomposition point, the calculation is refused rather than under-reporting the energy, because a latent heat would be needed that this mode has no data for. Use the <a href="/docs/Heater/">Heater</a> case, which does include melting and boiling.</p>
 <p>Water plus dissolved solutes with fitted data is treated as an aqueous solution, from fitted density and heat capacity rather than an equation of state. It carries no phase equilibrium, so the same final-temperature-only rule applies.</p>

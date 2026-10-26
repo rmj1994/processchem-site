@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Heat Exchanger | ProcessChem documentation</title>
-<meta name="description" content="A hot stream and a cold stream flowing past each other and exchanging heat — a shell-and-tube unit, a plate exchanger, any device where the two never...">
+<meta name="description" content="Inputs Results">
 <link rel="canonical" href="https://processchem.no/docs/Heat-Exchanger/">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F8FAFF">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ProcessChem">
 <meta property="og:title" content="Heat Exchanger | ProcessChem documentation">
-<meta property="og:description" content="A hot stream and a cold stream flowing past each other and exchanging heat — a shell-and-tube unit, a plate exchanger, any device where the two never...">
+<meta property="og:description" content="Inputs Results">
 <meta property="og:url" content="https://processchem.no/docs/Heat-Exchanger/">
 <meta property="og:image" content="https://processchem.no/assets/og-image.png">
 <link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,8 +47,10 @@
 <li><a href="/docs/Case-Tab/">Case</a></li>
 <li><a href="/docs/Units-Tab/">Units</a></li>
 </ul>
-<h2>Keeping your work</h2><ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -68,7 +70,8 @@
 <div class="crumb"><a href="/docs/">Documentation</a></div>
 <h1 id="heat-exchanger">Heat Exchanger</h1>
 <h2 id="about">About</h2>
-<p>Two streams exchange heat: one cools, the other warms by the same amount. Give the duty, or one outlet temperature, and it finds the rest — and refuses a pairing that would need heat to flow backwards.</p>
+<p>Two streams exchange heat: one cools, the other warms by the same amount. Give the duty, or one outlet temperature, and it finds the rest, counter-current or co-current, and refuses a pairing that would need heat to flow backwards.</p>
+<div class="doc-shots"><figure><a href="/docs/images/screens/hx-inputs.jpg"><img src="/docs/images/screens/hx-inputs.jpg" alt="Inputs" width="600" height="1298" loading="lazy"></a><figcaption>Inputs</figcaption></figure><figure><a href="/docs/images/screens/hx-results.jpg"><img src="/docs/images/screens/hx-results.jpg" alt="Results" width="600" height="1298" loading="lazy"></a><figcaption>Results</figcaption></figure></div>
 <h2 id="what-this-models">What This Models</h2>
 <p>A hot stream and a cold stream flowing past each other and exchanging heat — a shell-and-tube unit, a plate exchanger, any device where the two never mix. Whatever heat the hot stream gives up, the cold stream takes on: no loss to the surroundings is modelled, so the duty on one side always equals the duty on the other.</p>
 <h2 id="key-relations">Key Relations</h2>
@@ -76,34 +79,50 @@
 Q = ṅ_cold·(h_cold,out − h_cold,in)  heat the cold stream picks up
 </code></pre>
 <p>The same Q both ways, by construction — no separate closure to check. Each Δh comes from the same relation the <a href="/docs/Heater/">Heater</a> case uses on its one stream, Δh = ∫Cp dT + Σ L_tr (sensible heat plus any latent heat crossed), run once per stream. Whichever you give — the duty, or one stream's own outlet — the other three unknowns follow from these two equations together.</p>
-<h2 id="counter-current">Counter-Current</h2>
-<p>The two streams are assumed to flow in opposite directions through the unit, the usual arrangement and the more efficient one. That choice only matters for the feasibility check below — the energy balance itself is the same either way.</p>
+<h2 id="counter-current-and-co-current">Counter-Current And Co-Current</h2>
+<p><strong>Counter-current</strong>, the default, has the two streams flowing in opposite directions through the unit: the hot inlet meets the cold outlet at one end, and the hot outlet meets the cold inlet at the other. It is the usual arrangement and the more efficient one, because it lets the cold stream leave hotter than the hot stream leaves.</p>
+<p><strong>Co-current</strong> has both streams entering at the same end and leaving at the other. The hot inlet meets the cold inlet, and the two outlets leave side by side, so the cold outlet can never pass the hot outlet.</p>
+<p>The energy balance is the same either way: for a given duty the outlet temperatures do not depend on the arrangement. What the choice changes is what is possible (see <a href="#when-it-refuses">When It Refuses</a>), how the temperature profiles are drawn, and where the closest approach is measured.</p>
 <h2 id="inputs">Inputs</h2>
-<p>The form is grouped Hot stream, Cold stream and Duty. Each stream asks for the same things the <a href="/docs/Heater/#inputs">Heater</a> case asks for a single stream, given twice:</p>
+<p>The form opens with a <strong>Flow</strong> card: a <strong>Counter-current</strong> / <strong>Co-current</strong> switch and a picture of the exchanger, which follows the switch. It shows the two inlet temperatures as you type them, and a <strong>?</strong> on each outlet the calculation will find.</p>
+<p>Then a <strong>Hot stream</strong> card and a <strong>Cold stream</strong> card, marked HOT and COLD. Each asks for the same things the <a href="/docs/Heater/">Heater</a> case asks for a single stream, given twice:</p>
 <ul>
-<li><strong>Substance</strong>, a chemical or a mixture built the same way as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab. The defaults are hot carbon dioxide and cold nitrogen, echoing a calciner giving up heat. Air is a blend with no heat-capacity data of its own, so use nitrogen and oxygen instead.</li>
-<li><strong>Flow given as</strong>, one of Mass flow, Molar flow, Volumetric flow or Normal Volumetric Flow, then the value. Only rates are offered: a batch heat exchanger is not a standard concept. Each stream has its own basis. The default is 1000 kg/h.</li>
-<li><strong>Inlet temperature</strong>, 900 °C for the hot stream and 20 °C for the cold, and <strong>Pressure</strong>, 1.01325 bar, held constant through the exchanger on each side.</li>
+<li>A <strong>Single substance</strong> / <strong>Mixture</strong> switch, and the <strong>Substance</strong>. The defaults are hot carbon dioxide and cold nitrogen, echoing a calciner giving up heat. A mixture is built the same way as on the <a href="/docs/Property-Tab/">Property</a> tab, with shares as <strong>Mole %</strong> or <strong>Mass %</strong>, or as <strong>Amounts</strong>, each component's own flow; the stream's flow is then their sum. Air on its own has no heat-capacity data, so it is refused, but it can be one component of a mixture, where it is split into nitrogen, oxygen and argon.</li>
+<li><strong>Mass flow</strong>, 1000 kg/h by default, with its unit menu inside the field. The menu offers Mass flow, Molar flow, Volumetric flow and Normal Volumetric Flow units, and picking a unit of another kind switches the basis. Only rates are offered: a batch heat exchanger is not a standard concept. Each stream has its own basis.</li>
+<li><strong>Inlet temperature</strong>, 900 °C for the hot stream and 20 °C for the cold, and <strong>Pressure</strong>, 1.01325 bara, side by side. Its ⓘ says it is held constant through the exchanger on each side, as in the Heater case.</li>
 </ul>
-<p><strong>Specify</strong> then chooses what you know:</p>
+<p><strong>You know</strong> then chooses what you give, a switch of <strong>Duty</strong>, <strong>Hot outlet T</strong> and <strong>Cold outlet T</strong>. As the note under it says, the other two are calculated.</p>
 <ul>
-<li><strong>Duty — find both outlet temperatures.</strong> Enter one <strong>Duty</strong>; it is always positive, since which stream is hot already says which way the heat goes.</li>
-<li><strong>Hot stream's outlet temperature — find the duty and the cold outlet.</strong> The outlet must be cooler than the hot inlet.</li>
-<li><strong>Cold stream's outlet temperature — find the duty and the hot outlet.</strong> The outlet must be warmer than the cold inlet.</li>
+<li><strong>Duty</strong> asks for one <strong>Duty</strong>, a power, and finds both outlet temperatures. Its ⓘ says it is always positive, since which stream is hot already says which way the heat goes.</li>
+<li><strong>Hot outlet T</strong> asks for the <strong>Hot stream outlet temperature</strong> and finds the duty and the cold outlet. The outlet must be cooler than the hot inlet.</li>
+<li><strong>Cold outlet T</strong> asks for the <strong>Cold stream outlet temperature</strong> and finds the duty and the hot outlet. The outlet must be warmer than the cold inlet.</li>
 </ul>
-<p>Press <strong>Calculate</strong>. Editing any input, or changing a unit, clears the answer.</p>
+<p>Press <strong>Calculate</strong>, pinned at the bottom of the screen. Editing any input, or changing a unit, clears the answer, and you are back at the inputs.</p>
 <h2 id="what-comes-back">What comes back</h2>
-<p>A <strong>Duty</strong> line, then a group each for the <strong>Hot stream</strong> and the <strong>Cold stream</strong>: inlet and outlet temperature, initial and final phase, a Melting point or Boiling point line for each transition crossed, and when the phase changes the duty split into <em>of which sensible</em> and <em>of which latent</em>. Then the stream's mass flow, molar flow and volumetric flow at inlet conditions.</p>
-<p>Grey notes say that flow is assumed counter-current with no heat loss, so both sides carry the same duty, and that this is the energy balance only. If either stream changes phase, a note warns that the feasibility check below cannot see a pinch at the plateau. A failure inside one stream, such as a duty beyond what it can absorb, names the stream, so you are not left checking both.</p>
+<p>The results open on their own screen. At the top an <strong>Inputs</strong> strip sums up what was calculated ("Hot Carbon dioxide 900 °C · Cold Nitrogen 20 °C · Counter-current"), and <strong>Edit</strong> takes you back to the form.</p>
+<p>The answer comes first, in a dark card: the <strong>Duty</strong>, with a sentence giving the outlet you did not enter, "Cold stream leaves at 361.4 °C" (or the hot stream's, when you gave the cold outlet). Tap the unit beside the number to change it. Under it the exchanger picture comes back with all four temperatures filled in.</p>
+<p>A <strong>Closest approach</strong> tile gives the smallest temperature difference between the streams at the ends of the exchanger, and which end it is at: the smaller of the hot end and the cold end for counter-current, the outlet end for co-current.</p>
+<p>A <strong>Temperature profiles</strong> chart plots both streams' temperatures against the heat transferred. Counter-current, the heat is counted from the cold end (hot outlet beside cold inlet); co-current, from the inlet end (both inlets together). The note under it says which, and gives the closest approach read along the two lines, not just at the ends. A stream that changes phase shows as a flat step in its line.</p>
+<p>Then the values, grouped:</p>
+<ul>
+<li><strong>Duty:</strong> the duty.</li>
+<li><strong>Hot stream</strong> and <strong>Cold stream</strong>, each with the <strong>Inlet temperature</strong> and <strong>Outlet temperature</strong>, <strong>Initial → final phase</strong>, a <strong>Melting point</strong> or <strong>Boiling point</strong> line for each transition crossed, and when the phase changes the duty split into <em>of which sensible</em> and <em>of which latent</em>. Then the stream's <strong>Mass flow</strong>, <strong>Molar flow</strong> and <strong>Volumetric flow at inlet conditions</strong>.</li>
+</ul>
+<p>Every value with a unit has its own unit menu; changing one changes only that row.</p>
+<p>Grey notes say which flow arrangement was used, that there is no heat loss so both sides carry the same duty, and that this is the energy balance only. If either stream changes phase, a note says so. A failure inside one stream, such as a duty beyond what it can absorb, names the stream, so you are not left checking both.</p>
+<p><strong>Solved with:</strong> names the heat-capacity correlations used for each stream. <strong>Methods used</strong> at the foot opens a sheet where you can see, and for a single substance change, the heat-capacity method each stream uses for each phase; picking another one calculates again. See <a href="/docs/Methods-and-Sources/">Methods and Sources</a>.</p>
 <h2 id="when-it-refuses">When It Refuses</h2>
-<p>Heat only flows from hot to cold.</p>
-<pre><code>T_hot,out ≥ T_cold,in
-T_cold,out ≤ T_hot,in
+<p>Heat only flows from hot to cold, so wherever the two streams meet the hot one must be at least as hot as the cold one. Which temperatures meet depends on the arrangement.</p>
+<pre><code>Counter-current:  T_hot,out ≥ T_cold,in      (cold end)
+                  T_cold,out ≤ T_hot,in      (hot end)
+
+Co-current:       T_hot,in  &gt; T_cold,in      (inlet end)
+                  T_cold,out ≤ T_hot,out     (outlet end)
 </code></pre>
-<p>In a counter-current unit those are the two ends where the streams pair up — asking for a pairing that breaks either one is refused rather than answered with a duty that would require heat to run backwards.</p>
-<p>That check only looks at the four inlet/outlet temperatures, not the shape of the temperature profile in between. If a stream changes phase partway through, the closest approach between the two streams can actually occur at that phase change rather than at either end — sizing an exchanger for that case needs the fuller method below, not this check alone.</p>
+<p>Asking for a pairing that breaks any of these is refused rather than answered with a duty that would require heat to run backwards. The message gives the two temperatures that clash and, where it helps, suggests reducing the duty, raising a flow, or checking the outlet temperature entered. The co-current outlet-end check is the one counter-current never needs, and the usual reason a duty that works counter-current cannot be done co-current; its message suggests counter-current flow, which allows it.</p>
+<p>That check only looks at the four inlet and outlet temperatures, not the shape of the temperature profile in between. If a stream changes phase partway through, the closest approach between the two streams can occur at that phase change rather than at either end. The <strong>Temperature profiles</strong> chart reads the gap along both lines, and when they cross inside the exchanger an amber warning says at about what share of the duty, and by how many kelvin. The result is still shown, but that duty cannot be reached in a single exchanger of that arrangement. The <strong>Closest approach</strong> tile is taken at the ends only, so when a stream changes phase read the chart's note and warning as well.</p>
 <h2 id="what-this-does-not-do-yet">What This Does Not Do Yet</h2>
-<p>This is the energy balance only: how much heat moves, and what temperature each stream leaves at. It does not size the exchanger — no heat-transfer area, no tube count, no pressure drop, no fan or pump power, and no cost. Sizing needs the temperature profile along the unit and a heat-transfer coefficient, both a separate calculation from the one here.</p>
+<p>This is the energy balance only: how much heat moves, and what temperature each stream leaves at. It does not size the exchanger — no heat-transfer area, no overall heat-transfer coefficient, no LMTD, no tube count, no pressure drop, no fan or pump power, and no cost. Sizing needs a heat-transfer coefficient on top of the temperature profiles drawn here, a separate calculation from the one here.</p>
   </main>
   </div>
 </div>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Saving and Opening | ProcessChem documentation</title>
-<meta name="description" content="Those saved sets are kept inside the app, so deleting the app deletes them. To keep a case safe, also save it to a file. You choose where the file...">
+<meta name="description" content="Sets kept in the app live inside it, so deleting the app deletes them. To keep a case safe, also save it to a file. You choose where the file goes,...">
 <link rel="canonical" href="https://processchem.no/docs/Saving-and-Opening/">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F8FAFF">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ProcessChem">
 <meta property="og:title" content="Saving and Opening | ProcessChem documentation">
-<meta property="og:description" content="Those saved sets are kept inside the app, so deleting the app deletes them. To keep a case safe, also save it to a file. You choose where the file...">
+<meta property="og:description" content="Sets kept in the app live inside it, so deleting the app deletes them. To keep a case safe, also save it to a file. You choose where the file goes,...">
 <meta property="og:url" content="https://processchem.no/docs/Saving-and-Opening/">
 <meta property="og:image" content="https://processchem.no/assets/og-image.png">
 <link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -47,8 +47,10 @@
 <li><a href="/docs/Case-Tab/">Case</a></li>
 <li><a href="/docs/Units-Tab/">Units</a></li>
 </ul>
-<h2>Keeping your work</h2><ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/" aria-current="page">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -68,31 +70,52 @@
 <div class="crumb"><a href="/docs/">Documentation</a></div>
 <h1 id="saving-and-opening">Saving and Opening</h1>
 <h2 id="about">About</h2>
-<p>Every tab has <strong>Open</strong>, <strong>Save</strong> and <strong>Reset</strong> buttons under its heading. Save keeps what you have entered under a name, and Open brings it back.</p>
-<p>Those saved sets are kept inside the app, so <strong>deleting the app deletes them</strong>. To keep a case safe, also save it to a file. You choose where the file goes, such as iCloud Drive or On My iPhone on an iPhone, or Downloads or Google Drive on an Android phone, and it stays there when the app is gone.</p>
+<p>The <strong>⋯</strong> menu at the top right of every tab saves what you have entered under a name, opens a saved set again, and resets the inputs to their defaults. A set can be kept in the app or written to a file that stays when the app is gone.</p>
+<p>Sets kept in the app live inside it, so <strong>deleting the app deletes them</strong>. To keep a case safe, also save it to a file. You choose where the file goes, such as iCloud Drive or On My iPhone on an iPhone, or Downloads or Google Drive on an Android phone, and it stays there when the app is gone.</p>
+<div class="doc-shots"><figure><a href="/docs/images/screens/menu.jpg"><img src="/docs/images/screens/menu.jpg" alt="Menu" width="600" height="1298" loading="lazy"></a><figcaption>Menu</figcaption></figure><figure><a href="/docs/images/screens/save.jpg"><img src="/docs/images/screens/save.jpg" alt="Save" width="600" height="1298" loading="lazy"></a><figcaption>Save</figcaption></figure></div>
+<h2 id="the--menu">The ⋯ menu</h2>
+<p>Tap <strong>⋯</strong> beside <strong>Docs ↗</strong>. The menu is headed with the calculation it acts on: the tab's name on Property and Units, or the mode or case you have open on Thermo and Case. It holds:</p>
+<ul>
+<li><strong>Recent</strong>: your three newest saved sets for this calculation, each with the date it was saved. Tap one to open it.</li>
+<li><strong>Open a saved set…</strong>: every set saved for this calculation, and <strong>Open from a file…</strong>.</li>
+<li><strong>Save…</strong>: the <strong>Save this set</strong> sheet.</li>
+<li><strong>Reset to defaults</strong> (<strong>Reset this case to defaults</strong> on Case): puts the original inputs back on screen.</li>
+</ul>
+<p>Saving belongs to one calculation, so on Thermo and Case choose a mode or a case first. From the <strong>Choose a mode</strong> or <strong>All cases</strong> cards, <strong>Save…</strong> and <strong>Open a saved set…</strong> only ask you to choose a calculation.</p>
 <h2 id="saving-inside-the-app">Saving inside the app</h2>
-<p>Tap <strong>Save</strong>, type a name of up to 40 characters, and tap <strong>Save</strong> again. Each calculation keeps up to 25 sets, and saving under a name that already exists replaces it. The set you last saved or opened comes back when the app starts. <strong>Reset</strong> puts the original inputs back on screen and leaves your saved sets untouched.</p>
-<p>What a set holds depends on the tab: the Property and Units tabs each save the whole tab, while Thermo and Case save the one mode or case you have selected. Each tab's own page describes it.</p>
+<ol>
+<li>Tap <strong>⋯</strong>, then <strong>Save…</strong>.</li>
+<li>Type a <strong>Name</strong> of up to 40 characters. The field starts with the name you last saved or opened, so saving again keeps one set up to date.</li>
+<li>Leave <strong>Where</strong> on <strong>In the app</strong> and tap <strong>Save</strong>.</li>
+</ol>
+<p>The set then shows up under <strong>Recent</strong> in the ⋯ menu. Saving under a name that already exists replaces that set; the button reads <strong>Replace</strong> when it will. Each calculation keeps up to 25 sets; at the limit the app refuses to save and asks you to delete one first, rather than dropping one on its own. The set you last saved or opened comes back when the app starts.</p>
+<h2 id="what-gets-saved">What gets saved</h2>
+<p>The <strong>What gets saved</strong> note on the sheet says it: the calculation's inputs, including any unit you changed on a single field. Results are not stored; they are calculated again when you open the set and tap <strong>Calculate</strong>. A method picked on a data-source sheet or under <strong>Methods used</strong> is not saved with the set either (see <a href="/docs/Methods-and-Sources/">Methods and data sources</a>).</p>
+<p>What a set holds depends on the tab: the Property and Units tabs each save the whole tab, while Thermo and Case save the one mode or case you have open. Property also keeps its <strong>Recent</strong> names. Each tab's own page describes it.</p>
+<h2 id="opening-a-saved-set">Opening a saved set</h2>
+<p>Tap <strong>⋯</strong>, then a set under <strong>Recent</strong>, or <strong>Open a saved set…</strong> for the full list. In the list, the set you last used is marked <strong>last used</strong>. Tap a name to open it. The icons beside each set write it to a file, rename it, or delete it; a delete asks you to confirm first.</p>
+<h2 id="resetting">Resetting</h2>
+<p><strong>Reset to defaults</strong> puts the original inputs back on screen and leaves your saved sets untouched. On Thermo it resets the mode you have open and leaves the other modes as they are; on Case, <strong>Reset this case to defaults</strong> does the same for the open case. Tapped on the <strong>Choose a mode</strong> or <strong>All cases</strong> screen, it resets every mode or every case.</p>
 <h2 id="saving-to-a-file">Saving to a file</h2>
 <ol>
-<li>Tap <strong>Save</strong> and type a name.</li>
-<li>Tap <strong>Save to a file…</strong>. Your phone's file-saving screen opens.</li>
+<li>Tap <strong>⋯</strong>, then <strong>Save…</strong>, and type a name.</li>
+<li>Set <strong>Where</strong> to <strong>Files / iCloud</strong> and tap <strong>Save</strong>. Your phone's file-saving screen opens.</li>
 <li>Choose where to keep it and confirm.</li>
 </ol>
-<p>The file is named after the calculation and the set, for example <code>ProcessChem - Reaction - Site case.json</code>. It holds one case: the inputs of the calculation you were on. Saving to a file does not add the set to the app's own list; use <strong>Save</strong> for that as well if you want both.</p>
-<p>You can also write out a set you already saved in the app: tap <strong>Open</strong>, then the save icon beside the set.</p>
+<p>The file is a <code>.json</code> file named after the calculation and the set, for example <code>ProcessChem - Reaction - Site case.json</code>. It holds one case: the inputs of the calculation you were on. Saving to a file does not add the set to the app's own list; save it <strong>In the app</strong> as well if you want both. If you back out of the file-saving screen, the Save sheet stays open.</p>
+<p>You can also write out a set you already saved in the app: tap <strong>Open a saved set…</strong>, then the save icon beside the set.</p>
 <h2 id="opening-from-a-file">Opening from a file</h2>
 <ol>
 <li>Go to the tab and calculation the file came from. On Thermo, choose the mode; on Case, choose the case.</li>
-<li>Tap <strong>Open</strong>, then <strong>Open from a file…</strong>, and choose the file.</li>
+<li>Tap <strong>⋯</strong>, <strong>Open a saved set…</strong>, then <strong>Open from a file…</strong>, and choose the file.</li>
 <li>The form fills in with the saved values.</li>
 </ol>
-<p>Opening a file fills the form on screen but does not add the set to the app's own list. Tap <strong>Save</strong> afterwards if you want it kept there too.</p>
+<p>Opening a file fills the form on screen but does not add the set to the app's own list. Save it <strong>In the app</strong> afterwards if you want it kept there too.</p>
 <p>A file only opens on the tab and calculation it was saved from, because its numbers belong to that form. If you are somewhere else, the app says where the file belongs and changes nothing. A file that is not a ProcessChem case, is damaged, or was made by a newer version of the app is refused with a message, and nothing on screen changes.</p>
 <h2 id="units">Units</h2>
-<p>Every number is saved together with the unit it was typed in. A pressure saved as 100 psi opens as the same pressure even if you have since set pressure to bar; it shows as 6.89 bar, not 100 bar. The same holds for a set opened from the app's own list.</p>
+<p>Every number is saved together with the unit it was in. A pressure saved as 100 psi opens as the same pressure even if you have since set pressure to bar on the <a href="/docs/Units-Tab/">Units</a> tab; it shows as 6.89 bar, not 100 bar. A field whose unit you changed on the field itself keeps that unit, so it opens as 100 psi. The same holds for a set opened from the app's own list.</p>
 <h2 id="moving-a-case-elsewhere">Moving a case elsewhere</h2>
-<p>A saved file is an ordinary file, so you can copy it like any other: keep it in a cloud drive, send it by email or a messaging app, or put it on another device. Open it from ProcessChem in the same way.</p>
+<p>A saved file is an ordinary file, so you can copy it like any other: keep it in a cloud drive, send it by email or a messaging app, or put it on another device. Open it from ProcessChem there in the same way.</p>
   </main>
   </div>
 </div>

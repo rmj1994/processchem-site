@@ -62,7 +62,7 @@ Process calculations you can run on the plant floor.
 
 ### Introduction {#hero.lede}
 
-ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. It runs on your phone, with no account and no connection.
+ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. It runs on your phone, with no account and no connection, and every answer shows the method behind it.
 
 ### App Store button: small text {#hero.appstore_small}
 
@@ -86,7 +86,7 @@ On iPhone and iPad today. Android is coming soon.
 
 ### Picture description (screen readers): Heater screen {#hero.alt}
 
-ProcessChem Heater case: heat duty, conditions and amounts for water heated from 20 to 120 degrees Celsius
+ProcessChem Heater case: a heat duty of 730.4 kW for water heated from 20 to 120 degrees Celsius, with the heating curve
 
 ## The app (screenshots)
 
@@ -100,11 +100,11 @@ See it on the phone.
 
 ### Introduction {#screens.p}
 
-These are actual screens from the app. Property results for ethanol, the four Thermo modes, the Case list, and the Units tab.
+These are actual screens from the app: property results for ethanol with its heat-capacity curve, the four Thermo modes, the Case list, and the Units tab with its presets.
 
 ### Property: picture description {#screens.property.alt}
 
-Property tab: results for ethanol, including density, heat capacity, viscosity and boiling point
+Property tab: results for ethanol, with phase, density and boiling point at the top and a chart of heat capacity against temperature
 
 ### Property: title {#screens.property.title}
 
@@ -116,7 +116,7 @@ Look up a fluid
 
 ### Thermo: picture description {#screens.thermo.alt}
 
-Thermo tab with the mode list: Phase Equilibrium, Chemical Equilibrium, Reaction and Electrochemical Reaction
+Thermo tab: four mode cards, Phase Equilibrium, Chemical Equilibrium, Reaction and Electrochemical Reaction
 
 ### Thermo: title {#screens.thermo.title}
 
@@ -128,7 +128,7 @@ Solve a state
 
 ### Case: picture description {#screens.case.alt}
 
-Case tab with the case list: Heater, Vessel Heater, Fluidized Bed and Heat Exchanger
+Case tab: four case cards, Heater, Vessel Heater, Fluidized Bed and Heat Exchanger
 
 ### Case: title {#screens.case.title}
 
@@ -140,7 +140,7 @@ Answer a plant question
 
 ### Units: picture description {#screens.units.alt}
 
-Units tab: choose a unit for temperature, pressure, mass, volume, energy and more
+Units tab: unit presets, a search box, the unit converter and a unit for each quantity
 
 ### Units: title {#screens.units.title}
 
@@ -174,7 +174,7 @@ Look up a fluid
 
 ### Property: description {#inside.property.text}
 
-Density, heat capacity, viscosity, thermal conductivity, vapour pressure and more for thousands of chemicals and mixtures, with flash point, flammability limits and exposure limits alongside.
+Density, heat capacity, viscosity, thermal conductivity, vapour pressure and more for thousands of chemicals and mixtures, charted against temperature, with flash point, flammability limits and exposure limits one tap away. Every value shows where it came from.
 
 ### Property: small tags {#inside.property.chips}
 
@@ -185,6 +185,7 @@ Density, heat capacity, viscosity, thermal conductivity, vapour pressure and mor
 - Z factor
 - surface tension
 - hazard data
+- data sources
 
 ### Thermo: title {#inside.thermo.title}
 
@@ -196,7 +197,7 @@ Solve a state
 
 ### Thermo: description {#inside.thermo.text}
 
-Flash a stream at any two properties, find the equilibrium composition of a reacting system, balance a reaction with its energy balance, or get the cell voltage of an electrolysis.
+Flash a stream at any two properties, find the equilibrium composition of a reacting system, balance a reaction with its energy balance, or get the cell voltage of an electrolysis. What goes in and what comes out sit side by side in one table.
 
 ### Thermo: small tags {#inside.thermo.chips}
 
@@ -215,7 +216,7 @@ Answer a plant question
 
 ### Case: description {#inside.case.text}
 
-Start from the question an engineer actually asks. Give what you know and the case finds the rest, and it refuses a combination that cannot happen, such as heat flowing the wrong way.
+Start from the question an engineer actually asks. Give what you know and the case finds the rest, answer first, with a heating curve or temperature profile to check it by eye. It refuses a combination that cannot happen, such as heat flowing the wrong way.
 
 ### Case: small tags {#inside.case.chips}
 
@@ -234,7 +235,7 @@ Keep your own units
 
 ### Units: description {#inside.units.text}
 
-Choose a unit for each quantity, so bar can sit beside °C or psi beside °F. Gas volumes convert at the Normal reference you pick: 0 °C, 15 °C or 20 °C.
+Start from a preset (Process, Strict SI, Metric, British or US), then change any quantity on its own, here or right beside a field. Gas volumes convert at the Normal reference you pick, and a built-in converter handles one-off sums.
 
 ### Units: small tags {#inside.units.chips}
 
@@ -242,6 +243,7 @@ Choose a unit for each quantity, so bar can sit beside °C or psi beside °F. Ga
 - psi
 - Nm³/h
 - SCFM
+- MMSCFD
 
 ## What it stands on
 
@@ -255,7 +257,7 @@ What it stands on.
 
 ### Introduction {#stands.p}
 
-The numbers come from published reference data and established models.
+The numbers come from published reference data and established models, and every result names the method it used.
 
 ### First point: title {#stands.one.title}
 
@@ -263,7 +265,7 @@ Reference equations of state
 
 ### First point: text {#stands.one.text}
 
-CoolProp's reference equations cover more than 100 fluids. Peng-Robinson with ChemSep interaction parameters handles the rest, and mixtures.
+CoolProp's reference equations cover more than 100 fluids. Peng-Robinson with ChemSep interaction parameters handles the rest, and mixtures. For a single substance you can switch between the two.
 
 ### Second point: title {#stands.two.title}
 
@@ -319,7 +321,7 @@ Documented with the equations.
 
 ### Text {#docs.p}
 
-Each tab and calculation has its own page that states the governing equations, the data sources and the limits of the method.
+Each tab and calculation has its own page, with screenshots, that states the governing equations, the data sources and the limits of the method.
 
 ### Button: small text {#docs.btn_small}
 

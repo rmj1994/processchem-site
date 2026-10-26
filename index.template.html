@@ -55,7 +55,7 @@
           </div>
           <p class="note">{{hero.note}}</p>
         </div>
-        <div class="stage"><figure class="device" data-drift="-0.06"><img src="/assets/screens/case-heater-results.jpg" width="774" height="1674" alt="{{hero.alt|attr}}"></figure></div>
+        <div class="stage"><figure class="device" data-drift="-0.06"><img src="/assets/screens/heater-results.jpg" width="774" height="1674" alt="{{hero.alt|attr}}"></figure></div>
       </div>
       <div class="strip" aria-hidden="false">
       <svg viewBox="0 0 1200 160" role="img" aria-label="Simplified process flow: feed vessel, pump, heat exchanger, control valve and fluidized bed reactor">
@@ -295,22 +295,35 @@
     Units: '<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/></svg>'
   };
 
+  // The Case screen's cards, worded as in the app.
+  var CASES = {
+    "Heater": ["Heat or cool a flowing stream: find the duty or the outlet temperature",
+      '<svg viewBox="0 0 24 24"><path d="M4 12h2l2-5 3 10 3-10 3 10 2-5h1"/></svg>'],
+    "Vessel Heater": ["Heat a batch in a vessel: the energy to reach a temperature",
+      '<svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="4"/><path d="M6 13h12"/></svg>'],
+    "Fluidized Bed": ["Fluidization window, pressure drop, freeboard and reaction",
+      '<svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="2.5"/><circle cx="15.5" cy="13" r="2.5"/><circle cx="9" cy="17" r="2"/><circle cx="16" cy="6" r="1.6"/></svg>'],
+    "Heat Exchanger": ["Two streams, one duty: outlet temperatures and approach",
+      '<svg viewBox="0 0 24 24"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg>']
+  };
+  var CHEV = '<svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>';
+
   function phoneHtml(p) {
     var company = p.mark ? '<div class="co"><span class="mark">' + esc(p.mark) + '</span><b>' + esc(p.name) + '</b></div>' : '';
     var tabs = p.tabs.map(function (t) {
       return '<span class="' + (t === "Case" ? "on" : "") + '"><i>' + ICONS[t] + '</i>' + esc(t) + '</span>';
     }).join("");
-    var opts = p.cases.map(function (c) { return '<div>' + esc(c) + '</div>'; }).join("");
+    var cards = p.cases.map(function (c) {
+      return '<div class="card"><i>' + CASES[c][1] + '</i><div><b>' + esc(c) + '</b><small>' + esc(CASES[c][0]) + '</small></div>' + CHEV + '</div>';
+    }).join("");
     var chips = p.mark ? '<div class="lab">Default units</div><div class="chips">' + p.units.map(function (u) { return '<span class="chip">' + esc(u) + '</span>'; }).join("") + '</div>' : '';
     var saved = p.saved.length
       ? '<div class="lab">Saved by your company</div><div class="saved">' + p.saved.map(function (s) { return '<div><i></i>' + esc(s) + '</div>'; }).join("") + '</div>'
       : '';
-    return '<div class="tag-ex">example</div><div class="body">' + company +
-      '<div class="ttl">🏭 Case</div>' +
-      '<div class="sub">Real-world scenarios, start to finish</div>' +
-      '<div class="btns"><span>Open</span><span class="save">Save</span><span>Reset</span></div>' +
-      '<div class="sel"><span>Select a case</span><span>▴</span></div>' +
-      '<div class="menu' + (p.mark ? ' pa' : '') + '">' + opts + '</div>' + chips + saved + '</div>' +
+    return '<div class="tag-ex">example</div><div class="body">' +
+      '<div class="hd"><b>Case</b><span class="docs">Docs ↗</span><span class="more">⋯</span></div>' +
+      '<div class="sub">Real-world scenarios, start to finish</div>' + company +
+      '<div class="lab">All cases</div>' + cards + chips + saved + '</div>' +
       '<div class="nav">' + tabs + '</div>';
   }
 

@@ -101,7 +101,24 @@ def render(text: str):
     body = md.convert(text)
     body = re.sub(r"<table>", '<div class="table-wrap"><table>', body)
     body = body.replace("</table>", "</table></div>")
+    body = SHOTS_P.sub(shots_html, body)
     return body
+
+
+#: A paragraph holding nothing but app screenshots (images/screens/...): shown as a row
+#: of phone pictures, each captioned with its alt text and opening full size on a tap.
+SHOTS_P = re.compile(r'<p>((?:\s*<img [^>]*src="images/screens/[^"]+"[^>]*>\s*)+)</p>')
+SHOT_IMG = re.compile(r'<img alt="([^"]*)" src="(images/screens/[^"]+)"\s*/?>')
+SHOT_SIZE = (600, 1298)   # tools/screens.py writes the docs pictures at this size
+
+
+def shots_html(m) -> str:
+    figs = []
+    for alt, src in SHOT_IMG.findall(m.group(1)):
+        figs.append(
+            f'<figure><a href="{src}"><img src="{src}" alt="{alt}" width="{SHOT_SIZE[0]}" '
+            f'height="{SHOT_SIZE[1]}" loading="lazy"></a><figcaption>{alt}</figcaption></figure>')
+    return '<div class="doc-shots">' + "".join(figs) + "</div>"
 
 
 def page_url(name: str) -> str:
@@ -113,7 +130,7 @@ def rewrite_links(body: str, pages: dict, problems: list, where: str) -> str:
 
     def href(m):
         target = m.group(1)
-        if re.match(r"^(https?:|mailto:|/|#)", target):
+        if re.match(r"^(https?:|mailto:|/|#|images/)", target):
             return m.group(0)
         page, _, anchor = target.partition("#")
         hit = pages.get(page) and page or lower.get(page.lower())
@@ -123,7 +140,7 @@ def rewrite_links(body: str, pages: dict, problems: list, where: str) -> str:
         return 'href="%s%s"' % (page_url(hit), ("#" + anchor) if anchor else "")
 
     body = re.sub(r'href="([^"]*)"', href, body)
-    body = re.sub(r'src="images/([^"]+)"', r'src="/docs/images/\1"', body)
+    body = re.sub(r'(src|href)="images/([^"]+)"', r'\1="/docs/images/\2"', body)
     return body
 
 

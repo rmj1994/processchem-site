@@ -104,10 +104,60 @@
 ṅ·(h₂ − h₁) = Q̇ + Ẇ        rate basis (open, steady flow)
 </code></pre>
 <p>n is the fixed amount; ṅ the flow rate. U is internal energy, h is enthalpy — the open-system form carries h rather than U because a flowing stream does flow work on its surroundings just by moving, and h = U + Pv already accounts for it. Isenthalpic (a throttle) is the special case h₂ = h₁: no work, no heat, and the temperature still changes — the Joule–Thomson effect. Combinations that contradict each other — isenthalpic against a specified final temperature, say — are greyed out rather than silently answered.</p>
+<h2 id="energy-and-sign-convention">Energy and sign convention</h2>
+<p>The energy figures come from the first law, written so that <strong>positive means energy added to the fluid</strong>:</p>
+<pre><code>n·(U₂ − U₁) = Q + W        quantity basis (closed system: a vessel)
+ṅ·(h₂ − h₁) = Q̇ + Ẇ        rate basis (open system: a stream through a device)
+</code></pre>
+<p>On the results this reads in words: <strong>Heat in</strong> is Q (or Q̇) greater than zero, <strong>Heat out</strong> less than zero; <strong>Work in</strong> is work done on the fluid (a compressor, a pump), <strong>Work out</strong> is work the fluid does (a turbine, an expanding gas). A stream carries enthalpy h rather than internal energy U, because pushing the fluid in and out of the device is itself work (P·v), and h = U + P·v already counts it.</p>
+<p>What each process holds constant decides where the energy goes:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Held constant</th>
+<th>Heat</th>
+<th>Work</th>
+<th>What sets the final state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pressure</td>
+<td>the answer: Q = n·(H₂ − H₁)</td>
+<td>the volume change, −P·ΔV (a stream: none)</td>
+<td>the final temperature or volume you give</td>
+</tr>
+<tr>
+<td>Temperature</td>
+<td>Q = n·T·(S₂ − S₁), reversible</td>
+<td>the rest of the energy balance</td>
+<td>the final pressure or volume you give</td>
+</tr>
+<tr>
+<td>Volume (quantity only)</td>
+<td>Q = n·(U₂ − U₁)</td>
+<td>none, nothing moves</td>
+<td>the final temperature or pressure you give</td>
+</tr>
+<tr>
+<td>Adiabatic (isentropic)</td>
+<td>none</td>
+<td>the answer: W = n·(U₂ − U₁) (a stream: ṅ·(h₂ − h₁)); for a real machine the ideal work is divided by the isentropic efficiency when compressing, multiplied when expanding</td>
+<td>S₂ = S₁ at 100 % efficiency</td>
+</tr>
+<tr>
+<td>Isenthalpic (throttle)</td>
+<td>none</td>
+<td>none</td>
+<td>h₂ = h₁; the temperature change is the Joule–Thomson effect</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Worked example: nitrogen from 1 bar and 20 °C to 10 bar.</strong> Adiabatic compression reaches 290.2 °C and needs 5.67 kJ of work per mole in a closed vessel, or 7.94 kJ per mole as shaft work on a flowing stream (an ideal gas would reach 292.8 °C). Isenthalpic "compression" to the same 10 bar ends at only 21.96 °C, with no heat and no work: the 2 K rise is nitrogen's Joule–Thomson effect, about 0.22 K per bar. The two answers differ by the compression work. Isenthalpic is really the path of a gas passing through a valve from high to low pressure; run from 1 to 10 bar it is the state with the same enthalpy, not a real machine. To reach it in practice you would compress (7.94 kJ per mole in) and then cool back out the same 7.94 kJ.</p>
 <h2 id="what-comes-back">What comes back</h2>
 <p>The <strong>Inputs</strong> strip at the top repeats what you asked, for example "Nitrogen · 1.0 kg · adiabatic · 1.0 → 10.0 bara".</p>
-<p>The headline card gives the larger of the two energies, in words rather than signs: <strong>Work on fluid</strong> or <strong>Work by fluid</strong> for a quantity, <strong>Power in</strong> or <strong>Power out</strong> for a stream, and <strong>Heat in</strong> or <strong>Heat out</strong> for either. Under it a sentence says what happened to the phase: "It stays gas: 20 °C → 290.2 °C", or "From liquid to gas: it crosses the boiling curve". When the crossing happens at constant pressure, the sentence adds the temperature at which it boils, "… at 99.97 °C".</p>
-<p>Three tiles follow: <strong>Final phase</strong> (<strong>Outlet phase</strong> for a stream) with its vapour share, the other energy, and <strong>Final volume</strong> (<strong>Outlet flow</strong> for a stream). Tap the ⓘ on the phase tile to see which equation of state produced it. Tap any unit on the results to show that value in another unit.</p>
+<p>The headline card gives what the process is about, in words rather than signs. Held pressure, temperature or volume: the heat, <strong>Heat in</strong> or <strong>Heat out</strong>. Adiabatic: the work, <strong>Work in</strong> or <strong>Work out</strong>. Isenthalpic: the final temperature, marked "enthalpy unchanged", because heat and work are both zero by definition. The same words are used for a quantity and a stream; the unit says which (kJ for a quantity, kW for a stream). Under it a sentence says what happened to the phase: "It stays gas: 20 °C → 290.2 °C", or "From liquid to gas: it crosses the boiling curve". When the crossing happens at constant pressure, the sentence adds the temperature at which it boils, "… at 99.97 °C".</p>
+<p>Three tiles follow, always in the same places: <strong>Final phase</strong> (<strong>Outlet phase</strong> for a stream) with its vapour share, <strong>Heat</strong>, and <strong>Work</strong>. An energy that is zero by the nature of the process reads "none (adiabatic)" or "none (enthalpy unchanged)". Tap the ⓘ on the phase tile to see which equation of state produced it, and the ⓘ on the headline or an energy tile to open <a href="#energy-and-sign-convention">Energy and sign convention</a>. Tap any unit on the results to show that value in another unit.</p>
 <p>For a quantity (a vessel), the cards below are:</p>
 <div class="table-wrap"><table>
 <thead>

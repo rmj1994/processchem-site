@@ -60,9 +60,9 @@
 </ul>
 <h2>Cases</h2><ul>
 <li><a href="/docs/Heater/">Heater</a></li>
-<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
 <li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
 <li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+<li><a href="/docs/Reactor/">Reactor</a></li>
 </ul>
 </div>
 </nav>
@@ -76,10 +76,10 @@
 <p>These are engineering calculations with hazards attached, so each one flags what it is really for — the liquid-full vessel that gains 2.6 bar per °C, the auto-refrigeration that can embrittle a cylinder wall — rather than only returning a number.</p>
 <h2 id="cases">Cases</h2>
 <ul>
-<li><a href="/docs/Heater/">Heater</a>: "Heat or cool a flowing stream: find the duty or the outlet temperature"</li>
-<li><a href="/docs/Vessel-Heater/">Vessel Heater</a>: "Heat a batch in a vessel: the energy to reach a temperature"</li>
+<li><a href="/docs/Heater/">Heater</a>: "Heat or cool a stream, a batch or a sealed vessel: duty, outlet temperature, pressure rise"</li>
 <li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a>: "Fluidization window, pressure drop, freeboard and reaction"</li>
 <li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a>: "Two streams, one duty: outlet temperatures and approach"</li>
+<li><a href="/docs/Reactor/">Reactor</a>: "Plug flow, mixed flow or batch: size or conversion from the kinetics"</li>
 </ul>
 <p>The tab opens on this list, one card per case. Once you have calculated a case, a <strong>Continue</strong> card above the list takes you straight back to it, with a line summing up the inputs and the answer. Tap a case and its inputs open, with the case's name in the header and a <strong>‹</strong> back arrow that returns to the list. Tapping the <strong>Case</strong> tab again also steps back one screen at a time: from a result to its inputs, and from the inputs to the list.</p>
 <h2 id="how-a-case-form-works">How a case form works</h2>
@@ -89,7 +89,7 @@
 <li><strong>Inputs are grouped in cards</strong>, under headings such as Fluid, Amount, Inlet and Find. The Heat Exchanger's two streams are marked <strong>HOT</strong> and <strong>COLD</strong>. Groups you rarely need, such as the Fluidized Bed's <strong>Bed density</strong>, <strong>Distributor</strong> and <strong>Freeboard</strong>, open folded, with a line saying what they are set to; tap one to open it.</li>
 <li><strong>Choices reshape the form.</strong> A choice is a switch or a row of chips rather than a dropdown. Picking <strong>Outlet temperature</strong> under the Heater's <strong>Find</strong> asks for a duty instead of an outlet temperature, and choosing a <strong>Round</strong> or <strong>Rectangular</strong> bed changes which dimensions are asked for. Only the fields that apply are shown.</li>
 <li><strong>Each number field has its own unit menu.</strong> The unit starts on the one chosen on the <a href="/docs/Units-Tab/">Units</a> tab and follows that tab until you pick another in the field itself; from then on that field keeps its own unit, and the choice is saved with the case. Changing a field's unit converts what is already typed.</li>
-<li><strong>Chemicals work as they do elsewhere.</strong> A chemical field takes a name, formula, CAS number or synonym and offers matching suggestions as you type. Where a case accepts a mixture, the <strong>Single substance</strong> / <strong>Mixture</strong> switch and the mixture rows work as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab. In the Heater, Vessel Heater and Heat Exchanger a mixture can also be given as each component's own amount.</li>
+<li><strong>Chemicals work as they do elsewhere.</strong> A chemical field takes a name, formula, CAS number or synonym and offers matching suggestions as you type. Where a case accepts a mixture, the <strong>Single substance</strong> / <strong>Mixture</strong> switch and the mixture rows work as on the <a href="/docs/Property-Tab/#mixtures">Property</a> tab. In the Heater (also with a sealed vessel) and the Heat Exchanger a mixture can also be given as each component's own amount.</li>
 <li><strong>Some fields explain themselves.</strong> A field with a note carries a ⓘ beside its label; tap it for the reasoning behind the input.</li>
 <li><strong>Lists are summary rows.</strong> The Fluidized Bed takes up to 6 solids and up to 6 fluidizing gases. Each is shown as one row, such as "Calcium carbonate · 200 µm · sphericity 0.86 · 100 % of the bed"; tap it to edit that solid or gas in a sheet, which also has <strong>Remove this solid</strong> (or gas) while more than one is left. <strong>+ Add solid</strong> and <strong>+ Add fluidizing gas</strong> add a row and open it, until the limit is reached.</li>
 </ul>
@@ -102,7 +102,7 @@
 <li>A picture of the result follows where the case has one, then tiles for the next most important values and, where the case has them, charts such as the Heater's heating curve, the Heat Exchanger's temperature profiles or the Fluidized Bed's operating window.</li>
 <li>The rest of the values are rows in cards, grouped the way the inputs were. The Fluidized Bed gathers its groups under <strong>All results</strong>, each folded until you open it.</li>
 <li>Grey notes say how the answer was reached, and amber banners carry the warnings. The last line, "Solved with", names the method or data behind the answer.</li>
-<li>In the Heater, Vessel Heater and Heat Exchanger, <strong>Methods used</strong> at the foot opens a sheet listing the methods behind the result (the heat-capacity correlations, or the Vessel Heater's equation of state) and lets you pick another where there is a choice; the case is then calculated again. See <a href="/docs/Methods-and-Sources/">Methods and sources</a>.</li>
+<li>In the Heater and the Heat Exchanger, <strong>Methods used</strong> at the foot opens a sheet listing the methods behind the result (the heat-capacity correlations, or, for a sealed vessel, the equation of state) and lets you pick another where there is a choice; the case is then calculated again. See <a href="/docs/Methods-and-Sources/">Methods and sources</a>.</li>
 </ul>
 <p>A value shown in amber is one the case wants you to look at twice: a bed that is not fluidizing, a vessel that has gone liquid-full, a distributor that will not distribute. Every value shows its unit beside it; tap the unit to see that value in another unit. The change applies to that one value while the app is open, never to the Units tab.</p>
 <p>Editing any input clears the answer, and changing a unit on the Units tab sends the case back to its inputs, so a result is never left on screen under inputs that no longer match it. A wrong or unreadable input is reported in a red "Error:" banner on the inputs screen.</p>

@@ -60,9 +60,9 @@
 </ul>
 <h2>Cases</h2><ul>
 <li><a href="/docs/Heater/">Heater</a></li>
-<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
 <li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
 <li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+<li><a href="/docs/Reactor/">Reactor</a></li>
 </ul>
 </div>
 </nav>
@@ -76,18 +76,21 @@
 <p>The thermodynamics of an electrochemical cell: what voltage a reaction needs to be driven at, or produces when it drives, and what heat goes with it. Enter the reaction exactly as in the <a href="/docs/Reaction/">Reaction</a> mode and say how the cells are wired; the electrons it transfers are counted for you.</p>
 <p>It works in both directions and tells them apart itself. A reaction with a positive Gibbs energy has to be driven — an electrolyser. One with a negative Gibbs energy drives — a battery or fuel cell. The equations are the same; only the wording changes.</p>
 <h2 id="inputs">Inputs</h2>
-<p>The form reads top to bottom as the set-up, the reaction, how much, the cell and the conditions, with <strong>Calculate</strong> pinned at the bottom. Most of it is the <a href="/docs/Reaction/#inputs">Reaction</a> form, and behaves as described on that page. The defaults differ, opening on water electrolysis, 2H₂O → 2H₂ + O₂, with 1 mol/s of water fed at 25 °C.</p>
-<p><strong>Set-up</strong> is a picture of the cell, with the products named at their electrodes.</p>
+<p>The form reads top to bottom as the reaction, how much, the cell and the conditions, with <strong>Calculate</strong> pinned at the bottom. Most of it is the <a href="/docs/Reaction/#inputs">Reaction</a> form, and behaves as described on that page. The defaults differ, opening on water electrolysis, 2H₂O → 2H₂ + O₂, with 1 mol/s of water fed at 25 °C.</p>
 <p><strong>Equation</strong> is the balanced equation with its element-by-element check line, as on the Reaction page.</p>
-<p><strong>Reactants and products</strong> is folded under one row; tap it to open the compound rows, with their phase badges, <strong>+ Add reactant</strong>, <strong>+ Add product</strong> and, when extra amounts are on, the inerts.</p>
-<p><strong>How much</strong> is <strong>I have this feed</strong> or <strong>I need this product</strong>, chips to choose the reference compound where there is more than one, and its amount in a field labelled after it, such as "H₂O fed" or "H₂ produced", with a unit button. Under it, <strong>Excess or extra amounts</strong> and <strong>Not all of it reacts</strong> work as on the Reaction page.</p>
+<p><strong>Reactants and products</strong> is folded under one row; tap it to open the compound rows, with their phase menus, <strong>+ Add reactant</strong> and <strong>+ Add product</strong>. The key compound carries a <strong>KEY</strong> tag.</p>
+<p><strong>Inerts</strong> is its own card, as on the Reaction page.</p>
+<p><strong>How much</strong> opens with <strong>Set by</strong>: <strong>Feed and conversion</strong> (the default) or <strong>Current and voltage</strong>.</p>
+<p>With <strong>Current and voltage</strong> you give the <strong>Current</strong> (A, kA or MA) and the <strong>Voltage</strong>, which is for <strong>The whole stack</strong> or <strong>One cell</strong>. Reactants are supplied as needed: the current sets how fast the reaction runs, by Faraday's law, ξ = cells × I × efficiency / (z F) for a bipolar stack and I × efficiency / (z F) for a monopolar one. The results then lead with what is produced at that current, the power (current × voltage), the cell voltage and the energy per kg, then <strong>Where the voltage goes</strong>: a bar splitting each cell's voltage into the reversible voltage the reaction needs, the bath's resistance, the other losses and the rest, the electrodes' overpotential. Below it, the heat the cells make above the thermoneutral voltage, and what is lost outside them. A voltage too low to drive the electrolysis at that current is refused, naming the least it needs. At 1000 A and 1.9 V, water electrolysis uses 50.5 kWh per kg of hydrogen.</p>
+<p>With <strong>Feed and conversion</strong>, <strong>How much</strong> asks the same four questions as the Reaction page's Amounts card: <strong>What do you know?</strong> (a feed amount or a product I need), the <strong>key reactant</strong> or <strong>key product</strong> and its amount with a unit button, each other reactant as <strong>Stoichiometric</strong>, <strong>Stoichiometric excess %</strong> or <strong>Fixed amount</strong> (and products already in the feed), and <strong>How much reacts?</strong>, followed by a one-line summary of the feed. See <a href="/docs/Reaction/#amounts">Reaction</a>.</p>
 <p><strong>Cell</strong> opens with the line "Electrons are counted from the oxidation states of the balanced equation." Then:</p>
 <ul>
 <li><strong>Cells in the stack</strong> is a whole number, at least 1. The default is 1.</li>
 <li><strong>Current efficiency</strong> is the share of the charge doing the intended reaction, in per cent, greater than 0 and at most 100. At 100 % every electron makes product. Below it, extra current is needed for the same output, so the current and the electrical power scale by 100 divided by the efficiency, while the reversible voltage does not change.</li>
 <li><strong>Wiring</strong> is <strong>Monopolar</strong> (parallel) or <strong>Bipolar</strong> (series); see <a href="#monopolar-and-bipolar">Monopolar And Bipolar</a>.</li>
+<li><strong>Voltage losses</strong> (optional, with <strong>Current and voltage</strong>) opens the bath per cell (its <strong>Conductivity</strong>, the <strong>Electrode area</strong> and the <strong>Gap</strong> between the electrodes) and <strong>Other losses</strong> for the busbars and contacts, one voltage for the stack. The bath's resistance is gap ÷ (conductivity × area). Its voltage drop is the cell current × that resistance, and its heat stays in the cell. The heat of the other losses is released outside the cells. Leave them empty to see all the losses as one overpotential.</li>
 </ul>
-<p><strong>Conditions</strong> is <strong>Feed enters at</strong> and <strong>Products leave at</strong>, as on the Reaction page.</p>
+<p><strong>Conditions</strong> is <strong>What do you know?</strong>, then <strong>Reaction at</strong>, <strong>Feed enters at</strong> and <strong>Products leave at</strong>, as on the <a href="/docs/Reaction/#conditions">Reaction</a> page. With <strong>Heat added</strong>, the electricity into the cells enters the energy balance with the heat: at the current and voltage you gave, or, set by the feed, at the reversible voltage. A cell at the thermoneutral voltage with no heat added leaves at its inlet temperature.</p>
 <p>An impossible entry, such as zero cells or an efficiency of 120 %, is refused with a message saying what is wrong.</p>
 <h2 id="the-electrons-are-counted-for-you">The Electrons Are Counted For You</h2>
 <p>The electrons are always worked out from the oxidation states of the balanced equation, then reported as a result. There is no field to type them in. Water balances as 2H₂O → 2H₂ + O₂: four hydrogens go from +1 to 0, gaining one electron each, while two oxygens go from −2 to 0, losing two each — four gained, four lost, so four transferred.</p>
@@ -124,12 +127,16 @@
 <td>The voltage across the whole stack, from the wiring.</td>
 </tr>
 <tr>
-<td>Electrical energy (ΔG)</td>
-<td>Energy per mole of reaction as written.</td>
+<td>Electrical work, ΔG (per mol of reaction)</td>
+<td>The electrical work, in kJ/mol, to run the equation once as written. It is not a total and not a power (see <a href="#per-mole-per-hour-per-kg">Per mole, per hour, per kg</a>).</td>
 </tr>
 <tr>
-<td>Reversible heat (TΔS)</td>
-<td>The heat exchanged, labelled absorbed (an endothermic cell) or released.</td>
+<td>Reversible heat, TΔS (per mol of reaction)</td>
+<td>The heat exchanged per mole of reaction, labelled absorbed (an endothermic cell) or released.</td>
+</tr>
+<tr>
+<td>Electrical energy (min.) for this amount</td>
+<td>On a batch basis only: ΔG × the moles of reaction ÷ the current efficiency, the least electrical energy for the amount you gave.</td>
 </tr>
 <tr>
 <td>Wiring</td>
@@ -137,16 +144,45 @@
 </tr>
 </tbody>
 </table></div>
-<p><strong>Methods used</strong> shows the method and where each compound's data came from. <strong>The reaction</strong> at the foot folds away the reaction's own result — heat duty, ΔH, ΔG and K, the Stream table and the Reaction card — exactly as on the <a href="/docs/Reaction/#what-comes-back">Reaction</a> page; tap it to open. An amber note appears if the reversible voltage falls outside the 0.5–5 V that practical cells occupy.</p>
+<p><strong>Methods used</strong> shows the method and where each compound's data came from. <strong>The reaction</strong> at the foot folds away the reaction's own result — heat duty, ΔH, ΔG and K, the Gas, Liquid and Solid tables with the whole-stream totals, and the Reaction card — exactly as on the <a href="/docs/Reaction/#results">Reaction</a> page; tap it to open. An amber note appears if the reversible voltage falls outside the 0.5–5 V that practical cells occupy.</p>
 <h2 id="method">Method</h2>
-<p>Two relations carry everything, plus Faraday's law for the current.</p>
+<p>An electrochemical cell turns the Gibbs energy of a reaction into electrical work, or electrical work into Gibbs energy. Everything on the results screen follows from four relations: two from thermodynamics, one from counting electrons, and Faraday's law.</p>
 <h2 id="key-relations">Key Relations</h2>
-<pre><code>E_rev = −ΔG/(zF)     reversible voltage — what thermodynamics demands
-E_tn = −ΔH/(zF)      thermoneutral — cell neither heats nor cools
-z·F·(E_tn − E_rev) = TΔS   heat exchanged, per mole reacted
-I = ṅ_rxn·z·F         Faraday's law — a rate of reaction is a current
+<pre><code>E_rev = |ΔG| / (z·F)        reversible voltage — the least an electrolyser needs (or the most a fuel cell gives)
+E_tn  = |ΔH| / (z·F)        thermoneutral voltage — the cell neither heats nor cools
+z·F·(E_tn − E_rev) = TΔS    heat exchanged reversibly, per mole of reaction
+I = z·F·ξ̇ / η               Faraday's law — a rate of reaction is a current
+P_min = I·V_stack = |ΔG|·ξ̇ / η    the least electrical power
 </code></pre>
-<p>z is the electron count, F Faraday's constant, ṅ_rxn the molar rate of reaction. The heat TΔS is absorbed by an electrolyser, released by a fuel cell. Give the amount as a flow to get ṅ_rxn and so a current; a batch has no rate in it and so has no current.</p>
+<ul>
+<li><strong>ΔG, ΔH, ΔS</strong> are the reaction's Gibbs energy, enthalpy and entropy change at the reaction temperature, per mole of reaction as written, from the same data as the <a href="/docs/Reaction/">Reaction</a> page.</li>
+<li><strong>z</strong> is the number of electrons transferred per mole of reaction as written, counted from oxidation states (see <a href="#the-electrons-are-counted-for-you">The Electrons Are Counted For You</a>).</li>
+<li><strong>F</strong> = 96,485 C/mol is Faraday's constant, the charge on a mole of electrons.</li>
+<li><strong>ξ̇</strong> is the rate of reaction, moles of reaction per second, from the amount you gave on a flow basis.</li>
+<li><strong>η</strong> is the current efficiency, as a fraction: below 1, part of the charge does something else, so more current is needed for the same product.</li>
+</ul>
+<p><strong>Why two voltages.</strong> ΔG is the part of the reaction's energy that has to be delivered as electrical work: no cell can run below E_rev. ΔH is the whole energy change. The difference, TΔS, is heat. An electrolyser running between E_rev and E_tn takes that heat from its surroundings and cools. Above E_tn every extra volt becomes heat in the cell. Real electrolysers run above E_tn because of overpotentials and resistance, which this page does not model (see <a href="#what-this-does-not-do">What This Does Not Do</a>).</p>
+<h2 id="per-mole-per-hour-per-kg">Per Mole, Per Hour, Per kg</h2>
+<p>The results give the same energy three ways, and they are easy to mix up.</p>
+<ul>
+<li><strong>Per mole of reaction</strong> (kJ/mol): ΔG and TΔS in the Cell card. "One mole of reaction" means running the balanced equation once as written. For 2 AlCl₃ → 2 Al + 3 Cl₂ that is 2 mol of AlCl₃ consumed, 2 mol of Al and 3 mol of Cl₂ made. It does not depend on how much you make.</li>
+<li><strong>Per unit time</strong> (W, kW): <strong>Power (min.)</strong> = ΔG × the rate of reaction ÷ η. Only a flow has a rate, so only a flow gives a current and a power.</li>
+<li><strong>Per kg of product</strong> (kWh/kg): <strong>Energy per kg</strong> = power ÷ the product's mass flow, or ΔG ÷ (η × the product's mass made per mole of reaction). This is the figure usually quoted for an electrolysis process.</li>
+</ul>
+<p>On a batch basis the Cell card adds the total for your amount: ΔG × moles of reaction ÷ η, in J, kJ or MJ.</p>
+<h2 id="worked-example-aluminium-from-aluminium-chloride">Worked Example: Aluminium From Aluminium Chloride</h2>
+<p>1 kg/h of aluminium from solid aluminium chloride, 25 °C, 1.01325 bar, one cell, 100 % current efficiency, set as <strong>A product I need</strong>, aluminium 1 kg/h:</p>
+<ol>
+<li><strong>Balance.</strong> 2 AlCl₃ → 2 Al + 3 Cl₂.</li>
+<li><strong>Electrons.</strong> Aluminium goes from +3 to 0 and chlorine from −1 to 0. Two aluminium atoms take 3 electrons each, so z = 6 per mole of reaction.</li>
+<li><strong>Rate of reaction.</strong> 1 kg/h ÷ 26.98 g/mol = 37.06 mol Al/h. The equation makes 2 Al per mole of reaction, so ξ̇ = 18.53 mol/h = 0.005148 mol/s.</li>
+<li><strong>Gibbs energy.</strong> ΔG = +1,257 kJ/mol and ΔH = +1,408 kJ/mol, so TΔS = 151 kJ/mol is absorbed.</li>
+<li><strong>Voltages.</strong> E_rev = 1,257,000 ÷ (6 × 96,485) = 2.17 V. E_tn = 1,408,000 ÷ (6 × 96,485) = 2.43 V.</li>
+<li><strong>Current.</strong> I = 6 × 96,485 × 0.005148 = 2,980 A.</li>
+<li><strong>Power.</strong> P_min = 2,980 A × 2.17 V = 6.47 kW, the same as 1,257 kJ/mol × 0.005148 mol/s.</li>
+<li><strong>Per kg.</strong> 6.47 kW ÷ 1 kg/h = 6.47 kWh/kg of aluminium.</li>
+</ol>
+<p>The 1,257 kJ/mol is per mole of reaction, not per hour: it is the electrical work to make 2 mol (54 g) of aluminium. With 3 cells in series (bipolar) the stack voltage is 3 × 2.17 = 6.51 V and each cell carries 2,980 ÷ 3 = 993 A. The power is the same. Your numbers will differ slightly with the phases and temperature you choose: molten AlCl₃ at a higher temperature gives a smaller ΔG.</p>
 <h2 id="monopolar-and-bipolar">Monopolar And Bipolar</h2>
 <p>The wiring decides how one duty is split between current and voltage, and it is the part most often got wrong.</p>
 <pre><code>bipolar (series):     V_stack = N·E,   I_stack = I        high V, low I

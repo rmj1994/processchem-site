@@ -60,9 +60,9 @@
 </ul>
 <h2>Cases</h2><ul>
 <li><a href="/docs/Heater/">Heater</a></li>
-<li><a href="/docs/Vessel-Heater/">Vessel Heater</a></li>
 <li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
 <li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+<li><a href="/docs/Reactor/">Reactor</a></li>
 </ul>
 </div>
 </nav>
@@ -196,9 +196,16 @@
 <p>Tap the <strong>Hazards info</strong> chip beside the substance's name to open the hazard sheet. The chip looks the same for every substance; it is not itself a warning. The sheet groups what is known:</p>
 <ul>
 <li><strong>Fire</strong>: flash point, autoignition temperature, flammable range in air (vol %), and the NFPA 30 class</li>
-<li><strong>Exposure</strong>: 8 h average (TWA), short-term (STEL), ceiling, and whether the chemical is absorbed through the skin</li>
+<li><strong>Exposure limits — Norway</strong>: the legal limit values from the Norwegian Labour Inspection's list (see below): the 8 h average, a short-term value (15 min) or a ceiling where one is set, separate values for total and respirable dust where given, and its notes in a few words (skin uptake, carcinogen, mutagen, reproductive toxicant, sensitiser, EU indicative or binding limit). A compound covered only by an element group shows the group, such as <strong>Lead compounds (as Pb)</strong> for lead oxide.</li>
+<li><strong>Exposure limits — Ontario (Canada)</strong>: 8 h average (TWA), short-term (STEL), ceiling, and whether the chemical is absorbed through the skin</li>
 <li><strong>Health &amp; environment</strong>: carcinogen classification from IARC and from the US National Toxicology Program (NTP), global warming potential (100 yr) and ozone depletion potential</li>
 </ul>
+<h3 id="where-the-exposure-limits-come-from">Where the exposure limits come from</h3>
+<ul>
+<li><strong>Norway</strong>: <em>Forskrift om tiltaksverdier og grenseverdier for fysiske og kjemiske faktorer i arbeidsmiljøet</em> (forskrift om tiltaks- og grenseverdier, FOR-2011-12-06-1358), <strong>vedlegg 1</strong> "Liste over grenseverdier for forurensninger i arbeidsatmosfæren", as amended by FOR-2026-06-05-1019. Taken from <a href="https://lovdata.no/dokument/SF/forskrift/2011-12-06-1358">lovdata.no</a> on 29 October 2026, published by Lovdata under the Norwegian Licence for Open Government Data (NLOD 2.0). It lists 525 substances by CAS number and about 100 groups. A limit value (<em>grenseverdi</em>) is the highest allowed average concentration in a worker's breathing zone over 8 hours. A short-term value is averaged over 15 minutes unless stated, and a ceiling value must never be exceeded. Offshore petroleum work applies these limits with the safety factors in <em>aktivitetsforskriften</em> § 36, and onshore plants are designed with a safety factor (<em>rammeforskriften</em> § 6 e). For lead and mercury compounds the sheet also gives the regulation's biological limits (§ 5-2): lead in blood 45 µg Pb/L for women of childbearing age and 150 µg Pb/L for other workers, and mercury in urine 30 µg Hg/g creatinine.</li>
+<li><strong>Ontario</strong>: the Ontario Ministry of Labour's occupational exposure limits (O. Reg. 833), as bundled in the <em>chemicals</em> library. Where several forms of a compound are listed, the lowest value is used. They often differ from Norway's: acetone 500 ppm against Norway's 125 ppm, benzene 0.5 ppm against 0.1 ppm.</li>
+</ul>
+<p>The two sets are legal limits for their own jurisdictions; show the one that applies where you work. The app's copy of the Norwegian list is dated, so check Lovdata for amendments after that date.</p>
 <p>Temperatures are shown in your temperature unit. Each field is looked up on its own, and an entry with no data is left out, as is a group with nothing in it; if nothing at all is known, the sheet says "No hazard data is on record for this substance." Water and most inorganics have little of this data. <strong>A missing entry means no data is available, not that the hazard is absent.</strong> Carcinogen classifications can refer to a broader exposure context than industrial vapour, such as consumption. Always check the supplier's safety data sheet before handling.</p>
 <p>For a mixture the sheet gives each component's own pure-substance values under that component's name, and for an aqueous solution each solute's. These are never the mixture's: a mixture's flash point is not the lowest of its components', and mixing rules for flammability limits (Le Chatelier's rule) are not implemented. Air, the refrigerant blends, minerals, plastics and NASA-only species have no hazard data.</p>
 <h2 id="data-source-">Data source ⓘ</h2>
@@ -221,8 +228,8 @@
 <p><strong>NASA-only species</strong> are substances the general databases do not carry but the NASA Glenn (CEA) database does. That source gives heat capacity, enthalpy and entropy only, so the results show specific heat and formation enthalpy and Gibbs energy, and list the rest as not available. It is consulted only when nothing else can identify the name.</p>
 <h2 id="mixtures">Mixtures</h2>
 <p>Choose <strong>Mixture</strong> in the <strong>What</strong> card and the mixture is edited in place, one row per component: a name on the left and its share on the right. Names get the same suggestions as the single-substance field, and a <strong>Recent</strong> chip fills the first empty name (or adds a row for it). <strong>+ Add component</strong> adds a row, up to 6 components, and the × at the end of a row removes it while there are more than two.</p>
-<p><strong>Given as</strong> chooses whether the shares are <strong>Mole %</strong> or <strong>Mass %</strong>. Switching between the two converts the shares you typed, once every component is named. Type every share except the last: the last is the balance, worked out as 100% minus the rest and shown greyed out. The line beside <strong>Given as</strong> reads "Total 100 % ✓" once the mixture is complete, and otherwise says what is missing: a name, a share, or shares that already total 100% or more. Switching between <strong>Single substance</strong> and <strong>Mixture</strong> keeps both what you typed and the mixture you built.</p>
-<p>Where a calculation also has an amount (Phase Equilibrium, and the Heater, Vessel Heater and Heat Exchanger cases), <strong>Given as</strong> also offers <strong>Amounts</strong>: each component's own amount, in a unit you choose, with their sum as the total. The Property tab has no amount, so here a mixture is always given as shares.</p>
+<p><strong>Give each component as</strong>, a switch at the top of the mixture, chooses whether the shares are <strong>Mol %</strong> or <strong>Mass %</strong>. Switching between the two converts the shares you typed, once every component is named. Type every share except the last: the last is the balance, worked out as 100% minus the rest and shown greyed out. The line under the rows reads "Total 100 % ✓" once the mixture is complete, and otherwise says what is missing: a name, a share, or shares that already total 100% or more. Switching between <strong>Single substance</strong> and <strong>Mixture</strong> keeps both what you typed and the mixture you built.</p>
+<p>Where a calculation also has an amount (Phase Equilibrium, and the Heater, also with a sealed vessel, and Heat Exchanger cases), the switch also offers <strong>Amounts</strong>: each component's own amount, in a unit you choose, with their sum as the total. The Property tab has no amount, so here a mixture is always given as shares.</p>
 <p>Air or a refrigerant blend can be one of the components (SES36 excepted): it is split into its own constituents, so air becomes nitrogen, oxygen and argon, and merged with any of those you entered separately.</p>
 <p>How a mixture is modelled depends on what is in it:</p>
 <ul>

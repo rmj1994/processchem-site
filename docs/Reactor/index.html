@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reactor | ProcessChem documentation</title>
+<meta name="description" content="One reaction in one of the three ideal reactors. You give the balanced reaction (it balances itself, as in Reaction), the feed, the temperature and...">
+<link rel="canonical" href="https://processchem.no/docs/Reactor/">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F8FAFF">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Reactor | ProcessChem documentation">
+<meta property="og:description" content="One reaction in one of the three ideal reactors. You give the balanced reaction (it balances itself, as in Reaction), the feed, the temperature and...">
+<meta property="og:url" content="https://processchem.no/docs/Reactor/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="/#screens">The app</a>
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+      <a class="cta-link" href="https://apps.apple.com/app/id6796077930">Get the app</a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+<div class="wrap">
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<button class="docs-toggle" type="button" aria-expanded="false" aria-controls="docs-list"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg><span class="what">Contents</span><span class="cur">Reactor</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></button>
+<div class="docs-nav-list" id="docs-list">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+<li><a href="/docs/Reactor/" aria-current="page">Reactor</a></li>
+</ul>
+</div>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="reactor">Reactor</h1>
+<h2 id="about">About</h2>
+<p>Size a reactor for the conversion you need, or find the conversion a reactor of a given size reaches, from the reaction's rate law. Plug flow, mixed flow (a stirred tank) or batch, isothermal.</p>
+<h2 id="what-this-models">What This Models</h2>
+<p>One reaction in one of the three ideal reactors. You give the balanced reaction (it balances itself, as in <a href="/docs/Reaction/">Reaction</a>), the feed, the temperature and pressure, and the kinetics. The app works out how the conversion of the key reactant X rises through the reactor.</p>
+<ul>
+<li><strong>Plug flow:</strong> the feed moves through as a plug, with no mixing along the length. The conversion rises along it.</li>
+<li><strong>Mixed flow:</strong> a well-stirred tank. The whole contents are at the outlet's composition, so the reaction runs at the outlet's (lowest) rate.</li>
+<li><strong>Batch:</strong> a closed vessel filled once. The conversion rises with time.</li>
+</ul>
+<h2 id="key-relations">Key Relations</h2>
+<p>With X the conversion of the key reactant A, F_A0 its molar feed rate, r the rate per volume (or per kg of catalyst) and V the volume (or the catalyst mass W):</p>
+<ul>
+<li><strong>Plug flow:</strong> dX/dV = r(X) / F_A0, so V = F_A0 ∫₀ˣ dX / r(X)</li>
+<li><strong>Mixed flow:</strong> V = F_A0 · X / r(X)</li>
+<li><strong>Batch, at constant volume:</strong> dX/dt = r(X) · V / N_A0</li>
+</ul>
+<p>Every other amount follows from the balanced equation: n_i = n_i0 + ν_i · ξ, with the extent ξ = X · n_A0 / |ν_A|.</p>
+<p>The rate is a power law: r = k · C_A^a · C_B^b, with an optional (1 − Q/K) factor. k is entered at the reactor temperature, or as k = A · exp(−Ea / RT). The orders a and b are yours: a for the key reactant, b for the second reactant in the equation.</p>
+<p><strong>Units of k.</strong> Concentrations are in mol/L, the way rate constants are usually published. So k is in (L/mol)^(n−1)/s for a total order n: 1/s for first order, L/(mol·s) for second. Per kg of catalyst, k is in L^n/(mol^(n−1)·kg·s).</p>
+<p><strong>Gas or liquid.</strong> A gas's concentrations come from the ideal-gas law at the reactor's temperature and pressure: C_i = y_i · P / RT. So when moles appear or disappear the volume changes with them, which is Levenspiel's ε, without having to enter it. A liquid keeps the feed's volumetric flow, or the batch's volume.</p>
+<p><strong>Reversible.</strong> Choose Reversible and the rate carries (1 − Q/K), where Q is the reaction quotient of the gas mixture and K comes from the species' Gibbs energies at the reactor temperature. The conversion then stops at equilibrium. Even with One way, the equilibrium conversion of a gas-phase reaction is reported, with a warning if the answer passes it.</p>
+<h2 id="inputs">Inputs</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Card</th>
+<th>What you give</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reactor</td>
+<td>Plug flow, Mixed flow or Batch. <strong>Find:</strong> Size (give the target conversion) or Conversion (give the volume, the catalyst mass, or the batch time).</td>
+</tr>
+<tr>
+<td>Reaction</td>
+<td>The reactants come from the feed below. Add the products; the equation balances itself. The key compound is a reactant: conversion is counted on it.</td>
+</tr>
+<tr>
+<td>Rate</td>
+<td>k at this temperature, or Arrhenius A and Ea. The order in the key reactant and in the second reactant. One way or Reversible. Rate per volume or per kg of catalyst (flow reactors).</td>
+</tr>
+<tr>
+<td>Feed</td>
+<td>Reaction in gas or liquid. For a liquid: the volumetric flow (or the batch volume) and each component's concentration. For a gas: each component's molar flow (or, for a batch, its amount and the vessel volume).</td>
+</tr>
+<tr>
+<td>Conditions</td>
+<td>Temperature and pressure, held constant through the reactor.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="what-comes-back">What comes back</h2>
+<ul>
+<li><strong>Headline:</strong> the size for your conversion, or the conversion for your size. Under it is the comparison engineers draw on a Levenspiel plot: what a mixed-flow reactor would need for the same conversion as plug flow, or the other way round.</li>
+<li><strong>Reactor:</strong> space time τ = V/v₀ and space velocity 1/τ. For a catalyst, the weight time W/F_A0 instead. Also the Damköhler number (rate at the inlet × τ / C_A0) and, where it applies, the equilibrium conversion.</li>
+<li><strong>Chart:</strong> the conversion along the plug-flow reactor, or through the batch.</li>
+<li><strong>Outlet:</strong> each species' flow (or amount) and concentration.</li>
+<li><strong>Rate:</strong> at the inlet and at the outlet.</li>
+<li><strong>Heat:</strong> the heat the reaction releases (or absorbs) at this conversion. This is the heat to remove (or supply) to hold the temperature. Also ΔH of the reaction as written.</li>
+</ul>
+<p>The opening example is ethane cracking to ethylene (Fogler): first order, k = 3.07 1/s at 1100 K, pure ethane at 6 atm. Its plug-flow volume matches the closed form with ε = 1, k·τ₀ = (1 + ε) ln 1/(1 − X) − ε·X. At 6 atm equilibrium stops this reaction near 47 %, so the example is Reversible, with a 40 % target.</p>
+<h2 id="when-it-refuses">When It Refuses</h2>
+<ul>
+<li>A target conversion at or past equilibrium (Reversible), or past complete conversion: only an infinitely large reactor gets there.</li>
+<li>A key compound that is a product, or a key reactant that is not fed.</li>
+<li>A liquid reaction without a volumetric flow, or a batch without its volume.</li>
+<li>A rate per kg of catalyst for a batch: a batch here is per volume.</li>
+</ul>
+<h2 id="what-this-does-not-do-yet">What This Does Not Do Yet</h2>
+<ul>
+<li><strong>Not isothermal:</strong> the temperature is held. An adiabatic reactor, where the heat released raises the temperature along it, is not modelled. The heat output says how much has to be removed to hold it.</li>
+<li><strong>One reaction:</strong> competing reactions and selectivity are not modelled.</li>
+<li><strong>No pressure drop</strong> along a packed bed.</li>
+<li><strong>Non-ideal mixing:</strong> no dispersion or residence-time distribution between plug and mixed flow. Two ideal reactors are the bounds.</li>
+<li><strong>No rate data built in yet:</strong> the kinetics are yours to enter.</li>
+</ul>
+  </main>
+  </div>
+</div>
+<footer class="band cut-top site-foot">
+  <div class="wrap">
+    <div>
+      <strong>ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:ronmjacob1994@gmail.com" style="font-family:var(--mono);font-size:13px">ronmjacob1994@gmail.com</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="/privacy/">Privacy policy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

@@ -51,6 +51,7 @@
 <li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
 <li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
+<li><a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -161,7 +162,7 @@ ln K = −ΔG°_rxn / (RT)      equilibrium constant
 <h2 id="what-it-refuses">What It Refuses</h2>
 <p>A set of compounds that cannot be balanced, or that can be balanced in more than one way where no choice of split settles it — the message says how many independent reactions the set admits, and which compound to remove. Ions are refused too: the balance conserves elements but not charge. So is a compound entered twice in the same phase, one that cancels out of the equation, or one that balances only on the other side.</p>
 <h2 id="limitations">Limitations</h2>
-<p>One reaction at a time, with no kinetics and no reactor sizing. Gas volumes use the ideal molar volume RT/P, which is consistent with how the activities are modelled but approximate above about 10 bar. Heat capacity correlations extrapolate silently, so a compound entered in a phase it does not hold at your temperature is flagged rather than corrected.</p>
+<p>One reaction at a time, with no kinetics and no reactor sizing. Gas volumes use the ideal molar volume RT/P, which is consistent with how the activities are modelled but approximate above about 10 bar. A heat capacity correlation used outside its fitted range is flagged for the species concerned, and a compound entered in a phase it does not hold at your temperature is flagged rather than corrected. <a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a> has the measured deviations.</p>
   </main>
   </div>
 </div>

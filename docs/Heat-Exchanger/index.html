@@ -51,6 +51,7 @@
 <li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
 <li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
+<li><a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -103,6 +104,7 @@ Q = ṅ_cold·(h_cold,out − h_cold,in)  heat the cold stream picks up
 <p>The answer comes first, in a dark card: the <strong>Duty</strong>, with a sentence giving the outlet you did not enter, "Cold stream leaves at 361.4 °C" (or the hot stream's, when you gave the cold outlet). Tap the unit beside the number to change it. Under it the exchanger picture comes back with all four temperatures filled in.</p>
 <p>A <strong>Closest approach</strong> tile gives the smallest temperature difference between the streams at the ends of the exchanger, and which end it is at: the smaller of the hot end and the cold end for counter-current, the outlet end for co-current.</p>
 <p>A <strong>Temperature profiles</strong> chart plots both streams' temperatures against the heat transferred. Counter-current, the heat is counted from the cold end (hot outlet beside cold inlet); co-current, from the inlet end (both inlets together). The note under it says which, and gives the closest approach read along the two lines, not just at the ends. A stream that changes phase shows as a flat step in its line.</p>
+<p>A <strong>Hot stream by phase</strong> and a <strong>Cold stream by phase</strong> table give the flow that is liquid and gas, <strong>In</strong> beside <strong>Out</strong>, with a Total; a mixture stream lists every component instead.</p>
 <p>Then the values, grouped:</p>
 <ul>
 <li><strong>Duty:</strong> the duty.</li>
@@ -123,6 +125,7 @@ Co-current:       T_hot,in  &gt; T_cold,in      (inlet end)
 <p>That check only looks at the four inlet and outlet temperatures, not the shape of the temperature profile in between. If a stream changes phase partway through, the closest approach between the two streams can occur at that phase change rather than at either end. The <strong>Temperature profiles</strong> chart reads the gap along both lines, and when they cross inside the exchanger an amber warning says at about what share of the duty, and by how many kelvin. The result is still shown, but that duty cannot be reached in a single exchanger of that arrangement. The <strong>Closest approach</strong> tile is taken at the ends only, so when a stream changes phase read the chart's note and warning as well.</p>
 <h2 id="what-this-does-not-do-yet">What This Does Not Do Yet</h2>
 <p>This is the energy balance only: how much heat moves, and what temperature each stream leaves at. It does not size the exchanger — no heat-transfer area, no overall heat-transfer coefficient, no LMTD, no tube count, no pressure drop, no fan or pump power, and no cost. Sizing needs a heat-transfer coefficient on top of the temperature profiles drawn here, a separate calculation from the one here.</p>
+<p>What was checked against published values, and how far off it was, is on <a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a>.</p>
   </main>
   </div>
 </div>

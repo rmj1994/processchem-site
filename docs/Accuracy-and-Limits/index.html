@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Accuracy and Limits | ProcessChem documentation</title>
+<meta name="description" content="In the app, the ⋯ menu on every screen and the ⓘ sheet beside a value both link here.">
+<link rel="canonical" href="https://processchem.no/docs/Accuracy-and-Limits/">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F8FAFF">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProcessChem">
+<meta property="og:title" content="Accuracy and Limits | ProcessChem documentation">
+<meta property="og:description" content="In the app, the ⋯ menu on every screen and the ⓘ sheet beside a value both link here.">
+<meta property="og:url" content="https://processchem.no/docs/Accuracy-and-Limits/">
+<meta property="og:image" content="https://processchem.no/assets/og-image.png">
+<link rel="preload" href="/assets/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap top">
+    <a class="brand" href="/"><img src="/assets/icon-512.png" width="34" height="34" alt="">ProcessChem</a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="/#screens">The app</a>
+      <a href="/#inside">What it does</a>
+      <a href="/#companies">For companies</a>
+      <a href="/docs/" aria-current="page">Documentation</a>
+      <a class="cta-link" href="https://apps.apple.com/app/id6796077930">Get the app</a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+<div class="wrap">
+  <div class="docs-layout">
+<nav class="docs-nav" aria-label="Documentation">
+<button class="docs-toggle" type="button" aria-expanded="false" aria-controls="docs-list"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg><span class="what">Contents</span><span class="cur">Accuracy and limits</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></button>
+<div class="docs-nav-list" id="docs-list">
+<ul><li><a href="/docs/">Overview</a></li></ul>
+<h2>Tabs</h2><ul>
+<li><a href="/docs/Property-Tab/">Property</a></li>
+<li><a href="/docs/Thermo-Tab/">Thermo</a></li>
+<li><a href="/docs/Case-Tab/">Case</a></li>
+<li><a href="/docs/Units-Tab/">Units</a></li>
+</ul>
+<h2>Using the app</h2><ul>
+<li><a href="/docs/Getting-Around/">Getting around</a></li>
+<li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
+<li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
+<li><a href="/docs/Accuracy-and-Limits/" aria-current="page">Accuracy and limits</a></li>
+</ul>
+<h2>Thermo modes</h2><ul>
+<li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
+<li><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></li>
+<li><a href="/docs/Reaction/">Reaction</a></li>
+<li><a href="/docs/Electrochemical-Reaction/">Electrochemical Reaction</a></li>
+</ul>
+<h2>Cases</h2><ul>
+<li><a href="/docs/Heater/">Heater</a></li>
+<li><a href="/docs/Fluidized-Bed/">Fluidized Bed</a></li>
+<li><a href="/docs/Heat-Exchanger/">Heat Exchanger</a></li>
+<li><a href="/docs/Reactor/">Reactor</a></li>
+</ul>
+</div>
+</nav>
+  <main id="main" class="article">
+<div class="crumb"><a href="/docs/">Documentation</a></div>
+<h1 id="accuracy-and-limits">Accuracy and Limits</h1>
+<h2 id="about">About</h2>
+<p>This page says what ProcessChem is good at, what needs care, and what it does not calculate. Every statement rests on a comparison: the app's number beside a published value (steam tables, NIST reference equations, measured phase-equilibrium data, textbook worked examples) or a hand calculation. The comparison covers about 250 cases and is run again before each release.</p>
+<p>In the app, the <strong>⋯</strong> menu on every screen and the ⓘ sheet beside a value both link here.</p>
+<p>ProcessChem is a calculator for engineering estimates, teaching and checking. It is not a substitute for a validated process simulator or for measured data in safety-critical design: check relief sizing, design pressures and guarantees against an independent source.</p>
+<h2 id="how-the-app-tells-you">How the app tells you</h2>
+<ul>
+<li><strong>Amber warnings</strong> under a result name anything that weakens it: an estimated value, a model outside its range, a mixture model that does not suit the mixture.</li>
+<li><strong>Solved with:</strong> names the equation of state or correlation that produced the result.</li>
+<li><strong>ⓘ</strong> beside a value opens its source: the method, the library, the valid range and whether your temperature is inside it.</li>
+<li><strong>Methods used</strong> lets you switch method where there is a choice, to see how much the model moves the answer.</li>
+<li><strong>Balance checks</strong> run on every calculation: phase amounts must add back to the feed, and mixing must conserve energy. A failure shows as a warning instead of a silent wrong number.</li>
+<li><strong>Errors</strong> are given in words and in your units, with the reason and what to try.</li>
+</ul>
+<h2 id="good-at">Good at</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Measured against</th>
+<th>Typical deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pure fluids with a reference equation (water, CO₂, nitrogen, methane, propane, ammonia and more than 100 others)</td>
+<td>Steam tables, NIST</td>
+<td>Under 0.1 % on density, boiling point and heat of vaporisation</td>
+</tr>
+<tr>
+<td>Heater and Heat Exchanger duty, 1 to 200 bar</td>
+<td>Real-fluid enthalpy difference</td>
+<td>Under 0.1 % (water, nitrogen, methane, CO₂, propane, ammonia, ethanol)</td>
+</tr>
+<tr>
+<td>Light hydrocarbon and gas mixtures: bubble point, dew point, vapour composition</td>
+<td>Reference mixture equations</td>
+<td>0.3 to 1.3 °C; vapour mole fraction within 0.01</td>
+</tr>
+<tr>
+<td>Polar mixtures with fitted pair data (methanol/water, ethanol/water, benzene/toluene)</td>
+<td>Measured vapour–liquid data</td>
+<td>Bubble point within 1 °C; vapour mole fraction within 0.01; ethanol/water azeotrope at 88.7 mol % (measured 89.4)</td>
+</tr>
+<tr>
+<td>Liquid density and other properties on the Property tab</td>
+<td>Handbook values</td>
+<td>0.1 to 0.2 % for common liquids</td>
+</tr>
+<tr>
+<td>Salt, acid and base solutions: density and heat capacity</td>
+<td>Handbook tables</td>
+<td>Under 0.5 % (NaCl, NaOH, HCl up to 20 mass %)</td>
+</tr>
+<tr>
+<td>Reaction heat, ΔG and equilibrium constant</td>
+<td>Textbook values</td>
+<td>K within 0.2 to 12 % (limestone calcination, steam reforming, ammonia synthesis)</td>
+</tr>
+<tr>
+<td>Gas–solid equilibrium compositions at low to moderate pressure</td>
+<td>Measured compositions</td>
+<td>Ammonia at 450 °C and 10 atm: 2.08 mol % (measured 2.04)</td>
+</tr>
+<tr>
+<td>Solids that sublime (dry ice, iodine, aluminium chloride, ice)</td>
+<td>Measured sublimation points and heats</td>
+<td>Sublimation point within 2 °C; heat within 2.5 %</td>
+</tr>
+<tr>
+<td>Fluidized bed: minimum fluidization and terminal velocity</td>
+<td>Kunii &amp; Levenspiel worked examples</td>
+<td>Under 0.5 %</td>
+</tr>
+<tr>
+<td>Mass and energy balances</td>
+<td>Must close exactly</td>
+<td>Closed to 1 part in a million or better</td>
+</tr>
+<tr>
+<td>Throttling steam, 40 to 1 bar</td>
+<td>Steam tables</td>
+<td>Within 0.2 °C</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="use-with-care">Use with care</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Why</th>
+<th>How far off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Liquid density from Peng-Robinson</strong>: any substance or mixture without a reference equation, on Phase Equilibrium and the sealed vessel</td>
+<td>A cubic equation is fitted to vapour pressure, not liquid volume</td>
+<td>4 to 7 % for hydrocarbons; 10 to 17 % for water, ammonia, methanol, nitrogen and methane if you pick Peng-Robinson yourself. The Property tab uses measured liquid densities instead and is not affected.</td>
+</tr>
+<tr>
+<td><strong>Boiling point and heat of vaporisation without a reference equation</strong></td>
+<td>Same cubic</td>
+<td>Usually within 1 to 2 °C and 5 % (aniline, styrene, tetrahydrofuran)</td>
+</tr>
+<tr>
+<td><strong>Natural-gas throttling</strong></td>
+<td>Mixture is on Peng-Robinson</td>
+<td>Outlet 1.5 to 3 °C colder than the reference</td>
+</tr>
+<tr>
+<td><strong>Liquid-full vessel, mixture</strong></td>
+<td>Liquid compressibility from Peng-Robinson</td>
+<td>Pressure rise about 20 % low (propane/butane). A single substance with a reference equation is exact.</td>
+</tr>
+<tr>
+<td><strong>Polar mixtures without fitted pair data</strong></td>
+<td>UNIFAC estimates the interactions from chemical groups; marked <strong>Estimated</strong></td>
+<td>An estimate: good for a first look, not for column design. With fitted pair data (NRTL) the tested azeotropes are within 0.02 mole fraction and 1 °C.</td>
+</tr>
+<tr>
+<td><strong>Chemical equilibrium above about 50 bar</strong></td>
+<td>The gas is treated as ideal</td>
+<td>Ammonia synthesis: 5 % low at 100 atm, 13 % low at 300 atm</td>
+</tr>
+<tr>
+<td><strong>Reaction and equilibrium far outside a heat-capacity correlation's range</strong></td>
+<td>The correlation is extrapolated; the app flags each species</td>
+<td>Indicative only, typically above 1700 °C</td>
+</tr>
+<tr>
+<td><strong>Supercritical mixtures and estimated critical constants</strong></td>
+<td>Phase labels near the critical region are a convention</td>
+<td>The numbers hold; the label "gas" or "liquid" may not mean much</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="not-for">Not for</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>What the app does instead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Heat of mixing of unlike liquids</strong> (ethanol into water, acid into water)</td>
+<td>The mixed temperature ignores it and a warning says so. Ethanol into water at 25 °C: measured about 34 °C, app 19 °C. Concentrated sulfuric acid into water: really about 110 °C, app 35 °C.</td>
+</tr>
+<tr>
+<td><strong>Boiling-point rise, vapour pressure and heat of dilution of salt solutions</strong></td>
+<td>A solution is always liquid, with fitted density, heat capacity and viscosity. No boiling point is shown.</td>
+</tr>
+<tr>
+<td><strong>How much water dissolves in oil, and oil in water</strong></td>
+<td>The split into two liquids is found, but the trace amounts dissolved in each are wrong by 10 to 1000 times with Peng-Robinson and by up to about 40 times with the activity model. Do not use them.</td>
+</tr>
+<tr>
+<td><strong>Polar mixtures on Peng-Robinson</strong> (a fixed-volume calculation on water with an alcohol, for example)</td>
+<td>Carries a <strong>Not reliable</strong> warning. Azeotropes are misplaced by 5 to 10 °C.</td>
+</tr>
+<tr>
+<td><strong>Acetic acid and other acids that pair up in the vapour</strong></td>
+<td>Heat of vaporisation is 60 % high and the boiling point 4 °C low on Phase Equilibrium. The Property tab's measured values are fine.</td>
+</tr>
+<tr>
+<td><strong>Azeotropes that boil higher than both components</strong> (acetone/chloroform)</td>
+<td>Not found by either model.</td>
+</tr>
+<tr>
+<td><strong>Solid solutions, melts and slags, ions in water</strong> in Chemical Equilibrium</td>
+<td>Each solid is a pure phase; ionic species are left out.</td>
+</tr>
+<tr>
+<td><strong>Reaction rates</strong> beyond the ideal reactors of the Reactor case</td>
+<td>Equilibrium and Reaction give where a reaction ends, not how fast.</td>
+</tr>
+<tr>
+<td><strong>Heat exchanger sizing</strong></td>
+<td>Duty, outlet temperatures and approach only: no area, no heat-transfer coefficient.</td>
+</tr>
+<tr>
+<td><strong>Relief sizing and design pressure</strong></td>
+<td>The sealed vessel gives the unrelieved pressure as an indication.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="composition-tables">Composition tables</h2>
+<p>Results that involve more than one component or phase carry a table of what is where:</p>
+<ul>
+<li><strong>Phase Equilibrium:</strong> the whole stream, then one table per phase (gas, each liquid, solid), in and out, each with a Total.</li>
+<li><strong>Property, for a mixture:</strong> the composition for 1 mol, and what each phase holds when it is part gas and part liquid.</li>
+<li><strong>Heater, Heat Exchanger, sealed vessel:</strong> the amount in each phase in and out, and every component for a mixture.</li>
+<li><strong>Reactor:</strong> feed and outlet for every component.</li>
+</ul>
+<p>Shares can be read in mol % or mass %, and amounts in any amount or flow unit. The Total rows are the check: what goes in comes out.</p>
+<h2 id="where-the-numbers-come-from">Where the numbers come from</h2>
+<p>The comparison is a script in the app's source (<code>tools/reliability_audit.py</code>); it writes one row per case with the reference, its source, the app's value and the deviation. The methods and data libraries are described in <a href="/docs/Methods-and-Sources/">Methods and data sources</a>.</p>
+  </main>
+  </div>
+</div>
+<footer class="band cut-top site-foot">
+  <div class="wrap">
+    <div>
+      <strong>ProcessChem</strong><br>
+      Built by Ron M. Jacob<br>
+      <a href="mailto:ronmjacob1994@gmail.com" style="font-family:var(--mono);font-size:13px">ronmjacob1994@gmail.com</a>
+    </div>
+    <div class="links">
+      <a href="/docs/">Documentation</a>
+      <a href="/privacy/">Privacy policy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

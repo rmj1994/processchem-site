@@ -51,6 +51,7 @@
 <li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
 <li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
+<li><a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -125,7 +126,7 @@ minimise  Σ nᵢ·μᵢ   subject to one balance per element
 <h2 id="dissolved-species-are-modelled-as-pure-phases">Dissolved Species Are Modelled As Pure Phases</h2>
 <p>Every condensed species is treated as a pure phase at unit activity. In a solution it is not: caustic soda in water is dissolved ions, and its activity is far from one — a 17 % NaOH solution is about 5 molal. Results for aqueous systems are therefore qualitative. They will get the direction and the stoichiometry right and the amounts only approximately.</p>
 <h2 id="other-limitations">Other Limitations</h2>
-<p>Ionic species are excluded: the solver balances elements but not charge, so admitting an ion would let it create charge from nothing. There are no solution phases — no molten slag, no solid solutions — so a system that really forms a melt is modelled only approximately; this handles calcination well and clinkering roughly. There is no kinetics. And heat capacity correlations extrapolate silently, so compositions much above 1700 °C should be treated as indicative.</p>
+<p>Ionic species are excluded: the solver balances elements but not charge, so admitting an ion would let it create charge from nothing. There are no solution phases — no molten slag, no solid solutions — so a system that really forms a melt is modelled only approximately; this handles calcination well and clinkering roughly. There is no kinetics. A heat capacity correlation used outside its fitted range is flagged for each species present, so compositions much above 1700 °C should be treated as indicative. The gas is treated as ideal, and a note says so above 50 bar: ammonia synthesis at 450 °C comes out 5 % low at 100 atm and 13 % low at 300 atm. <a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a> has the measured deviations.</p>
   </main>
   </div>
 </div>

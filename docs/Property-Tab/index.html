@@ -51,6 +51,7 @@
 <li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
 <li><a href="/docs/Methods-and-Sources/">Methods and data sources</a></li>
+<li><a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -238,6 +239,7 @@
 <li><strong>Any other mixture</strong> (hydrocarbons, gases, or a liquid with a dissolved gas) uses Peng-Robinson with fitted ChemSep interaction parameters where they exist and ideal mixing where they do not. Peng-Robinson cannot describe hydrogen bonding, so a polar mixture that ends up here carries a <strong>Not reliable</strong> warning. Liquids known to mix in all proportions (ethanol and water, for instance) are never shown as two liquids, even where Peng-Robinson predicts a split.</li>
 </ul>
 <p>Every mixture reports phase, density, specific heat, viscosity, and the bubble and dew points at your pressure; the gap between them is the temperature glide. Vapor pressure is not available, since a mixture has no single one.</p>
+<p>A <strong>Composition</strong> table lists every component with its share and its amount in 1 mol of the mixture. When the mixture is part gas and part liquid (or two liquids), <strong>What each phase holds</strong> gives each component's share and amount in each phase, and the line under it gives the split by moles and by mass. <strong>Share</strong> switches between mol % and mass %, and <strong>Amount</strong> sets the unit.</p>
 <p>A note under the results says which model was used and lists anything that weakens the result, such as a missing interaction parameter, a liquid-liquid split the model may have invented, or a temperature beyond where the data reaches.</p>
 <h2 id="saving-your-inputs">Saving your inputs</h2>
 <p>The <strong>⋯</strong> menu in the header saves and opens your inputs. <strong>Save…</strong> stores the chemical or mixture, the temperature and the pressure under a name of up to 40 characters, up to 25 sets, either <strong>In the app</strong> or in <strong>Files / iCloud</strong> as a file you can share or back up; saving under an existing name replaces it. Sets saved in the app are listed under <strong>Recent</strong> at the top of the menu, and <strong>Open a saved set…</strong> lists them all. The set you last saved or opened comes back when the app starts. <strong>Reset to defaults</strong> returns the original inputs (Ethanol, 20.0 °C, 1.0 bara) and leaves your saved sets untouched. Sets saved in the app are deleted with it, so keep a file of anything you want to keep; see <a href="/docs/Saving-and-Opening/">Saving and opening</a>.</p>

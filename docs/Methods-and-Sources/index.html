@@ -51,6 +51,7 @@
 <li><a href="/docs/Getting-Around/">Getting around</a></li>
 <li><a href="/docs/Saving-and-Opening/">Saving and opening</a></li>
 <li><a href="/docs/Methods-and-Sources/" aria-current="page">Methods and data sources</a></li>
+<li><a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a></li>
 </ul>
 <h2>Thermo modes</h2><ul>
 <li><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></li>
@@ -75,7 +76,7 @@
 <h2 id="where-the-data-come-from">Where the data come from</h2>
 <ul>
 <li><strong>CoolProp</strong> reference equations of state, the most accurate available, for the 100-plus pure fluids CoolProp covers: water, the common gases, light hydrocarbons, refrigerants and more.</li>
-<li><strong>Peng-Robinson</strong> cubic equation of state for other fluids, and for mixtures, with fitted binary interaction parameters from ChemSep.</li>
+<li><strong>Peng-Robinson</strong> cubic equation of state for other fluids, and for mixtures, with fitted binary interaction parameters from ChemSep where they exist. A pair without one is mixed ideally, and the result says so.</li>
 <li><strong>thermo / chemicals</strong> (Caleb Bell's libraries) for property correlations fitted to measured data, drawn from DIPPR, Perry's and the literature.</li>
 <li><strong>NASA CEA</strong> thermodynamic data for 1,820 species, used where the other libraries have none.</li>
 <li><strong>Tabulated data</strong> for the cement clinker minerals (from Barin, <em>Thermochemical Data of Pure Substances</em>) and curated values for plastics.</li>
@@ -118,6 +119,17 @@
 <h3 id="changing-a-propertys-method">Changing a property's method</h3>
 <p>For vapor pressure, specific heat capacity, viscosity, thermal conductivity, enthalpy of vaporization and surface tension, the sheet ends with <strong>Change method</strong> when the libraries have more than one method for that chemical. Each method shows its library and valid range; methods whose range covers your temperature come first, and ranges your temperature falls outside are in amber. The method in use has a tick.</p>
 <p>Tap another method and the properties are calculated again with it. Once you have picked one, <strong>Use the app's default</strong> goes back to the app's own choice. A picked method lasts until you look up a different substance, which starts from the app's own choices again; it is not part of a saved set.</p>
+<h2 id="one-enthalpy-reference">One enthalpy reference</h2>
+<p>Enthalpy is a state function: the heat to take a substance from one state to another is its enthalpy at the end minus its enthalpy at the start, whatever happens on the way. So wherever a calculation crosses a phase (Heater, Heat Exchanger, Phase Equilibrium, mixing streams, a solid depositing), both ends are put on one reference: each phase's heat-capacity curve, joined to the next phase by the enthalpy difference between the two phases. That difference is taken from the best data on record, in this order:</p>
+<ol>
+<li><strong>A measured value of that very difference</strong>: the heat of fusion, the heat of vaporisation, or a measured heat of sublimation (NIST WebBook, Gharagheizi).</li>
+<li><strong>The difference of the two phases' enthalpies of formation</strong>, but only when both come from one evaluated compilation (CRC, NIST WebBook, JANAF, ATcT, API) and the difference is positive. Across about 2,000 substances in the catalogue, pairs taken from two sources or from a group-contribution estimate were off by a median of 40 to 90 %; pairs from one compilation are reliable for the inorganic solids where no measured value exists, such as AlCl₃, ZrCl₄ and ZrI₄.</li>
+<li><strong>The slope of a measured sublimation-pressure curve</strong>, by Clapeyron: ΔH_sub = R T² d(ln P_sub)/dT. CO₂ gets 25.8 kJ/mol at −78.5 °C this way (measured 25.2 to 26.1).</li>
+<li><strong>An estimate</strong>, the heat of fusion plus a heat of vaporisation extrapolated to the melting point. The result then says it is an estimate.</li>
+</ol>
+<p>A difference at 25 °C is carried to the transition temperature along the same heat-capacity curves (Kirchhoff), so the latent heat and the sensible heat on either side cannot disagree.</p>
+<p>The sublimation-pressure curve follows the same rule. Where no measured curve exists, the app rebuilds it by Clapeyron from the triple point with the heat of sublimation above, instead of thermo's own curve, which is built from the estimate. AlCl₃ was the case that showed it: thermo's estimate is 69 kJ/mol, while CRC's formation enthalpies give 121 kJ/mol. The rebuilt curve sublimes AlCl₃ at 181.9 °C at 1 atm (measured: 180 °C), where thermo's read 2.5 kPa at 100 °C against about 0.13 kPa measured.</p>
+<p>Reaction, Electrochemical Reaction and Chemical Equilibrium already work this way: each species' enthalpy is its enthalpy of formation in the phase picked, plus its heat capacity.</p>
 <h2 id="methods-used">Methods used</h2>
 <p>Most results end with a <strong>Methods used</strong> row: "See or change how this was calculated". Tap it to open a sheet listing what the result was calculated with. Where there is another method to pick, its choices sit under it as chips; tap one and the result is calculated again with it. Where there is nothing to pick, the sheet only says what was used.</p>
 <div class="table-wrap"><table>
@@ -132,7 +144,7 @@
 <tr>
 <td><a href="/docs/Phase-Equilibrium/">Phase Equilibrium</a></td>
 <td><strong>Equation of state</strong></td>
-<td>For a single substance with a CoolProp reference equation: <strong>Reference equation (CoolProp)</strong> (the default) or <strong>Peng-Robinson cubic</strong>. A mixture is always solved with Peng-Robinson and fitted interaction parameters.</td>
+<td>For a single substance with a CoolProp reference equation: <strong>Reference equation (CoolProp)</strong> (the default) or <strong>Peng-Robinson cubic</strong>. A mixture has nothing to pick: a liquid that hydrogen bonds uses an activity-coefficient model (NRTL with fitted pair data, otherwise UNIFAC, marked <strong>Estimated</strong>), and other mixtures use Peng-Robinson with fitted interaction parameters where they exist and ideal mixing where they do not.</td>
 </tr>
 <tr>
 <td><a href="/docs/Chemical-Equilibrium/">Chemical Equilibrium</a></td>
@@ -147,7 +159,7 @@
 <tr>
 <td><a href="/docs/Heater/">Heater</a>, <a href="/docs/Heat-Exchanger/">Heat Exchanger</a></td>
 <td><strong>Heat capacity</strong> for each phase of each substance (on the Heat Exchanger, of the hot and the cold stream)</td>
-<td>The heat-capacity correlation for that phase, where there is more than one. A mixture uses ideal mixing of each component's own correlations, with nothing to pick.</td>
+<td>The heat-capacity correlation for that phase, where there is more than one. A mixture uses ideal mixing of each component's own correlations, with nothing to pick. For a fluid, the duty itself is the enthalpy difference from the equation of state, so it holds at high pressure too; the heat capacity is shown for checking by hand.</td>
 </tr>
 <tr>
 <td><a href="/docs/Heater/#vessel-sealed">Heater, sealed vessel</a></td>
@@ -158,6 +170,8 @@
 </table></div>
 <p>The <a href="/docs/Fluidized-Bed/">Fluidized Bed</a> has no <strong>Methods used</strong> row, and on <a href="/docs/Property-Tab/">Property</a> each value's method is changed from its own ⓘ sheet instead.</p>
 <p>The reference equation is the most accurate where it exists; Peng-Robinson is the general cubic the app uses for everything else. Picking Peng-Robinson for a substance with a reference equation is a way to see how much the choice of model moves the answer. Like a method picked on Property, a pick here is not part of a saved set.</p>
+<h2 id="how-accurate-it-is">How accurate it is</h2>
+<p><a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a> lists what each method was checked against and how far off it was.</p>
   </main>
   </div>
 </div>

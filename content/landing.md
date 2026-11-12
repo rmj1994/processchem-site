@@ -265,7 +265,7 @@ Reference equations of state
 
 ### First point: text {#stands.one.text}
 
-CoolProp's reference equations cover more than 100 fluids. Peng-Robinson with ChemSep interaction parameters handles the rest, and mixtures. For a single substance you can switch between the two.
+CoolProp's reference equations cover more than 100 fluids. Peng-Robinson with ChemSep interaction parameters handles the rest, and mixtures, with NRTL or UNIFAC for liquids that hydrogen bond. For a single substance you can switch between the two.
 
 ### Second point: title {#stands.two.title}
 
@@ -321,7 +321,7 @@ Documented with the equations.
 
 ### Text {#docs.p}
 
-Each tab and calculation has its own page, with screenshots, that states the governing equations, the data sources and the limits of the method.
+Each tab and calculation has its own page, with screenshots, that states the governing equations, the data sources and the limits of the method. One page, Accuracy and limits, lists what the app was checked against, how far off it was, and what it does not calculate.
 
 ### Button: small text {#docs.btn_small}
 

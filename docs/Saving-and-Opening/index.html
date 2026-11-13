@@ -78,23 +78,24 @@
 <p>Tap <strong>⋯</strong> beside <strong>Docs ↗</strong>. The menu is headed with the calculation it acts on: the tab's name on Property and Units, or the mode or case you have open on Thermo and Case. It holds:</p>
 <ul>
 <li><strong>Recent</strong>: your three newest saved sets for this calculation, each with the date it was saved. Tap one to open it.</li>
-<li><strong>Open a saved set…</strong>: every set saved for this calculation, and <strong>Open from a file…</strong>.</li>
+<li><strong>Open a saved set…</strong>: the <strong>Saved cases</strong> list. It holds every case saved in the app, from all four tabs, with the calculation you are on first, and the buttons <strong>Open from a file…</strong> and <strong>Export all to a file…</strong>.</li>
 <li><strong>Save…</strong>: the <strong>Save this set</strong> sheet.</li>
 <li><strong>Reset to defaults</strong> (<strong>Reset this case to defaults</strong> on Case): puts the original inputs back on screen.</li>
 </ul>
-<p>Saving belongs to one calculation, so on Thermo and Case choose a mode or a case first. From the <strong>Choose a mode</strong> or <strong>All cases</strong> cards, <strong>Save…</strong> and <strong>Open a saved set…</strong> only ask you to choose a calculation.</p>
+<p>Saving belongs to one calculation, so on Thermo and Case choose a mode or a case first. From the <strong>Choose a mode</strong> or <strong>All cases</strong> cards, <strong>Save…</strong> asks you to choose a calculation first. <strong>Open a saved set…</strong> and <strong>Recent</strong> work there too: they list the tab's saved cases, and opening one takes you to its calculation.</p>
 <h2 id="saving-inside-the-app">Saving inside the app</h2>
 <ol>
 <li>Tap <strong>⋯</strong>, then <strong>Save…</strong>.</li>
 <li>Type a <strong>Name</strong> of up to 40 characters. The field starts with the name you last saved or opened, so saving again keeps one set up to date.</li>
-<li>Leave <strong>Where</strong> on <strong>In the app</strong> and tap <strong>Save</strong>.</li>
+<li>Leave <strong>Where</strong> on <strong>In the app</strong> and tap <strong>Save</strong>, or the keyboard's Done key.</li>
 </ol>
 <p>The set then shows up under <strong>Recent</strong> in the ⋯ menu. Saving under a name that already exists replaces that set; the button reads <strong>Replace</strong> when it will. Each calculation keeps up to 25 sets; at the limit the app refuses to save and asks you to delete one first, rather than dropping one on its own. The set you last saved or opened comes back when the app starts.</p>
 <h2 id="what-gets-saved">What gets saved</h2>
 <p>The <strong>What gets saved</strong> note on the sheet says it: the calculation's inputs, including any unit you changed on a single field. Results are not stored; they are calculated again when you open the set and tap <strong>Calculate</strong>. A method picked on a data-source sheet or under <strong>Methods used</strong> is not saved with the set either (see <a href="/docs/Methods-and-Sources/">Methods and data sources</a>).</p>
 <p>What a set holds depends on the tab: the Property and Units tabs each save the whole tab, while Thermo and Case save the one mode or case you have open. Property also keeps its <strong>Recent</strong> names. Each tab's own page describes it.</p>
 <h2 id="opening-a-saved-set">Opening a saved set</h2>
-<p>Tap <strong>⋯</strong>, then a set under <strong>Recent</strong>, or <strong>Open a saved set…</strong> for the full list. In the list, the set you last used is marked <strong>last used</strong>. Tap a name to open it. The icons beside each set write it to a file, rename it, or delete it; a delete asks you to confirm first.</p>
+<p>Tap <strong>⋯</strong>, then a set under <strong>Recent</strong>, or <strong>Open a saved set…</strong> for the <strong>Saved cases</strong> list. The list is grouped by calculation (Property, Units, Phase Equilibrium, Heater and so on), and the set last used in each is marked <strong>last used</strong>. Tap a name to open it. The icons beside each set write it to a file, rename it, or delete it; a delete asks you to confirm first.</p>
+<p>A case opens in the calculation it was saved from, wherever you are. Opening a Heater case from the Property tab takes you to the Case tab with the Heater form filled in, and a green line under the title says which case was opened.</p>
 <h2 id="resetting">Resetting</h2>
 <p><strong>Reset to defaults</strong> puts the original inputs back on screen and leaves your saved sets untouched. On Thermo it resets the mode you have open and leaves the other modes as they are; on Case, <strong>Reset this case to defaults</strong> does the same for the open case. Tapped on the <strong>Choose a mode</strong> or <strong>All cases</strong> screen, it resets every mode or every case.</p>
 <h2 id="saving-to-a-file">Saving to a file</h2>
@@ -103,16 +104,22 @@
 <li>Set <strong>Where</strong> to <strong>Files / iCloud</strong> and tap <strong>Save</strong>. Your phone's file-saving screen opens.</li>
 <li>Choose where to keep it and confirm.</li>
 </ol>
-<p>The file is a <code>.json</code> file named after the calculation and the set, for example <code>ProcessChem - Reaction - Site case.json</code>. It holds one case: the inputs of the calculation you were on. Saving to a file does not add the set to the app's own list; save it <strong>In the app</strong> as well if you want both. If you back out of the file-saving screen, the Save sheet stays open.</p>
+<p>The file is a <code>.json</code> file named after the calculation and the set, for example <code>ProcessChem - Reaction - Site case.json</code>. It holds one case: the inputs of the calculation you were on. Saving to a file does not add the set to the app's own list; save it <strong>In the app</strong> as well if you want both, or open the file later, which adds it. If you back out of the file-saving screen, the Save sheet stays open.</p>
 <p>You can also write out a set you already saved in the app: tap <strong>Open a saved set…</strong>, then the save icon beside the set.</p>
 <h2 id="opening-from-a-file">Opening from a file</h2>
 <ol>
-<li>Go to the tab and calculation the file came from. On Thermo, choose the mode; on Case, choose the case.</li>
-<li>Tap <strong>⋯</strong>, <strong>Open a saved set…</strong>, then <strong>Open from a file…</strong>, and choose the file.</li>
-<li>The form fills in with the saved values.</li>
+<li>On any tab, tap <strong>⋯</strong>, <strong>Open a saved set…</strong>, then <strong>Open from a file…</strong>, and choose the file.</li>
+<li>The app goes to the calculation the file belongs to and fills in the form.</li>
+<li>The case is also added to the <strong>Saved cases</strong> list, so it is under <strong>Recent</strong> next time.</li>
 </ol>
-<p>Opening a file fills the form on screen but does not add the set to the app's own list. Save it <strong>In the app</strong> afterwards if you want it kept there too.</p>
-<p>A file only opens on the tab and calculation it was saved from, because its numbers belong to that form. If you are somewhere else, the app says where the file belongs and changes nothing. A file that is not a ProcessChem case, is damaged, or was made by a newer version of the app is refused with a message, and nothing on screen changes.</p>
+<p>You do not have to be on the right tab first: a Reaction file opened from the Units tab takes you to Thermo, Reaction. If a case with the same name and the same inputs is already in the list, nothing is added twice. If the name is taken by a different case, the new one gets a number after its name, and nothing is replaced. If that calculation already holds 25 sets, the file still opens and the message says it was not added.</p>
+<p>A file that is not a ProcessChem case or is damaged is refused with a message, and nothing on screen changes.</p>
+<h2 id="all-saved-cases-in-one-file">All saved cases in one file</h2>
+<p><strong>Export all to a file…</strong> in the <strong>Saved cases</strong> list writes every case saved in the app to one file, <code>ProcessChem - All saved cases.json</code>. Keep it as a backup, or use it to move everything to another phone.</p>
+<p>To bring the cases back, use <strong>Open from a file…</strong> and choose that file. Every case in it joins the <strong>Saved cases</strong> list; the message says how many were added and how many were already there. Nothing is opened and what is on screen stays as it is. Then tap the case you want.</p>
+<h2 id="after-an-app-update">After an app update</h2>
+<p>Saved cases and files do not expire. Each input is stored under its own name with its own unit, so a later version of the app reads an older case, in the app or from a file, and fills in what it holds; an input that did not exist when the case was saved keeps its default. A calculation that has since been merged into another opens in its new place: cases saved under the earlier Closed System and Open System modes open in Phase Equilibrium.</p>
+<p>A file from a newer version of the app opens in an older one as long as the older app can read it; inputs it does not know are left out. If it cannot be read, the app says the file was made by a newer version and changes nothing.</p>
 <h2 id="units">Units</h2>
 <p>Every number is saved together with the unit it was in. A pressure saved as 100 psi opens as the same pressure even if you have since set pressure to bar on the <a href="/docs/Units-Tab/">Units</a> tab; it shows as 6.89 bar, not 100 bar. A field whose unit you changed on the field itself keeps that unit, so it opens as 100 psi. The same holds for a set opened from the app's own list.</p>
 <h2 id="moving-a-case-elsewhere">Moving a case elsewhere</h2>

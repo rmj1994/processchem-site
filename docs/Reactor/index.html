@@ -90,7 +90,7 @@
 <p>The rate is a power law: r = k · C_A^a · C_B^b, with an optional (1 − Q/K) factor. k is entered at the reactor temperature, or as k = A · exp(−Ea / RT). The orders a and b are yours: a for the key reactant, b for the second reactant in the equation.</p>
 <p><strong>Units of k.</strong> Concentrations are in mol/L, the way rate constants are usually published. So k is in (L/mol)^(n−1)/s for a total order n: 1/s for first order, L/(mol·s) for second. Per kg of catalyst, k is in L^n/(mol^(n−1)·kg·s).</p>
 <p><strong>Gas or liquid.</strong> A gas's concentrations come from the ideal-gas law at the reactor's temperature and pressure: C_i = y_i · P / RT. So when moles appear or disappear the volume changes with them, which is Levenspiel's ε, without having to enter it. A liquid keeps the feed's volumetric flow, or the batch's volume.</p>
-<p><strong>Reversible.</strong> Choose Reversible and the rate carries (1 − Q/K), where Q is the reaction quotient of the gas mixture and K comes from the species' Gibbs energies at the reactor temperature. The conversion then stops at equilibrium. Even with One way, the equilibrium conversion of a gas-phase reaction is reported, with a warning if the answer passes it.</p>
+<p><strong>Reversible.</strong> Choose Reversible and the rate carries (1 − Q/K), where Q is the reaction quotient and K comes from the species' Gibbs energies at the reactor temperature. For a gas, Q is built from partial pressures in bar; an inert in the feed lowers them. For a liquid, Q is built from mole fractions among everything fed, the liquid taken as an ideal solution; a solvent counts only if you list it as a feed component. The conversion then stops at equilibrium. Even with One way, the equilibrium conversion of a gas-phase reaction is reported, with a warning if the answer passes it.</p>
 <p>These are the textbook design equations for the ideal reactors (Levenspiel 1999; Fogler). See <a href="#references">References</a>.</p>
 <h2 id="inputs">Inputs</h2>
 <div class="table-wrap"><table>
@@ -107,7 +107,7 @@
 </tr>
 <tr>
 <td>Feed</td>
-<td>Reaction in gas or liquid, then each feed component: tap it to give its name and how much. <strong>Given as</strong> offers, for a gas to a flow reactor, Molar flow, Mass flow, Volumetric flow (at the reactor's temperature and pressure) or Normal flow (at the Normal reference on the <a href="/docs/Units-Tab/">Units</a> tab); for a gas batch, Moles, Mass or Volume; for a liquid, Concentration, or a molar or mass amount. A liquid also needs its total volumetric flow, and a batch its volume. A component may be named by name or by formula.</td>
+<td>Reaction in gas or liquid, then each feed component: tap it to give its name and how much. <strong>Given as</strong> offers, for a gas to a flow reactor, Molar flow, Mass flow, Volumetric flow (at the reactor's temperature and pressure) or Normal flow (at the Normal reference on the <a href="/docs/Units-Tab/">Units</a> tab); for a gas batch, Moles, Mass or Volume; for a liquid, Concentration, or a molar or mass amount. A liquid also needs its total volumetric flow, and a batch its volume. A component may be named by name or by formula. A component that is not in the reaction is an inert: it does not react, but it dilutes the others and is listed in the feed and outlet table.</td>
 </tr>
 <tr>
 <td>Conditions</td>

@@ -91,6 +91,7 @@
 <p><strong>Units of k.</strong> Concentrations are in mol/L, the way rate constants are usually published. So k is in (L/mol)^(n−1)/s for a total order n: 1/s for first order, L/(mol·s) for second. Per kg of catalyst, k is in L^n/(mol^(n−1)·kg·s).</p>
 <p><strong>Gas or liquid.</strong> A gas's concentrations come from the ideal-gas law at the reactor's temperature and pressure: C_i = y_i · P / RT. So when moles appear or disappear the volume changes with them, which is Levenspiel's ε, without having to enter it. A liquid keeps the feed's volumetric flow, or the batch's volume.</p>
 <p><strong>Reversible.</strong> Choose Reversible and the rate carries (1 − Q/K), where Q is the reaction quotient of the gas mixture and K comes from the species' Gibbs energies at the reactor temperature. The conversion then stops at equilibrium. Even with One way, the equilibrium conversion of a gas-phase reaction is reported, with a warning if the answer passes it.</p>
+<p>These are the textbook design equations for the ideal reactors (Levenspiel 1999; Fogler). See <a href="#references">References</a>.</p>
 <h2 id="inputs">Inputs</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -149,6 +150,18 @@
 <li><strong>No rate data built in yet:</strong> the kinetics are yours to enter.</li>
 </ul>
 <p>What was checked against published values, and how far off it was, is on <a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a>.</p>
+<h2 id="references">References</h2>
+<p><strong>Design equations and kinetics</strong></p>
+<ul>
+<li><strong>Plug-flow, mixed-flow and batch design equations, space time and space velocity, the Levenspiel plot comparison, the volume change of a gas (ε), the power-law rate and the Arrhenius form:</strong> Levenspiel, O., <em>Chemical Reaction Engineering</em>, 3rd ed., Wiley, 1999.</li>
+<li><strong>The same design equations for catalyst mass (W/F_A0), the reversible rate with the (1 − Q/K) factor and the Damköhler number:</strong> Fogler, H. S., <em>Elements of Chemical Reaction Engineering</em>, Prentice Hall.</li>
+<li><strong>The default example</strong> (ethane cracking to ethylene, first order, k = 3.07 1/s at 1100 K, pure ethane at 6 atm, and the closed form k·τ₀ = (1 + ε) ln 1/(1 − X) − ε·X): Fogler, as above.</li>
+</ul>
+<p><strong>Thermodynamics</strong></p>
+<ul>
+<li><strong>K from the species' Gibbs energies, the equilibrium conversion, the heat of reaction and the ideal-gas concentrations C = yP/RT:</strong> Smith, J. M., Van Ness, H. C., Abbott, M. M. and Swihart, M. T., <em>Introduction to Chemical Engineering Thermodynamics</em>, 8th ed., McGraw-Hill, 2018. The species data are those named on the <a href="/docs/Reaction/#references">Reaction</a> page.</li>
+</ul>
+<p>See also the combined list on <a href="/docs/Methods-and-Sources/#references">Methods and sources</a>.</p>
   </main>
   </div>
 </div>

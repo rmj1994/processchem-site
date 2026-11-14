@@ -270,6 +270,20 @@
 <p>Shares can be read in mol % or mass %, and amounts in any amount or flow unit. The Total rows are the check: what goes in comes out.</p>
 <h2 id="where-the-numbers-come-from">Where the numbers come from</h2>
 <p>The comparison is a script in the app's source (<code>tools/reliability_audit.py</code>); it writes one row per case with the reference, its source, the app's value and the deviation. A test run before each release fails if any case becomes worse than its recorded verdict. The methods and data libraries are described in <a href="/docs/Methods-and-Sources/">Methods and data sources</a>.</p>
+<h2 id="references">References</h2>
+<p>The comparison values in the tables above come from the sources named in <code>tools/reliability_audit.py</code>. Each case in the script's report names its own source.</p>
+<ul>
+<li><strong>Steam and water:</strong> the IAPWS-IF97 steam tables (Wagner et al., <em>Journal of Engineering for Gas Turbines and Power</em> 122, 2000). The app itself answers with IAPWS-95 (Wagner and Pruss, <em>Journal of Physical and Chemical Reference Data</em> 31, 2002). Ice Ih: IAPWS-06 (Feistel and Wagner, <em>Journal of Physical and Chemical Reference Data</em> 35, 2006). The sublimation pressure of ice: the IAPWS equation (Wagner et al., 2011).</li>
+<li><strong>Pure fluids and light mixtures with a reference equation:</strong> the Helmholtz equations in CoolProp (Bell et al., <em>Industrial &amp; Engineering Chemistry Research</em> 53, 2014), including Span and Wagner for carbon dioxide and GERG-2008 type mixing for light gas mixtures.</li>
+<li><strong>Boiling points, liquid densities, heats of vaporisation, sublimation points and heats:</strong> the <em>CRC Handbook of Chemistry and Physics</em> and the NIST Chemistry WebBook.</li>
+<li><strong>Salt solutions:</strong> the CRC Handbook, "Concentrative properties of aqueous solutions", for densities and the boiling point of brine. Perry's Chemical Engineers' Handbook for the heat capacity of brine and for the enthalpy-concentration chart of sulfuric acid in water.</li>
+<li><strong>Vapour-liquid equilibrium:</strong> Perry's Chemical Engineers' Handbook, table 13-1, for methanol and water. McCabe, Smith and Harriott for benzene and toluene. The azeotrope table in the CRC Handbook (Horsley). The IUPAC-NIST Solubility Data Series for water with a hydrocarbon in two liquid phases.</li>
+<li><strong>Reaction equilibrium constants and heats:</strong> NIST-JANAF Gibbs energies of formation (Chase, <em>NIST-JANAF Thermochemical Tables</em>, 4th ed., 1998) for steam reforming, water-gas shift and ammonia synthesis. The NIST lower heating value for methane combustion. The measured decomposition temperature of limestone, 895 °C.</li>
+<li><strong>Ammonia at equilibrium at 450 °C, 10, 100 and 300 atm:</strong> Larson and Dodge (1923, 1924), measured.</li>
+<li><strong>Fluidized bed:</strong> Kunii and Levenspiel, <em>Fluidization Engineering</em>, 2nd ed., Example 3.1, for the minimum fluidization velocity. The Wen and Yu and Haider and Levenspiel correlations and Stokes' law are checked by hand calculation, written out in the script.</li>
+<li><strong>Dry ice:</strong> Giauque and Egan, <em>Journal of Chemical Physics</em> 5, 45 (1937), for the heat capacity.</li>
+</ul>
+<p>See also the combined list on <a href="/docs/Methods-and-Sources/#references">Methods and sources</a>.</p>
   </main>
   </div>
 </div>

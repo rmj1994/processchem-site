@@ -115,6 +115,7 @@ minimise  Σ nᵢ·μᵢ   subject to one balance per element
 </code></pre>
 <p>Hf,298 and S°₂₉₈ are the formation enthalpy and absolute entropy at 298.15 K; the two integrals carry each up to your temperature. μᵢ is the chemical potential the minimisation actually balances element-by-element, numerically, not by hand. A condensed phase's μᵢ does not depend on how much of it is present, which is why a solid either survives or disappears entirely rather than settling at some intermediate amount — only a gas's does, through the yᵢP mixing term.</p>
 <p>The heat duty is the full energy balance: enthalpy of the products at the final temperature, less enthalpy of the feed at its own temperature (with a known initial condition, of the feed's equilibrium at that temperature and pressure). It therefore includes both the heat of reaction and the sensible heat.</p>
+<p>These are the standard relations of Gibbs energy minimisation (Smith and Missen 1982; Gordon and McBride 1994). The species data are NASA Glenn polynomials (McBride, Zehe and Gordon 2002) and the CRC, NIST-JANAF and Barin tables. See <a href="#references">References</a>.</p>
 <h2 id="about-the-initial-pressure">About The Initial Pressure</h2>
 <p>It does not affect this result, and the field is not pretending otherwise. Feed enthalpy is pressure-independent for an ideal gas and for a condensed phase, so an isothermal-isobaric equilibrium depends only on the final pressure. It is still recorded, for completeness alongside the other conditions on the sheet.</p>
 <h2 id="the-limitation-that-matters-most">The Limitation That Matters Most</h2>
@@ -127,6 +128,24 @@ minimise  Σ nᵢ·μᵢ   subject to one balance per element
 <p>Every condensed species is treated as a pure phase at unit activity. In a solution it is not: caustic soda in water is dissolved ions, and its activity is far from one — a 17 % NaOH solution is about 5 molal. Results for aqueous systems are therefore qualitative. They will get the direction and the stoichiometry right and the amounts only approximately.</p>
 <h2 id="other-limitations">Other Limitations</h2>
 <p>Ionic species are excluded: the solver balances elements but not charge, so admitting an ion would let it create charge from nothing. There are no solution phases — no molten slag, no solid solutions — so a system that really forms a melt is modelled only approximately; this handles calcination well and clinkering roughly. There is no kinetics. A heat capacity correlation used outside its fitted range is flagged for each species present, so compositions much above 1700 °C should be treated as indicative. The gas is treated as ideal, and a note says so above 50 bar: ammonia synthesis at 450 °C comes out 5 % low at 100 atm and 13 % low at 300 atm. <a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a> has the measured deviations.</p>
+<h2 id="references">References</h2>
+<p><strong>Method</strong></p>
+<ul>
+<li><strong>Gibbs energy minimisation, one balance per element, and the chemical potentials</strong> (μᵢ = Gᵢ + RT ln(yᵢP) for a gas, unit activity for a pure solid or liquid): Smith, W. R. and Missen, R. W., <em>Chemical Reaction Equilibrium Analysis: Theory and Algorithms</em>, Wiley, 1982. Also Smith, J. M., Van Ness, H. C., Abbott, M. M. and Swihart, M. T., <em>Introduction to Chemical Engineering Thermodynamics</em>, 8th ed., McGraw-Hill, 2018.</li>
+<li><strong>Energy balance and heat duty</strong> (enthalpy of the products less enthalpy of the feed, with the heat capacity integrals carrying each species from 298.15 K to your temperature): Smith, Van Ness, Abbott and Swihart, as above.</li>
+<li><strong>Screening of large species lists, and the adiabatic flame check</strong> (methane in air, 2226 K): the approach of NASA's CEA program. Gordon, S. and McBride, B. J., <em>Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications. I. Analysis</em>, NASA Reference Publication 1311, 1994. McBride, B. J. and Gordon, S., <em>Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications. II. Users Manual and Program Description</em>, NASA Reference Publication 1311, 1996.</li>
+</ul>
+<p><strong>Species data</strong></p>
+<ul>
+<li><strong>NASA polynomials</strong> (the heat capacity, enthalpy and entropy forms used for the 1,820 NASA species): McBride, B. J., Zehe, M. J. and Gordon, S., <em>NASA Glenn Coefficients for Calculating Thermodynamic Properties of Individual Species</em>, NASA/TP-2002-211556, 2002. The file format is described in NASA RP-1311 Part II, Appendix A.</li>
+<li><strong>Enthalpy of formation, absolute entropy and heat capacity from the CRC tables and the <code>chemicals</code> and <code>thermo</code> libraries:</strong> <em>CRC Handbook of Chemistry and Physics</em>, CRC Press. The libraries draw on evaluated compilations such as NIST-JANAF (Chase, M. W., Jr., <em>NIST-JANAF Thermochemical Tables</em>, 4th ed., Journal of Physical and Chemical Reference Data, Monograph 9, 1998) and the Active Thermochemical Tables (ATcT, Argonne National Laboratory).</li>
+<li><strong>Condensed phases such as the cement clinker minerals and magnetite:</strong> Barin, I., <em>Thermochemical Data of Pure Substances</em>, 1997. Tetracalcium aluminoferrite: Hanein, T., Glasser, F. P. and Bannerman, M. N., "Thermodynamic data for cement clinkering", <em>Cement and Concrete Research</em> 132, 2020.</li>
+</ul>
+<p><strong>Comparison data</strong></p>
+<ul>
+<li><strong>Ammonia at equilibrium</strong> (450 °C, 10, 100 and 300 atm, the 5 % and 13 % deviations): Larson, A. T. and Dodge, R. L., measurements published in the <em>Journal of the American Chemical Society</em>, 1923 and 1924.</li>
+</ul>
+<p>See also the combined list on <a href="/docs/Methods-and-Sources/#references">Methods and sources</a>.</p>
   </main>
   </div>
 </div>

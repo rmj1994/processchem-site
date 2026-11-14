@@ -172,6 +172,85 @@
 <p>The reference equation is the most accurate where it exists; Peng-Robinson is the general cubic the app uses for everything else. Picking Peng-Robinson for a substance with a reference equation is a way to see how much the choice of model moves the answer. Like a method picked on Property, a pick here is not part of a saved set.</p>
 <h2 id="how-accurate-it-is">How accurate it is</h2>
 <p><a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a> lists what each method was checked against and how far off it was.</p>
+<h2 id="references">References</h2>
+<p>One list of the books, papers, data sources and libraries the app relies on, grouped by subject and in alphabetical order within each group. Each module's page has its own References section that says which relation each one supports. Page numbers are left out.</p>
+<h3 id="equations-of-state-and-phase-equilibrium">Equations of state and phase equilibrium</h3>
+<ul>
+<li>Bell, I. H., Wronski, J., Quoilin, S. and Lemort, V., "Pure and pseudo-pure fluid thermophysical property evaluation and the open-source thermophysical property library CoolProp", <em>Industrial &amp; Engineering Chemistry Research</em> 53, 2014. The library behind the reference equations of state.</li>
+<li>ChemSep, database of binary interaction parameters for Peng-Robinson and of NRTL pair parameters.</li>
+<li>DDBST, UNIFAC group assignment table.</li>
+<li>Fredenslund, A., Jones, R. L. and Prausnitz, J. M., "Group-contribution estimation of activity coefficients in nonideal liquid mixtures", <em>AIChE Journal</em> 21, 1975. UNIFAC.</li>
+<li>Horsley, L. H., <em>Azeotropic Data</em>, as tabulated in the CRC Handbook. Azeotrope comparison data.</li>
+<li>IUPAC-NIST Solubility Data Series. Mutual solubility of water and hydrocarbons, comparison data.</li>
+<li>Kunz, O. and Wagner, W., "The GERG-2008 wide-range equation of state for natural gases and other mixtures", <em>Journal of Chemical &amp; Engineering Data</em> 57, 2012. The type of reference mixture equation used to check light gas mixtures.</li>
+<li>McCabe, W. L., Smith, J. C. and Harriott, P., <em>Unit Operations of Chemical Engineering</em>. Benzene and toluene comparison data.</li>
+<li>Peng, D.-Y. and Robinson, D. B., "A new two-constant equation of state", <em>Industrial &amp; Engineering Chemistry Fundamentals</em> 15, 1976.</li>
+<li><em>Perry's Chemical Engineers' Handbook</em>, McGraw-Hill. Methanol and water vapour-liquid data, table 13-1, as comparison data.</li>
+<li>Renon, H. and Prausnitz, J. M., "Local compositions in thermodynamic excess functions for liquid mixtures", <em>AIChE Journal</em> 14, 1968. NRTL.</li>
+<li>Smith, J. M., Van Ness, H. C., Abbott, M. M. and Swihart, M. T., <em>Introduction to Chemical Engineering Thermodynamics</em>, 8th ed., McGraw-Hill, 2018.</li>
+<li>Span, R. and Wagner, W., "A new equation of state for carbon dioxide covering the fluid region from the triple-point temperature to 1100 K at pressures up to 800 MPa", <em>Journal of Physical and Chemical Reference Data</em> 25, 1996.</li>
+<li>Wagner, W. and Pruss, A., "The IAPWS formulation 1995 for the thermodynamic properties of ordinary water substance for general and scientific use", <em>Journal of Physical and Chemical Reference Data</em> 31, 2002. IAPWS-95.</li>
+<li>Wagner, W. et al., "The IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and Steam", <em>Journal of Engineering for Gas Turbines and Power</em> 122, 2000. IAPWS-IF97, the steam tables used as comparison data.</li>
+</ul>
+<h3 id="thermochemical-data">Thermochemical data</h3>
+<ul>
+<li>Active Thermochemical Tables (ATcT), Argonne National Laboratory. One of the evaluated compilations behind the enthalpies of formation in <code>chemicals</code>.</li>
+<li>Barin, I., <em>Thermochemical Data of Pure Substances</em>, 1997. Cement clinker minerals, magnetite and calcite.</li>
+<li>Chase, M. W., Jr., <em>NIST-JANAF Thermochemical Tables</em>, 4th ed., Journal of Physical and Chemical Reference Data, Monograph 9, 1998.</li>
+<li><em>CRC Handbook of Chemistry and Physics</em>, CRC Press. Enthalpies of formation, entropies, heat capacities, phase-change data and the inorganic decomposition table.</li>
+<li>Feistel, R. and Wagner, W., "A new equation of state for H2O ice Ih", <em>Journal of Physical and Chemical Reference Data</em> 35, 2006. IAPWS-06, the heat capacity of ice.</li>
+<li>Gharagheizi et al., enthalpy of sublimation data set, as bundled in <code>chemicals</code>.</li>
+<li>Giauque, W. F. and Egan, C. J., <em>Journal of Chemical Physics</em> 5, 45 (1937). Measured heat capacity of dry ice.</li>
+<li>Gordon, S. and McBride, B. J., <em>Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications. I. Analysis</em>, NASA Reference Publication 1311, 1994.</li>
+<li>Hanein, T., Glasser, F. P. and Bannerman, M. N., "Thermodynamic data for cement clinkering", <em>Cement and Concrete Research</em> 132, 2020. Tetracalcium aluminoferrite.</li>
+<li>Lastovka and Shaw, group-contribution estimate of solid heat capacity, through <code>thermo</code>. Used only where no measured heat capacity exists, and the result says so.</li>
+<li>McBride, B. J. and Gordon, S., <em>Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications. II. Users Manual and Program Description</em>, NASA Reference Publication 1311, 1996. Describes the thermodynamic data file format.</li>
+<li>McBride, B. J., Zehe, M. J. and Gordon, S., <em>NASA Glenn Coefficients for Calculating Thermodynamic Properties of Individual Species</em>, NASA/TP-2002-211556, 2002.</li>
+<li>NIST Chemistry WebBook, NIST Standard Reference Database 69. Phase-change enthalpies, heat capacities and the plastics data below.</li>
+<li>Plastics heat capacities: NIST WebBook (Chang 1976; Chang and Bestul 1973), Wunderlich (1990, ATHAS report), Grebowicz et al. (1984), Passaglia and Kevorkian (1963) and Dainton et al. (1962), as cited in the app's polymer data.</li>
+<li>Wagner, W. et al. (2011), IAPWS equation for the sublimation pressure of ice, used as comparison data.</li>
+</ul>
+<h3 id="transport-and-physical-properties">Transport and physical properties</h3>
+<ul>
+<li>DIPPR property correlations (AIChE Design Institute for Physical Properties), through <code>chemicals</code> and <code>thermo</code>.</li>
+<li>Laliberté, M., "A model for calculating the heat capacity of aqueous solutions, with updated density and viscosity data", <em>Journal of Chemical &amp; Engineering Data</em> 54, 2009. The fitted model for density, heat capacity and viscosity of aqueous solutions, through <code>thermo</code>. It builds on Laliberté, M. and Cooper, W. E., "Model for calculating the density of aqueous electrolyte solutions", <em>Journal of Chemical &amp; Engineering Data</em> 49, 2004.</li>
+<li>Lange's Handbook of Chemistry. Tabulated measured values used on the Property tab.</li>
+<li>Lovdata, <em>forskrift om tiltaks- og grenseverdier</em>, vedlegg 1 (Norway), licence NLOD 2.0. Exposure limits. Ontario limits come from the <code>chemicals</code> library.</li>
+<li>Perry's Chemical Engineers' Handbook, as above. Heat capacity of brine and the enthalpy-concentration chart for sulfuric acid, as comparison data.</li>
+<li>Poling, B. E., Prausnitz, J. M. and O'Connell, J. P., <em>The Properties of Gases and Liquids</em>, 5th ed., McGraw-Hill, 2001.</li>
+</ul>
+<h3 id="reaction-engineering">Reaction engineering</h3>
+<ul>
+<li>Fogler, H. S., <em>Elements of Chemical Reaction Engineering</em>, Prentice Hall. The default Reactor example.</li>
+<li>Larson, A. T. and Dodge, R. L., <em>Journal of the American Chemical Society</em>, 1923 and 1924. Measured ammonia equilibrium at 450 °C.</li>
+<li>Levenspiel, O., <em>Chemical Reaction Engineering</em>, 3rd ed., Wiley, 1999.</li>
+<li>Smith, W. R. and Missen, R. W., <em>Chemical Reaction Equilibrium Analysis: Theory and Algorithms</em>, Wiley, 1982.</li>
+</ul>
+<h3 id="fluidization">Fluidization</h3>
+<ul>
+<li>Abrahamsen, A. R. and Geldart, D., "Behaviour of gas-fluidized beds of fine powders, Part I: Homogeneous expansion", <em>Powder Technology</em> 26, 1980. Minimum bubbling velocity.</li>
+<li>Darton, R. C., LaNauze, R. D., Davidson, J. F. and Harrison, D., "Bubble growth due to coalescence in fluidised beds", <em>Transactions of the Institution of Chemical Engineers</em> 55, 1977.</li>
+<li>Davidson, J. F. and Harrison, D., <em>Fluidised Particles</em>, Cambridge University Press, 1963.</li>
+<li>Ergun, S., "Fluid flow through packed columns", <em>Chemical Engineering Progress</em> 48, 1952.</li>
+<li>Geldart, D., "Types of gas fluidization", <em>Powder Technology</em> 7, 1973.</li>
+<li>Geldart, D., Cullinan, J., Georghiades, S., Gilvary, D. and Pope, D. J., "The effect of fines on entrainment from gas fluidised beds", <em>Transactions of the Institution of Chemical Engineers</em> 57, 1979. Elutriation, as given in Kunii and Levenspiel.</li>
+<li>Zenz, F. A. and Weil, N. A., "A theoretical-empirical approach to the mechanism of particle entrainment from fluidized beds", <em>AIChE Journal</em> 4, 1958. Transport disengaging height, which the app does not calculate.</li>
+<li>Haider, A. and Levenspiel, O., "Drag coefficient and terminal velocity of spherical and nonspherical particles", <em>Powder Technology</em> 58, 1989.</li>
+<li>Kunii, D. and Levenspiel, O., <em>Fluidization Engineering</em>, 2nd ed., Butterworth-Heinemann, 1991.</li>
+<li>Wen, C. Y. and Yu, Y. H., "A generalized method for predicting the minimum fluidization velocity", <em>AIChE Journal</em> 12, 1966.</li>
+</ul>
+<h3 id="electrochemistry">Electrochemistry</h3>
+<ul>
+<li>Bard, A. J. and Faulkner, L. R., <em>Electrochemical Methods: Fundamentals and Applications</em>, 2nd ed., Wiley, 2001.</li>
+<li>CODATA recommended values. The Faraday constant, exact since the 2019 redefinition of the SI units.</li>
+</ul>
+<h3 id="software-libraries">Software libraries</h3>
+<ul>
+<li><code>chemicals</code> 1.5.2 and <code>thermo</code> 0.6.0, by Caleb Bell. Property correlations, compound identification and the Laliberté, NRTL and UNIFAC models.</li>
+<li>CoolProp 7.2.0 (Bell et al. 2014, above). Reference equations of state.</li>
+<li>Flet 0.86.4. The user interface framework.</li>
+<li>NASA CEA (<code>nasa/cea</code>, Apache License 2.0). The thermodynamic data file for the NASA Glenn polynomials.</li>
+</ul>
   </main>
   </div>
 </div>

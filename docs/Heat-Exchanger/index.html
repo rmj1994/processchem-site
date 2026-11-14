@@ -126,6 +126,12 @@ Co-current:       T_hot,in  &gt; T_cold,in      (inlet end)
 <h2 id="what-this-does-not-do-yet">What This Does Not Do Yet</h2>
 <p>This is the energy balance only: how much heat moves, and what temperature each stream leaves at. It does not size the exchanger — no heat-transfer area, no overall heat-transfer coefficient, no LMTD, no tube count, no pressure drop, no fan or pump power, and no cost. Sizing needs a heat-transfer coefficient on top of the temperature profiles drawn here, a separate calculation from the one here.</p>
 <p>What was checked against published values, and how far off it was, is on <a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><strong>Energy balance between the two streams (Q = ṅ·Δh on each side), and Δh = ∫Cp dT + Σ L_tr:</strong> Smith, J. M.; Van Ness, H. C.; Abbott, M. M.; Swihart, M. T. <em>Introduction to Chemical Engineering Thermodynamics</em>, 8th ed.; McGraw-Hill: New York, 2018. Also Çengel, Y. A.; Boles, M. A. <em>Thermodynamics: An Engineering Approach</em>, McGraw-Hill.</li>
+<li><strong>Counter-current and co-current arrangements, temperature profiles and closest approach:</strong> Incropera, F. P.; DeWitt, D. P.; Bergman, T. L.; Lavine, A. S. <em>Fundamentals of Heat and Mass Transfer</em>, 7th ed.; Wiley: Hoboken, 2011.</li>
+<li><strong>Heat capacities, latent heats, phase-change temperatures and equations of state for each stream:</strong> the sources listed on the <a href="/docs/Heater/#references">Heater</a> page, since each stream is calculated the same way. These are CoolProp (Bell, I. H.; Wronski, J.; Quoilin, S.; Lemort, V. <em>Ind. Eng. Chem. Res.</em> 2014, 53, 2498-2508), the Peng-Robinson equation of state (Peng, D.-Y.; Robinson, D. B. <em>Ind. Eng. Chem. Fundam.</em> 1976, 15, 59-64), and the <code>chemicals</code> and <code>thermo</code> libraries by Caleb Bell, https://github.com/CalebBell/chemicals and https://github.com/CalebBell/thermo.</li>
+</ul>
   </main>
   </div>
 </div>

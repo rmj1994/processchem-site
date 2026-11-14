@@ -157,12 +157,31 @@
 ln K = −ΔG°_rxn / (RT)      equilibrium constant
 </code></pre>
 <p>νᵢ is positive for a product, negative for a reactant, and the reported heat duty is this same sum applied to the whole outlet and feed: enthalpy of the outlet less enthalpy of the feed. With the feed entering at the reaction temperature the duty is the heat of reaction alone; give it its own temperature and the duty includes the sensible heat as well.</p>
+<p>These are the standard relations of chemical thermodynamics (Smith, Van Ness, Abbott and Swihart; Smith and Missen 1982). See <a href="#references">References</a>.</p>
 <h2 id="about-the-equilibrium-constant">About The Equilibrium Constant</h2>
 <p>K depends on temperature alone. Pressure shifts where a real equilibrium settles, but it does not change K, and the value shown will not move when you change the pressure. Pressure does set the gas volumes.</p>
 <h2 id="what-it-refuses">What It Refuses</h2>
 <p>A set of compounds that cannot be balanced, or that can be balanced in more than one way where no choice of split settles it — the message says how many independent reactions the set admits, and which compound to remove. Ions are refused too: the balance conserves elements but not charge. So is a compound entered twice in the same phase, one that cancels out of the equation, or one that balances only on the other side.</p>
 <h2 id="limitations">Limitations</h2>
 <p>One reaction at a time, with no kinetics and no reactor sizing. Gas volumes use the ideal molar volume RT/P, which is consistent with how the activities are modelled but approximate above about 10 bar. A heat capacity correlation used outside its fitted range is flagged for the species concerned, and a compound entered in a phase it does not hold at your temperature is flagged rather than corrected. <a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a> has the measured deviations.</p>
+<h2 id="references">References</h2>
+<p><strong>Method</strong></p>
+<ul>
+<li><strong>Balancing by the null space of the element matrix, independent reactions, extent of reaction:</strong> Smith, W. R. and Missen, R. W., <em>Chemical Reaction Equilibrium Analysis: Theory and Algorithms</em>, Wiley, 1982.</li>
+<li><strong>Heat of reaction as the sum of νᵢhᵢ, ΔG° and the equilibrium constant (ln K = −ΔG°/RT), the enthalpy of the end states with the heat capacity integrals (Kirchhoff's law), the ideal molar volume RT/P:</strong> Smith, J. M., Van Ness, H. C., Abbott, M. M. and Swihart, M. T., <em>Introduction to Chemical Engineering Thermodynamics</em>, 8th ed., McGraw-Hill, 2018.</li>
+<li><strong>Conversion, limiting reactant and excess reactant:</strong> Levenspiel, O., <em>Chemical Reaction Engineering</em>, 3rd ed., Wiley, 1999.</li>
+</ul>
+<p><strong>Data</strong></p>
+<ul>
+<li><strong>Enthalpy of formation, absolute entropy and heat capacity:</strong> <em>CRC Handbook of Chemistry and Physics</em>, CRC Press, through the <code>chemicals</code> and <code>thermo</code> libraries, which draw on NIST-JANAF (Chase, M. W., Jr., <em>NIST-JANAF Thermochemical Tables</em>, 4th ed., Journal of Physical and Chemical Reference Data, Monograph 9, 1998) and the Active Thermochemical Tables (ATcT, Argonne National Laboratory).</li>
+<li><strong>Species the CRC data lack, in NASA polynomial form:</strong> McBride, B. J., Zehe, M. J. and Gordon, S., <em>NASA Glenn Coefficients for Calculating Thermodynamic Properties of Individual Species</em>, NASA/TP-2002-211556, 2002.</li>
+<li><strong>Cement clinker minerals:</strong> Barin, I., <em>Thermochemical Data of Pure Substances</em>, 1997.</li>
+</ul>
+<p><strong>Comparison data</strong></p>
+<ul>
+<li>The equilibrium constants of steam reforming, water-gas shift and ammonia synthesis are checked against NIST-JANAF Gibbs energies of formation. The heat of methane combustion is checked against the NIST value. See <a href="/docs/Accuracy-and-Limits/#references">Accuracy and limits</a>.</li>
+</ul>
+<p>See also the combined list on <a href="/docs/Methods-and-Sources/#references">Methods and sources</a>.</p>
   </main>
   </div>
 </div>

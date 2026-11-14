@@ -85,7 +85,7 @@
 <li><strong>Sphericity</strong>, 0.86 by default: 1 is a perfect sphere, sand is about 0.86. The terminal-velocity correlation is fitted between 0.5 and 1 and says so when read outside that.</li>
 <li><strong>Particle void fraction</strong>, 0 by default: porosity inside each particle, 0 for a solid grain.</li>
 <li><strong>Voidage at minimum fluidization</strong>, 0.48 by default, typically 0.4 to 0.5, and it must be above that species' own bed voidage, because a settled bed is denser than the same bed at the point of lifting.</li>
-<li><strong>Mass fraction below 45 µm</strong>, 0 by default. This is what separates a Geldart A powder from a B, since the fines let a bed expand smoothly before it bubbles. It also stands in for the fines size in that species' own elutriation estimate.</li>
+<li><strong>Mass fraction below 45 µm</strong>, 0 by default. This is what separates a Geldart A powder from a B, since the fines let a bed expand smoothly before it bubbles. It is also the share of that species counted as fines, at 45 µm, in its own elutriation estimate (see <a href="#elutriation-and-entrainment">Elutriation And Entrainment</a>).</li>
 <li><strong>Share of the bed, by mass</strong> (batch), or <strong>Feed rate</strong> (continuous feed, 500 kg/h by default). Enter each share; the last one is worked out so they always add to 100.</li>
 </ul>
 <p><strong>Fluidizing gas</strong> works the same way: one summary row per gas, such as "Carbon dioxide, 450 m³/h · 20 °C", edited in a sheet, and <strong>+ Add fluidizing gas</strong> for another, up to 6. With more than one gas, each row has an <strong>✕</strong> to remove it. Each gas is fed its own flow on its own basis, the way a real feed is actually specified: so many Nm³/h of nitrogen, so many kg/h of steam, rather than a composition entered as percentages plus one shared total that could disagree with each other. A single row is a pure gas. Each gas's sheet has the gas name, <strong>Fed as</strong> (Volumetric flow at inlet T and P, Mass flow, Molar flow or Normal Volumetric Flow), the value, and the gas's own <strong>Inlet temperature</strong> and <strong>Inlet pressure</strong> (20 °C and 1.01325 bara). A volumetric flow is read at the gas's inlet temperature and pressure and converted to the vessel's; the other bases need no inlet state. When any gas enters at a different temperature or pressure from the vessel, the results add <strong>Gas heating to vessel temperature</strong>: the heat to bring each gas from its inlet state to the vessel's (molar flow × molar enthalpy change, each gas as its own pure gas), per gas and in total. A negative value means the gas is cooled. Only rates are offered, since a batch volume of gas has no superficial velocity. Air and the refrigerant blends cannot be a row, even alone, so enter nitrogen and oxygen separately.</p>
@@ -143,6 +143,38 @@ u_t = u_t*·[μ_g·g·(ρ_p − ρ_g) / ρ_g²]^(1/3)
 u_br = (u₀ − u_mf) + 0.711·√(g·d_b)
 </code></pre>
 <p>A₀ is the distributor area per orifice — a coarser plate makes bigger bubbles everywhere above it, which is why the Bubbling and Distributor groups cannot be sized apart from each other. The Bubbling group reports d_b at the bed surface, u_br, and how far the bed expands — flagging it when d_b grows enough to span the vessel and the bed slugs instead — using that same blended particle population, since a bubble rising through a mixed bed is a bed-scale phenomenon, not a per-species one. The Distributor group takes the orifice diameter and count you specify — what a real plate is actually made from — and reports the velocity and pressure drop that follow, alongside the drop a plate should take to distribute gas evenly (a fraction of the bed's own drop). When the plate you specified falls short of that, it's flagged: the gas will find the easiest path through the bed rather than spread across it.</p>
+<h2 id="elutriation-and-entrainment">Elutriation And Entrainment</h2>
+<p>Elutriation is the solid carried out of the top of the freeboard by the gas. The case uses the correlation of Geldart, Cullinan, Georghiades, Gilvary and Pope (1979), as given in Kunii &amp; Levenspiel:</p>
+<pre><code>K*_inf / (ρ_g·u₀) = 23.7·exp(−5.4·u_t / u₀)
+E = K*_inf·A_top·x_i
+</code></pre>
+<p>The constants 23.7 and 5.4 are used as written. K*_inf is the entrainment flux far above the bed, in kg/(m²·s). E is the rate carried out, in kg/s, and the results show it in kg/h (E × 3600). The symbols are:</p>
+<ul>
+<li>ρ_g, the density of the gas leaving the bed, in kg/m³.</li>
+<li>u₀, the superficial velocity of that gas in the freeboard, in m/s. It is the outlet flow divided by A_top.</li>
+<li>u_t, the terminal velocity of the particle size being considered, in m/s, from the <a href="#the-terminal-velocity">Haider &amp; Levenspiel form above</a>.</li>
+<li>A_top, the freeboard cross-section, in m². It is the bed's own area unless a wider top is given.</li>
+<li>x_i, the mass fraction of the solid that has this size, dimensionless, between 0 and 1.</li>
+</ul>
+<p>If u_t is at or above u₀, the rate is set to exactly zero. A particle the gas cannot lift is not entrained, so the exponential is not left to give a small number.</p>
+<p>The steps for each solid species are:</p>
+<ol>
+<li>Take the gas density and viscosity of the outlet gas. With a reaction in flow mode this is the gas after reaction. With no reaction, and in batch mode, it is the fluidizing gas as fed.</li>
+<li>Take u₀ as the outlet gas flow divided by the freeboard cross-section. This is the velocity shown under <strong>Freeboard</strong>.</li>
+<li>Mean size. Take u_t for the species' mean particle size on that gas, and use x_i = 1. This gives <strong>Elutriation, mean size</strong>.</li>
+<li>Fines size. The fines size is fixed at 45 µm for every species. Take u_t for 45 µm, with the same envelope density and sphericity as the species, and use x_i = the species' <strong>Mass fraction below 45 µm</strong>. This gives <strong>Elutriation, fines size</strong>. If that fraction is 0, the fines figure is 0 and no u_t is used for it.</li>
+<li>In flow mode only, add the fines-size figures of all species. This sum is the <strong>Estimated elutriation (guidance only)</strong> in the Result group. The mean-size figures are not added.</li>
+</ol>
+<p>The share of the bed, the feed rate and the bed height do not enter E. The rate depends only on the gas state, the freeboard velocity and area, the particle size and the fines fraction.</p>
+<p>How it enters the solids balance. It does not. The Solids balance is solids fed = total solid leaving the bed + gas lost to reaction, and the total leaving comes from the reaction balance alone. The elutriation sum is only compared with that total. If the sum is larger than the total leaving, a warning says the estimate is unreliable at this gas rate. Nothing is subtracted or split.</p>
+<p>When it is shown. The mean-size and fines-size figures are shown in every species group, in batch and flow mode. The fines figure turns amber if it is larger than the mean-size figure. The Result-group estimate is shown in flow mode only.</p>
+<p>Guidance only, and a lower bound. The correlation holds only above the transport disengaging height (TDH), where entrainment has fallen to its limiting rate. The app does not compute a TDH. The TDH is read from a Zenz &amp; Weil chart, and no chart is built in to check a formula against. Every rate shown is therefore the floor of what leaves, and nearer the distributor the true rate is higher. Other limits:</p>
+<ul>
+<li>Each species is treated at two sizes only, its mean size and 45 µm. A real size distribution is not integrated.</li>
+<li>The mean-size figure takes the whole species as that one size (x_i = 1). It is a different estimate from the fines figure, not a part of it.</li>
+<li>The terminal velocity behind it carries the sphericity range of 0.5 to 1 given under <a href="#the-terminal-velocity">The Terminal Velocity</a>.</li>
+<li>The rate needs a gas density, a velocity, a terminal velocity and an area that are all above zero, and a mass fraction between 0 and 1. Otherwise the calculation stops with a message.</li>
+</ul>
 <h2 id="reaction-the-freeboard-and-what-leaves">Reaction, The Freeboard And What Leaves</h2>
 <p>Choose <strong>Reaction in the bed</strong> on the <strong>Reaction</strong> card and open the editor with <strong>Edit reactants and products</strong>; the balanced equation shows on the card. Its reactants are chosen from the solids and gases already fed above, and <strong>+ Add row</strong> adds products and inerts, each with a name, a phase (Solid, Liquid or Gas) and a role. A reactant no longer fed above takes an <strong>Excess %</strong> instead. <strong>Which reactant's feed rate is known</strong> picks the reference, and <strong>Conversion (%)</strong> sets how far it goes. <strong>Use reaction</strong> applies it, and <strong>Cancel</strong> leaves the previous one in force. An error, such as a row with no name or a conversion that is not a number, appears in the dialog.</p>
 <p>A calciner is the case this exists for, and it is the shipped default: CaCO₃ → CaO + CO₂ at 90 % conversion, fluidized by CO₂ itself rather than an inert diluent — the recycled product gas a real electrified calciner runs on. Turning the reaction on opens an editor where you name any number of reactant, product and inert species across any phase, seeded from every solid and gas row already entered. One reactant is picked as the reference. The species must balance into exactly one equation: a set that admits more than one independent reaction is refused with a message asking you to remove a compound. Unlike the <a href="/docs/Reaction/">Reaction</a> mode, the editor here has no split ratio to choose between them.</p>
@@ -169,6 +201,23 @@ u_br = (u₀ − u_mf) + 0.711·√(g·d_b)
 <p>One mean particle size per species — a wide size distribution within one species still fluidizes progressively rather than at a single velocity, and no single diameter can express that. The terminal-velocity correlation's own sphericity range is checked per species, per <a href="#the-terminal-velocity">The Terminal Velocity</a> above.</p>
 <p>The reaction editor resolves one balanced equation, not independent reactions running side by side, and has no split ratio for a set that could balance more than one way. A batch reaction's reference must be a solid — the fluidizing gas has no batch total, only a flow — and a batch does not recompute a post-reaction bed height even though the reaction changes the solid's mass; before/after composition is reported, not a new geometry. Air and other pseudo-pure blends (refrigerants) can't be fed as the fluidizing gas at all, even alone — enter their real constituents instead (nitrogen and oxygen for air), since they have no CAS of their own and so can never be one component of the mixture a reaction's outlet gas may need to become. No heat transfer and no attrition — this case sizes the bed, bounds its operating window, and says what leaves it.</p>
 <p>What was checked against published values, and how far off it was, is on <a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a>.</p>
+<h2 id="references">References</h2>
+<p>Each entry names the formula on this page that it supports.</p>
+<ul>
+<li>Minimum fluidization, Ergun form, and the packed-bed pressure drop below u_mf: Ergun, S. (1952). Fluid flow through packed columns. Chemical Engineering Progress, 48(2). The case takes the form from Kunii &amp; Levenspiel (below).</li>
+<li>Minimum fluidization, Wen &amp; Yu form (33.7 and 0.0408): Wen, C. Y. and Yu, Y. H. (1966). A generalized method for predicting the minimum fluidization velocity. AIChE Journal, 12(3).</li>
+<li>Terminal velocity, dimensionless size d<em> and u_t</em>: Haider, A. and Levenspiel, O. (1989). Drag coefficient and terminal velocity of spherical and nonspherical particles. Powder Technology, 58(1). The sphericity range of 0.5 to 1 is the range this case checks.</li>
+<li>Geldart group (A, B, C, D): Geldart, D. (1973). Types of gas fluidization. Powder Technology, 7(5).</li>
+<li>Minimum bubbling velocity, u_mb / u_mf, which also decides Group A or B: Abrahamsen, A. R. and Geldart, D. (1980). Behaviour of gas-fluidized beds of fine powders, Part I: Homogeneous expansion. Powder Technology, 26(1).</li>
+<li>Bubble diameter d_b at height h: Darton, R. C., LaNauze, R. D., Davidson, J. F. and Harrison, D. (1977). Bubble growth due to coalescence in fluidised beds. Transactions of the Institution of Chemical Engineers, 55. </li>
+<li>Bubble rise velocity, 0.711·√(g·d_b) and the crowd correction: Davidson, J. F. and Harrison, D. (1963). Fluidised Particles. Cambridge University Press. </li>
+<li>Elutriation rate, K*_inf and E: Geldart, D., Cullinan, J., Georghiades, S., Gilvary, D. and Pope, D. J. (1979). The effect of fines on entrainment from gas fluidised beds. Transactions of the Institution of Chemical Engineers, 57. The case uses it as given in Kunii &amp; Levenspiel.</li>
+<li>Transport disengaging height (not computed; the elutriation rate is a floor because of it): Zenz, F. A. and Weil, N. A. (1958). A theoretical-empirical approach to the mechanism of particle entrainment from fluidized beds. AIChE Journal, 4(4).</li>
+<li>Distributor: the required pressure drop as a fraction of the bed's (0.3 for a shallow bed, 0.1 for a deep one), the orifice discharge coefficient of 0.6, and the orifice pressure drop and velocity: Kunii &amp; Levenspiel (below). The orifice equation itself is the standard one.</li>
+<li>Bed expansion by two-phase theory, the bubble fraction and H / H_mf, and the one-third-of-vessel slugging limit used on this page: Kunii &amp; Levenspiel (below).</li>
+<li>Archimedes number, the fluidized-bed pressure drop (the bed's weight per unit area) and the voidage and bulk density relations: standard definitions and a force balance.</li>
+<li>Kunii, D. and Levenspiel, O. (1991). Fluidization Engineering, 2nd edition. Butterworth-Heinemann. The app takes from it the forms of Ergun, Haider &amp; Levenspiel, the Geldart classification, the bubbling correlations, the distributor rule and the elutriation correlation.</li>
+</ul>
   </main>
   </div>
 </div>

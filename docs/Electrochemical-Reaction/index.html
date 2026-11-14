@@ -163,6 +163,7 @@ P_min = I·V_stack = |ΔG|·ξ̇ / η    the least electrical power
 <li><strong>η</strong> is the current efficiency, as a fraction: below 1, part of the charge does something else, so more current is needed for the same product.</li>
 </ul>
 <p><strong>Why two voltages.</strong> ΔG is the part of the reaction's energy that has to be delivered as electrical work: no cell can run below E_rev. ΔH is the whole energy change. The difference, TΔS, is heat. An electrolyser running between E_rev and E_tn takes that heat from its surroundings and cools. Above E_tn every extra volt becomes heat in the cell. Real electrolysers run above E_tn because of overpotentials and resistance, which this page does not model (see <a href="#what-this-does-not-do">What This Does Not Do</a>).</p>
+<p>These are the standard relations of electrochemical thermodynamics and Faraday's law (Bard and Faulkner 2001). See <a href="#references">References</a>.</p>
 <h2 id="per-mole-per-hour-per-kg">Per Mole, Per Hour, Per kg</h2>
 <p>The results give the same energy three ways, and they are easy to mix up.</p>
 <ul>
@@ -198,6 +199,19 @@ P = V_stack·I_stack    identical either way
 <p>No kinetics. There is no overpotential model, no exchange current density, no Tafel slope — those depend on electrode material, surface and age, and are in no database anywhere. The voltages here are reversible ones, and a real cell always needs more. Everything between the two is yours to supply.</p>
 <p>It also assumes unit activity throughout: pure phases and ideal gases at the stated pressure, with no correction for concentration. For a concentrated brine or a molten-salt bath the real voltage differs by tens of millivolts, which matters for a precise energy balance and not for sizing a rectifier.</p>
 <p>What was checked against published values, and how far off it was, is on <a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a>.</p>
+<h2 id="references">References</h2>
+<p><strong>Method</strong></p>
+<ul>
+<li><strong>Reversible voltage from the Gibbs energy (E_rev = |ΔG|/zF), the reversible heat TΔS, and Faraday's law (I = zFξ̇/η):</strong> Bard, A. J. and Faulkner, L. R., <em>Electrochemical Methods: Fundamentals and Applications</em>, 2nd ed., Wiley, 2001.</li>
+<li><strong>Thermoneutral voltage (E_tn = |ΔH|/zF):</strong> a first-law energy balance on the cell, using ΔG = ΔH − TΔS. Smith, J. M., Van Ness, H. C., Abbott, M. M. and Swihart, M. T., <em>Introduction to Chemical Engineering Thermodynamics</em>, 8th ed., McGraw-Hill, 2018, for the thermodynamics. Bard and Faulkner, as above, for the cell form.</li>
+<li><strong>Faraday constant</strong> (96,485.33212 C/mol, used here as 96,485): fixed exactly by the 2019 redefinition of the SI units, CODATA.</li>
+<li><strong>Ohmic voltage drop of the bath</strong> (gap ÷ conductivity × area, times the current): Ohm's law; the treatment of solution resistance is in Bard and Faulkner, as above.</li>
+</ul>
+<p><strong>Data</strong></p>
+<ul>
+<li><strong>ΔH, ΔG and ΔS of the reaction:</strong> the data of the <a href="/docs/Reaction/#references">Reaction</a> page. These are the CRC tables and NIST-JANAF (Chase, M. W., Jr., <em>NIST-JANAF Thermochemical Tables</em>, 4th ed., Journal of Physical and Chemical Reference Data, Monograph 9, 1998), with NASA Glenn polynomials (McBride, Zehe and Gordon 2002) where the CRC data lack a species.</li>
+</ul>
+<p>See also the combined list on <a href="/docs/Methods-and-Sources/#references">Methods and sources</a>.</p>
   </main>
   </div>
 </div>

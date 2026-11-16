@@ -10,7 +10,7 @@ ProcessChem: thermodynamics and process engineering calculator
 
 ### Search-result description {#meta.description}
 
-ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. For iPhone and iPad.
+ProcessChem looks up fluid properties, solves phase and reaction equilibrium, and sizes heaters, vessels, heat exchangers and fluidized beds. For iPhone, iPad and Android.
 
 ### Link preview title {#meta.og_title}
 
@@ -74,15 +74,15 @@ App Store
 
 ### Google Play button: small text {#hero.play_small}
 
-Google Play
+Get it on
 
 ### Google Play button: main text {#hero.play}
 
-Coming soon
+Google Play
 
 ### Line under the buttons {#hero.note}
 
-On iPhone and iPad today. Android is coming soon.
+On iPhone, iPad and Android.
 
 ### Picture description (screen readers): Heater screen {#hero.alt}
 

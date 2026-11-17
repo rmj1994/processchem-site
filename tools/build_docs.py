@@ -271,9 +271,8 @@ def build_privacy() -> str:
 #: Where the bug-report form posts. FormSubmit (formsubmit.co) e-mails each report, with the
 #: pictures attached, to the address this alias stands for. The alias is the random string
 #: FormSubmit sends after the address is confirmed; it keeps the address out of the page.
-#: Until then it is the address itself (already public in the footer), so the first report
-#: sent from the live page triggers FormSubmit's confirmation e-mail.
-REPORT_FORM_ALIAS = "ronmjacob1994@gmail.com"
+#: Confirmed 2026-11-17.
+REPORT_FORM_ALIAS = "a782a430170e37d4e6af6418555583a1"
 REPORT_FORM_ACTION = "https://formsubmit.co/" + REPORT_FORM_ALIAS
 
 REPORT_BODY = """    <h1>Report a bug</h1>

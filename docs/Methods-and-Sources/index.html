@@ -83,11 +83,11 @@
 <ul>
 <li><strong>CoolProp</strong> reference equations of state, the most accurate available, for the 100-plus pure fluids CoolProp covers: water, the common gases, light hydrocarbons, refrigerants and more.</li>
 <li><strong>Peng-Robinson</strong> cubic equation of state for other fluids, and for mixtures, with fitted binary interaction parameters from ChemSep where they exist. A pair without one is mixed ideally, and the result says so.</li>
-<li><strong>thermo / chemicals</strong> (Caleb Bell's libraries) for property correlations fitted to measured data, drawn from DIPPR, Perry's and the literature.</li>
-<li><strong>NASA CEA</strong> thermodynamic data for 1,820 species, used where the other libraries have none.</li>
+<li><strong>Property correlations fitted to measured data</strong>, drawn from DIPPR, Perry's and the literature.</li>
+<li><strong>NASA CEA</strong> thermodynamic data for 1,820 species, used where the other sources have none.</li>
 <li><strong>Tabulated data</strong> for the cement clinker minerals (from Barin, <em>Thermochemical Data of Pure Substances</em>) and curated values for plastics.</li>
 <li><strong>Laliberté</strong> electrolyte-solution model for aqueous solutions such as sodium chloride in water.</li>
-<li><strong>Exposure limits</strong>: Norway's legal limit values from <em>forskrift om tiltaks- og grenseverdier</em>, vedlegg 1 (Lovdata, NLOD 2.0), and Ontario's from the <em>chemicals</em> library; see <a href="/docs/Property-Tab/#health-and-safety-data">Health and safety data</a>.</li>
+<li><strong>Exposure limits</strong>: Norway's legal limit values from <em>forskrift om tiltaks- og grenseverdier</em>, vedlegg 1 (Lovdata, NLOD 2.0), and Ontario's from O. Reg. 833; see <a href="/docs/Property-Tab/#health-and-safety-data">Health and safety data</a>.</li>
 <li><strong>NRTL</strong> activity-coefficient model with fitted ChemSep pair data, and <strong>UNIFAC</strong> group contribution (DDBST group table) where no fitted pair exists, for liquids that hydrogen bond, such as alcohols and water.</li>
 </ul>
 <p>The <a href="/docs/Property-Tab/">Property</a> page lists what can be looked up and what each value reads when no data exist.</p>
@@ -110,8 +110,8 @@
 <td>The correlation or model that gave the value, such as "CoolProp HEOS (reference equation of state)".</td>
 </tr>
 <tr>
-<td><strong>Library</strong></td>
-<td>Which data library that method belongs to (see <a href="#where-the-data-come-from">Where the data come from</a>).</td>
+<td><strong>Source</strong></td>
+<td>Which data source or family of methods it belongs to (see <a href="#where-the-data-come-from">Where the data come from</a>).</td>
 </tr>
 <tr>
 <td><strong>Valid range</strong></td>
@@ -123,7 +123,7 @@
 <p>A note at the foot says what kind of value it is. Most say the value comes from a correlation, or a model, fitted to measured data for this chemical rather than a generalized estimate. The enthalpy and Gibbs energy of formation also give their reference condition: 298.15 K (25 °C) and 1 bara, with each element in its standard reference state at zero, so these values do not change with the temperature and pressure you entered.</p>
 <p>When a value is low-confidence, the sheet is titled with "accuracy" instead of "source", such as <strong>Density accuracy</strong> (<strong>Phase accuracy</strong> rather than <strong>Phase determination</strong>), and its icon and note are amber, saying what limits the value.</p>
 <h3 id="changing-a-propertys-method">Changing a property's method</h3>
-<p>For vapor pressure, specific heat capacity, viscosity, thermal conductivity, enthalpy of vaporization and surface tension, the sheet ends with <strong>Change method</strong> when the libraries have more than one method for that chemical. Each method shows its library and valid range; methods whose range covers your temperature come first, and ranges your temperature falls outside are in amber. The method in use has a tick.</p>
+<p>For vapor pressure, specific heat capacity, viscosity, thermal conductivity, enthalpy of vaporization and surface tension, the sheet ends with <strong>Change method</strong> when more than one method is available for that chemical. Each method shows its source and valid range; methods whose range covers your temperature come first, and ranges your temperature falls outside are in amber. The method in use has a tick.</p>
 <p>Tap another method and the properties are calculated again with it. Once you have picked one, <strong>Use the app's default</strong> goes back to the app's own choice. A picked method lasts until you look up a different substance, which starts from the app's own choices again; it is not part of a saved set.</p>
 <h2 id="one-enthalpy-reference">One enthalpy reference</h2>
 <p>Enthalpy is a state function: the heat to take a substance from one state to another is its enthalpy at the end minus its enthalpy at the start, whatever happens on the way. So wherever a calculation crosses a phase (Heater, Heat Exchanger, Phase Equilibrium, mixing streams, a solid depositing), both ends are put on one reference: each phase's heat-capacity curve, joined to the next phase by the enthalpy difference between the two phases. That difference is taken from the best data on record, in this order:</p>
@@ -134,7 +134,7 @@
 <li><strong>An estimate</strong>, the heat of fusion plus a heat of vaporisation extrapolated to the melting point. The result then says it is an estimate.</li>
 </ol>
 <p>A difference at 25 °C is carried to the transition temperature along the same heat-capacity curves (Kirchhoff), so the latent heat and the sensible heat on either side cannot disagree.</p>
-<p>The sublimation-pressure curve follows the same rule. Where no measured curve exists, the app rebuilds it by Clapeyron from the triple point with the heat of sublimation above, instead of thermo's own curve, which is built from the estimate.</p>
+<p>The sublimation-pressure curve follows the same rule. Where no measured curve exists, the app rebuilds it by Clapeyron from the triple point with the heat of sublimation above, instead of a curve built from the estimate.</p>
 <p>Reaction, Electrochemical Reaction and Chemical Equilibrium already work this way: each species' enthalpy is its enthalpy of formation in the phase picked, plus its heat capacity.</p>
 <h2 id="methods-used">Methods used</h2>
 <p>Most results end with a <strong>Methods used</strong> row: "See or change how this was calculated". Tap it to open a sheet listing what the result was calculated with. Where there is another method to pick, its choices sit under it as chips; tap one and the result is calculated again with it. Where there is nothing to pick, the sheet only says what was used.</p>
@@ -179,10 +179,10 @@
 <h2 id="how-accurate-it-is">How accurate it is</h2>
 <p><a href="/docs/Accuracy-and-Limits/">Accuracy and limits</a> lists what each method was checked against and how far off it was.</p>
 <h2 id="references">References</h2>
-<p>One list of the books, papers, data sources and libraries the app relies on, grouped by subject and in alphabetical order within each group. Each module's page has its own References section that says which relation each one supports. Page numbers are left out.</p>
+<p>One list of the books, papers and data sources the app relies on, grouped by subject and in alphabetical order within each group. Each module's page has its own References section that says which relation each one supports. Page numbers are left out.</p>
 <h3 id="equations-of-state-and-phase-equilibrium">Equations of state and phase equilibrium</h3>
 <ul>
-<li>Bell, I. H., Wronski, J., Quoilin, S. and Lemort, V., "Pure and pseudo-pure fluid thermophysical property evaluation and the open-source thermophysical property library CoolProp", <em>Industrial &amp; Engineering Chemistry Research</em> 53, 2014. The library behind the reference equations of state.</li>
+<li>Bell, I. H., Wronski, J., Quoilin, S. and Lemort, V., "Pure and pseudo-pure fluid thermophysical property evaluation and the open-source thermophysical property library CoolProp", <em>Industrial &amp; Engineering Chemistry Research</em> 53, 2014.</li>
 <li>ChemSep, database of binary interaction parameters for Peng-Robinson and of NRTL pair parameters.</li>
 <li>DDBST, UNIFAC group assignment table.</li>
 <li>Fredenslund, A., Jones, R. L. and Prausnitz, J. M., "Group-contribution estimation of activity coefficients in nonideal liquid mixtures", <em>AIChE Journal</em> 21, 1975. UNIFAC.</li>
@@ -200,28 +200,29 @@
 </ul>
 <h3 id="thermochemical-data">Thermochemical data</h3>
 <ul>
-<li>Active Thermochemical Tables (ATcT), Argonne National Laboratory. One of the evaluated compilations behind the enthalpies of formation in <code>chemicals</code>.</li>
+<li>Active Thermochemical Tables (ATcT), Argonne National Laboratory. One of the evaluated compilations behind the enthalpies of formation.</li>
 <li>Barin, I., <em>Thermochemical Data of Pure Substances</em>, 1997. Cement clinker minerals, magnetite and calcite.</li>
 <li>Chase, M. W., Jr., <em>NIST-JANAF Thermochemical Tables</em>, 4th ed., Journal of Physical and Chemical Reference Data, Monograph 9, 1998.</li>
 <li><em>CRC Handbook of Chemistry and Physics</em>, CRC Press. Enthalpies of formation, entropies, heat capacities, phase-change data and the inorganic decomposition table.</li>
 <li>Feistel, R. and Wagner, W., "A new equation of state for H2O ice Ih", <em>Journal of Physical and Chemical Reference Data</em> 35, 2006. IAPWS-06, the heat capacity of ice.</li>
-<li>Gharagheizi et al., enthalpy of sublimation data set, as bundled in <code>chemicals</code>.</li>
+<li>Gharagheizi et al., enthalpy of sublimation data set.</li>
 <li>Giauque, W. F. and Egan, C. J., <em>Journal of Chemical Physics</em> 5, 45 (1937). Measured heat capacity of dry ice.</li>
 <li>Gordon, S. and McBride, B. J., <em>Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications. I. Analysis</em>, NASA Reference Publication 1311, 1994.</li>
 <li>Hanein, T., Glasser, F. P. and Bannerman, M. N., "Thermodynamic data for cement clinkering", <em>Cement and Concrete Research</em> 132, 2020. Tetracalcium aluminoferrite.</li>
-<li>Lastovka and Shaw, group-contribution estimate of solid heat capacity, through <code>thermo</code>. Used only where no measured heat capacity exists, and the result says so.</li>
+<li>Lastovka and Shaw, group-contribution estimate of solid heat capacity. Used only where no measured heat capacity exists, and the result says so.</li>
 <li>McBride, B. J. and Gordon, S., <em>Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications. II. Users Manual and Program Description</em>, NASA Reference Publication 1311, 1996. Describes the thermodynamic data file format.</li>
 <li>McBride, B. J., Zehe, M. J. and Gordon, S., <em>NASA Glenn Coefficients for Calculating Thermodynamic Properties of Individual Species</em>, NASA/TP-2002-211556, 2002.</li>
 <li>NIST Chemistry WebBook, NIST Standard Reference Database 69. Phase-change enthalpies, heat capacities and the plastics data below.</li>
 <li>Plastics heat capacities: NIST WebBook (Chang 1976; Chang and Bestul 1973), Wunderlich (1990, ATHAS report), Grebowicz et al. (1984), Passaglia and Kevorkian (1963) and Dainton et al. (1962), as cited in the app's polymer data.</li>
 <li>Wagner, W. et al. (2011), IAPWS equation for the sublimation pressure of ice, used as comparison data.</li>
+<li>NASA CEA thermodynamic data file (Apache License 2.0), for the NASA Glenn polynomials.</li>
 </ul>
 <h3 id="transport-and-physical-properties">Transport and physical properties</h3>
 <ul>
-<li>DIPPR property correlations (AIChE Design Institute for Physical Properties), through <code>chemicals</code> and <code>thermo</code>.</li>
-<li>Laliberté, M., "A model for calculating the heat capacity of aqueous solutions, with updated density and viscosity data", <em>Journal of Chemical &amp; Engineering Data</em> 54, 2009. The fitted model for density, heat capacity and viscosity of aqueous solutions, through <code>thermo</code>. It builds on Laliberté, M. and Cooper, W. E., "Model for calculating the density of aqueous electrolyte solutions", <em>Journal of Chemical &amp; Engineering Data</em> 49, 2004.</li>
+<li>DIPPR property correlations (AIChE Design Institute for Physical Properties).</li>
+<li>Laliberté, M., "A model for calculating the heat capacity of aqueous solutions, with updated density and viscosity data", <em>Journal of Chemical &amp; Engineering Data</em> 54, 2009. The fitted model for density, heat capacity and viscosity of aqueous solutions. It builds on Laliberté, M. and Cooper, W. E., "Model for calculating the density of aqueous electrolyte solutions", <em>Journal of Chemical &amp; Engineering Data</em> 49, 2004.</li>
 <li>Lange's Handbook of Chemistry. Tabulated measured values used on the Property tab.</li>
-<li>Lovdata, <em>forskrift om tiltaks- og grenseverdier</em>, vedlegg 1 (Norway), licence NLOD 2.0. Exposure limits. Ontario limits come from the <code>chemicals</code> library.</li>
+<li>Lovdata, <em>forskrift om tiltaks- og grenseverdier</em>, vedlegg 1 (Norway), licence NLOD 2.0. Exposure limits. Ontario limits come from O. Reg. 833.</li>
 <li>Perry's Chemical Engineers' Handbook, as above. Heat capacity of brine and the enthalpy-concentration chart for sulfuric acid, as comparison data.</li>
 <li>Poling, B. E., Prausnitz, J. M. and O'Connell, J. P., <em>The Properties of Gases and Liquids</em>, 5th ed., McGraw-Hill, 2001.</li>
 </ul>
@@ -252,10 +253,7 @@
 </ul>
 <h3 id="software-libraries">Software libraries</h3>
 <ul>
-<li><code>chemicals</code> 1.5.2 and <code>thermo</code> 0.6.0, by Caleb Bell. Property correlations, compound identification and the Laliberté, NRTL and UNIFAC models.</li>
 <li>CoolProp 7.2.0 (Bell et al. 2014, above). Reference equations of state.</li>
-<li>Flet 0.86.4. The user interface framework.</li>
-<li>NASA CEA (<code>nasa/cea</code>, Apache License 2.0). The thermodynamic data file for the NASA Glenn polynomials.</li>
 </ul>
   </main>
   </div>

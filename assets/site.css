@@ -292,4 +292,5 @@ section.s { padding-block: clamp(56px, 8vw, 112px) clamp(8px, 2vw, 24px); }
 .report .err { color: var(--error-fg); font-size: 14px; min-height: 1em; }
 .report button[type="submit"] { justify-self: start; cursor: pointer; font: inherit; font-weight: 600; }
 .report .fine { font-size: 13.5px; color: var(--muted); }
+.report .mail-alt { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; }
 @media (max-width: 560px) { .report .row2 { grid-template-columns: minmax(0, 1fr); } }

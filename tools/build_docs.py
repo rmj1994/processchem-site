@@ -304,6 +304,7 @@ REPORT_BODY = """    <h1>Report a bug</h1>
       <button class="btn fill" type="submit"><small>Send to the developer</small>Submit report</button>
       <p class="fine">Reports are sent by e-mail through FormSubmit (formsubmit.co), which may ask you to tick a box to show you are not a robot. See the <a href="/privacy/">privacy policy</a>.</p>
     </form>
+    <p class="fine mail-alt">Form not working? <a href="mailto:ronmjacob1994@gmail.com?subject=ProcessChem%20bug%20report&amp;body=What%20I%20entered%3A%0D%0A%0D%0AWhat%20I%20expected%3A%0D%0A%0D%0AWhat%20the%20app%20showed%3A%0D%0A%0D%0APhone%20and%20app%20version%3A%0D%0A">Email the report instead</a> and attach your screenshot there.</p>
 """
 
 THANKS_BODY = """    <h1>Thank you</h1>

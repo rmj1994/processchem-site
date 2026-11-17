@@ -38,15 +38,15 @@ The app
 
 What it does
 
-### Menu: for companies {#nav.companies}
-
-For companies
-
 ### Menu: documentation {#nav.docs}
 
 Documentation
 
-### Menu: get the app button {#nav.cta}
+### Menu: report a bug {#nav.report}
+
+Report a bug
+
+### Menu: get the app button (opens a choice of App Store or Google Play) {#nav.cta}
 
 Get the app
 
@@ -282,36 +282,6 @@ Private by design
 ### Third point: text {#stands.three.text}
 
 No account, no ads, and no connection needed. Your calculations stay on your phone unless you save them to a file.
-
-## For companies
-
-### Small line above the heading {#companies.eyebrow}
-
-For companies
-
-### Heading {#companies.h2}
-
-One app, set up for your plant.
-
-### Introduction {#companies.p}
-
-A company code switches ProcessChem to your company's setup. Engineers see only the tabs and calculators they use, in your order, with your units and your standard cases already saved. Everyone else keeps the standard app.
-
-### Note under the example buttons {#companies.fict}
-
-Fictional example companies. Illustrative screens.
-
-### Text under the example {#companies.after}
-
-We set this up with you: your tabs, your cases, your units and your standard setups. If your plant needs a calculator that does not exist yet, we can build it for you.
-
-### Button: small text {#companies.cta_small}
-
-Company setup
-
-### Button: main text {#companies.cta}
-
-Talk to us
 
 ## Documentation block
 

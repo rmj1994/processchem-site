@@ -28,9 +28,15 @@
     <nav class="nav" id="nav" aria-label="Main">
       <a href="/#screens">The app</a>
       <a href="/#inside">What it does</a>
-      <a href="/#companies">For companies</a>
       <a href="/docs/" aria-current="page">Documentation</a>
-      <a class="cta-link" href="https://apps.apple.com/app/id6796077930">Get the app</a>
+      <a href="/report/">Report a bug</a>
+      <div class="get-app">
+        <button class="cta-link" type="button" aria-expanded="false" aria-controls="get-app-menu">Get the app<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></button>
+        <div class="get-menu" id="get-app-menu">
+          <a href="https://apps.apple.com/app/id6796077930"><small>Download on the</small>App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.ronmjacob.pocketchem"><small>Get it on</small>Google Play</a>
+        </div>
+      </div>
     </nav>
   </div>
   <div class="progress" aria-hidden="true"></div>
@@ -95,7 +101,7 @@
 <p>An impossible entry, such as zero cells or an efficiency of 120 %, is refused with a message saying what is wrong.</p>
 <h2 id="the-electrons-are-counted-for-you">The Electrons Are Counted For You</h2>
 <p>The electrons are always worked out from the oxidation states of the balanced equation, then reported as a result. There is no field to type them in. Water balances as 2H₂O → 2H₂ + O₂: four hydrogens go from +1 to 0, gaining one electron each, while two oxygens go from −2 to 0, losing two each — four gained, four lost, so four transferred.</p>
-<p>This matters because the number belongs to the equation as balanced, not to the half-reaction you remember. 2H⁺ + 2e⁻ → H₂ is two electrons per molecule of hydrogen, and this equation makes two of them. Two electrons would give 2.46 V instead of 1.23 V — and 2.46 V looks perfectly ordinary, between chlor-alkali's 2.19 and magnesium's 2.48, so nothing downstream could have caught it. Counting from the equation removes that trap.</p>
+<p>This matters because the number belongs to the equation as balanced, not to the half-reaction you remember. 2H⁺ + 2e⁻ → H₂ is two electrons per molecule of hydrogen, and this equation makes two of them. Two electrons would give 2.46 V instead of 1.23 V — and 2.46 V looks perfectly ordinary for a cell, so nothing downstream could have caught it. Counting from the equation removes that trap.</p>
 <p>It declines rather than guessing in two cases. A reaction that moves no electrons at all — calcination, say — has none to count. And where the rules contradict themselves, as in a peroxide, where hydrogen at +1 and oxygen at −2 leave a molecule that does not add up to zero, it says so instead of returning a confident wrong number. The reaction's own result is still shown, with the message under it.</p>
 <h2 id="what-comes-back">What comes back</h2>
 <p>The <strong>Inputs</strong> strip repeats the equation, the amount and the number of cells, for example "2 H₂O → 2 H₂ + O₂ · 1 mol/s water · 1 cell".</p>
@@ -167,24 +173,24 @@ P_min = I·V_stack = |ΔG|·ξ̇ / η    the least electrical power
 <h2 id="per-mole-per-hour-per-kg">Per Mole, Per Hour, Per kg</h2>
 <p>The results give the same energy three ways, and they are easy to mix up.</p>
 <ul>
-<li><strong>Per mole of reaction</strong> (kJ/mol): ΔG and TΔS in the Cell card. "One mole of reaction" means running the balanced equation once as written. For 2 AlCl₃ → 2 Al + 3 Cl₂ that is 2 mol of AlCl₃ consumed, 2 mol of Al and 3 mol of Cl₂ made. It does not depend on how much you make.</li>
+<li><strong>Per mole of reaction</strong> (kJ/mol): ΔG and TΔS in the Cell card. "One mole of reaction" means running the balanced equation once as written. For 2 H₂O → 2 H₂ + O₂ that is 2 mol of water consumed, 2 mol of hydrogen and 1 mol of oxygen made. It does not depend on how much you make.</li>
 <li><strong>Per unit time</strong> (W, kW): <strong>Power (min.)</strong> = ΔG × the rate of reaction ÷ η. Only a flow has a rate, so only a flow gives a current and a power.</li>
 <li><strong>Per kg of product</strong> (kWh/kg): <strong>Energy per kg</strong> = power ÷ the product's mass flow, or ΔG ÷ (η × the product's mass made per mole of reaction). This is the figure usually quoted for an electrolysis process.</li>
 </ul>
 <p>On a batch basis the Cell card adds the total for your amount: ΔG × moles of reaction ÷ η, in J, kJ or MJ.</p>
-<h2 id="worked-example-aluminium-from-aluminium-chloride">Worked Example: Aluminium From Aluminium Chloride</h2>
-<p>1 kg/h of aluminium from solid aluminium chloride, 25 °C, 1.01325 bar, one cell, 100 % current efficiency, set as <strong>A product I need</strong>, aluminium 1 kg/h:</p>
+<h2 id="worked-example-hydrogen-from-water">Worked Example: Hydrogen From Water</h2>
+<p>The page's own screenshot: 1 mol/s of water, 25 °C, 1.01325 bar, one cell, 100 % current efficiency, set as <strong>A feed amount</strong>, water 1 mol/s:</p>
 <ol>
-<li><strong>Balance.</strong> 2 AlCl₃ → 2 Al + 3 Cl₂.</li>
-<li><strong>Electrons.</strong> Aluminium goes from +3 to 0 and chlorine from −1 to 0. Two aluminium atoms take 3 electrons each, so z = 6 per mole of reaction.</li>
-<li><strong>Rate of reaction.</strong> 1 kg/h ÷ 26.98 g/mol = 37.06 mol Al/h. The equation makes 2 Al per mole of reaction, so ξ̇ = 18.53 mol/h = 0.005148 mol/s.</li>
-<li><strong>Gibbs energy.</strong> ΔG = +1,257 kJ/mol and ΔH = +1,408 kJ/mol, so TΔS = 151 kJ/mol is absorbed.</li>
-<li><strong>Voltages.</strong> E_rev = 1,257,000 ÷ (6 × 96,485) = 2.17 V. E_tn = 1,408,000 ÷ (6 × 96,485) = 2.43 V.</li>
-<li><strong>Current.</strong> I = 6 × 96,485 × 0.005148 = 2,980 A.</li>
-<li><strong>Power.</strong> P_min = 2,980 A × 2.17 V = 6.47 kW, the same as 1,257 kJ/mol × 0.005148 mol/s.</li>
-<li><strong>Per kg.</strong> 6.47 kW ÷ 1 kg/h = 6.47 kWh/kg of aluminium.</li>
+<li><strong>Balance.</strong> 2 H₂O → 2 H₂ + O₂.</li>
+<li><strong>Electrons.</strong> Hydrogen goes from +1 to 0 and oxygen from −2 to 0. Four hydrogen atoms take 1 electron each, so z = 4 per mole of reaction.</li>
+<li><strong>Rate of reaction.</strong> The equation uses 2 H₂O per mole of reaction, so ξ̇ = 1 mol/s ÷ 2 = 0.5 mol/s.</li>
+<li><strong>Gibbs energy.</strong> ΔG = +474.3 kJ/mol and ΔH = +571.7 kJ/mol, so TΔS = 97.4 kJ/mol is absorbed.</li>
+<li><strong>Voltages.</strong> E_rev = 474,300 ÷ (4 × 96,485) = 1.229 V. E_tn = 571,700 ÷ (4 × 96,485) = 1.481 V.</li>
+<li><strong>Current.</strong> I = 4 × 96,485 × 0.5 = 192,970 A, or 193 kA.</li>
+<li><strong>Power.</strong> P_min = ΔG × ξ̇ = 474.3 kJ/mol × 0.5 mol/s = 237.15 kW, the same as 192,970 A × 1.229 V. The screen shows 237.1 kW.</li>
+<li><strong>Per kg.</strong> The cell makes 1 mol/s of H₂ = 2.016 g/s = 7.258 kg/h. 237.15 kW ÷ 7.258 kg/h = 32.68 kWh/kg of hydrogen.</li>
 </ol>
-<p>The 1,257 kJ/mol is per mole of reaction, not per hour: it is the electrical work to make 2 mol (54 g) of aluminium. With 3 cells in series (bipolar) the stack voltage is 3 × 2.17 = 6.51 V and each cell carries 2,980 ÷ 3 = 993 A. The power is the same. Your numbers will differ slightly with the phases and temperature you choose: molten AlCl₃ at a higher temperature gives a smaller ΔG.</p>
+<p>The 474.3 kJ/mol is per mole of reaction, not per second: it is the electrical work to make 2 mol (4.032 g) of hydrogen. With 3 cells in series (bipolar) the stack voltage is 3 × 1.229 = 3.687 V and each cell carries 192,970 ÷ 3 = 64,323 A. The power is the same. Your numbers will differ slightly with the temperature you choose: ΔG changes with it.</p>
 <h2 id="monopolar-and-bipolar">Monopolar And Bipolar</h2>
 <p>The wiring decides how one duty is split between current and voltage, and it is the part most often got wrong.</p>
 <pre><code>bipolar (series):     V_stack = N·E,   I_stack = I        high V, low I
@@ -192,9 +198,6 @@ monopolar (parallel): V_stack = E,     I_stack = N·I       low V, high I
 P = V_stack·I_stack    identical either way
 </code></pre>
 <p>N is the number of cells, E and I one cell's own voltage and current. Bipolar cells sit in series: one current threads all of them and the voltages add, giving a high-voltage, low-current stack. Monopolar cells sit in parallel: each sees the same voltage and the currents add, giving the opposite. The power is identical either way — the choice is about busbars, rectifiers and sealing, not about energy.</p>
-<h2 id="a-worked-comparison">A Worked Comparison</h2>
-<p>Aluminium smelting is the clearest example of what this mode is for. With a consumable carbon anode the reversible voltage at 960 °C is about 1.18 V; with an inert anode releasing oxygen instead it is about 2.20 V. The carbon is oxidised and contributes chemical energy, which is real and worth about a volt.</p>
-<p>That is not the whole picture, and the mode deliberately does not pretend it is: an inert anode produces no process CO₂ and needs no replacing, which is why it is pursued despite the extra volt. What holds it back is materials that survive molten cryolite, not this number. Use the comparison to size the energy penalty, not to settle the question.</p>
 <h2 id="what-this-does-not-do">What This Does Not Do</h2>
 <p>No kinetics. There is no overpotential model, no exchange current density, no Tafel slope — those depend on electrode material, surface and age, and are in no database anywhere. The voltages here are reversible ones, and a real cell always needs more. Everything between the two is yours to supply.</p>
 <p>It also assumes unit activity throughout: pure phases and ideal gases at the stated pressure, with no correction for concentration. For a concentrated brine or a molten-salt bath the real voltage differs by tens of millivolts, which matters for a precise energy balance and not for sizing a rectifier.</p>

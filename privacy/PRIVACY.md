@@ -1,6 +1,6 @@
 # Privacy Policy — ProcessChem
 
-**Last updated: 13 October 2026** (the app policy is unchanged since 8 August 2026; a section about this website was added)
+**Last updated: 17 November 2026** (the app policy is unchanged since 8 August 2026; the website section now covers the bug-report form)
 
 ## Summary
 
@@ -54,6 +54,13 @@ companies' servers. It is hosted on GitHub Pages, and GitHub may keep ordinary
 server logs of visits, such as your IP address, as described in the GitHub
 Privacy Statement. If you email the address below, we receive your email
 address and message and use them only to reply.
+
+The "Report a bug" page sends what you type and the pictures you attach to us
+by e-mail through FormSubmit (formsubmit.co), a form-to-e-mail service. Your
+email address is optional and used only to reply. FormSubmit may show a Google
+reCAPTCHA check before sending; it handles the report under its own privacy
+policy and does not keep the pictures. We use reports only to fix the app and
+delete them when they are no longer needed.
 
 ## Children's privacy
 

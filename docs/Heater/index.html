@@ -28,9 +28,15 @@
     <nav class="nav" id="nav" aria-label="Main">
       <a href="/#screens">The app</a>
       <a href="/#inside">What it does</a>
-      <a href="/#companies">For companies</a>
       <a href="/docs/" aria-current="page">Documentation</a>
-      <a class="cta-link" href="https://apps.apple.com/app/id6796077930">Get the app</a>
+      <a href="/report/">Report a bug</a>
+      <div class="get-app">
+        <button class="cta-link" type="button" aria-expanded="false" aria-controls="get-app-menu">Get the app<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></button>
+        <div class="get-menu" id="get-app-menu">
+          <a href="https://apps.apple.com/app/id6796077930"><small>Download on the</small>App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.ronmjacob.pocketchem"><small>Get it on</small>Google Play</a>
+        </div>
+      </div>
     </nav>
   </div>
   <div class="progress" aria-hidden="true"></div>
@@ -104,7 +110,7 @@
 <h2 id="mixtures">Mixtures</h2>
 <p>A mixture is accepted as long as <strong>no component melts or boils inside the range asked for</strong>. Its duty is then the mole-weighted sum of each component's sensible heat, which is exact for an ideal mixture. A composition entered by mass is converted to moles first, because the duty is per mole of mixture. If any component does change phase in the range, the calculation is refused by name, for example "water boils at 100 °C, inside the range asked for", and suggests keeping the range on one side of it or heating that component on its own, since a mixture changes phase across a range rather than at one point.</p>
 <h2 id="phase-changes-are-included">Phase Changes Are Included</h2>
-<p>Unlike the <a href="/docs/Thermo-Tab/">Thermo</a> tab, which refuses a range that crosses a melting or boiling point, this case walks the range in segments — integrating the solid, liquid or gas heat capacity as appropriate — and adds the latent heat at each boundary it crosses. A solid below its triple-point pressure never melts: it sublimes in one step where its sublimation pressure equals the pressure, for example AlCl₃ at about 182 °C and CO₂ at −78.5 °C at 1 atm. Heating AlCl₃ from 20 °C to 250 °C at 1 atm takes 139.8 kJ/mol, of which 118.4 kJ/mol is the sublimation at 182 °C. Each latent heat is chosen so that both ends sit on one reference; see <a href="/docs/Methods-and-Sources/#one-enthalpy-reference">One enthalpy reference</a>.</p>
+<p>Unlike the <a href="/docs/Thermo-Tab/">Thermo</a> tab, which refuses a range that crosses a melting or boiling point, this case walks the range in segments — integrating the solid, liquid or gas heat capacity as appropriate — and adds the latent heat at each boundary it crosses. A solid below its triple-point pressure never melts: it sublimes in one step where its sublimation pressure equals the pressure, for example CO₂ at −78.5 °C at 1 atm. Heating dry ice from −100 °C to 20 °C at 1 atm is one such range: the solid warms to −78.5 °C, sublimes there, and the gas warms to 20 °C. Each latent heat is chosen so that both ends sit on one reference; see <a href="/docs/Methods-and-Sources/#one-enthalpy-reference">One enthalpy reference</a>.</p>
 <h2 id="key-relations">Key Relations</h2>
 <pre><code>Q = n·Δh                  duty is the enthalpy change, constant P
 Δh = ∫Cp dT + Σ L_tr       sensible part plus each latent heat crossed

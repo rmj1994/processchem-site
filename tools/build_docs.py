@@ -187,9 +187,15 @@ HEAD = """<!doctype html>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="/#screens">The app</a>
       <a href="/#inside">What it does</a>
-      <a href="/#companies">For companies</a>
       <a href="/docs/" aria-current="page">Documentation</a>
-      <a class="cta-link" href="https://apps.apple.com/app/id6796077930">Get the app</a>
+      <a href="/report/">Report a bug</a>
+      <div class="get-app">
+        <button class="cta-link" type="button" aria-expanded="false" aria-controls="get-app-menu">Get the app<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></button>
+        <div class="get-menu" id="get-app-menu">
+          <a href="https://apps.apple.com/app/id6796077930"><small>Download on the</small>App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.ronmjacob.pocketchem"><small>Get it on</small>Google Play</a>
+        </div>
+      </div>
     </nav>
   </div>
   <div class="progress" aria-hidden="true"></div>
@@ -258,6 +264,76 @@ def build_privacy() -> str:
     )
     out.write_text(page)
     return BASE + "/privacy/"
+
+
+# ---------------------------------------------------------------- report a bug
+
+#: Where the bug-report form posts. FormSubmit (formsubmit.co) e-mails each report, with the
+#: pictures attached, to the address this alias stands for. The alias is the random string
+#: FormSubmit sends after the address is confirmed; it keeps the address out of the page.
+#: Until then it is the address itself (already public in the footer), so the first report
+#: sent from the live page triggers FormSubmit's confirmation e-mail.
+REPORT_FORM_ALIAS = "ronmjacob1994@gmail.com"
+REPORT_FORM_ACTION = "https://formsubmit.co/" + REPORT_FORM_ALIAS
+
+REPORT_BODY = """    <h1>Report a bug</h1>
+    <p class="lead">Something wrong, unclear or missing in ProcessChem? Tell us what you did and what you saw. A screenshot helps most.</p>
+    <form id="report-form" action="{action}" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="ProcessChem bug report">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="{base}/report/thanks/">
+      <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+      <label>Subject
+        <input type="text" name="subject" required maxlength="120" placeholder="For example: Heater gives a negative duty">
+      </label>
+      <label>Message
+        <small>What you entered, what you expected and what the app showed.</small>
+        <textarea name="message" required></textarea>
+      </label>
+      <label>Pictures <small>(optional, up to 10 MB in all)</small>
+        <input type="file" name="attachment" accept="image/*" multiple>
+      </label>
+      <div class="row2">
+        <label>Phone and app version <small>(optional)</small>
+          <input type="text" name="device" placeholder="iPhone 15, ProcessChem 0.2.0">
+        </label>
+        <label>Your email <small>(optional, only to reply)</small>
+          <input type="email" name="email" autocomplete="email">
+        </label>
+      </div>
+      <p class="err" role="alert"></p>
+      <button class="btn fill" type="submit"><small>Send to the developer</small>Submit report</button>
+      <p class="fine">Reports are sent by e-mail through FormSubmit (formsubmit.co), which may ask you to tick a box to show you are not a robot. See the <a href="/privacy/">privacy policy</a>.</p>
+    </form>
+"""
+
+THANKS_BODY = """    <h1>Thank you</h1>
+    <p>Your report has been sent. If you gave your email address, you may get a reply.</p>
+    <p><a href="/">Back to the home page</a> or <a href="/report/">send another report</a>.</p>
+"""
+
+
+def build_report() -> list:
+    """The bug-report form at /report/ and its thank-you page at /report/thanks/."""
+    urls = []
+    for rel, title, desc, body in (
+        ("report", "Report a bug | ProcessChem", "Report a bug in ProcessChem, with a screenshot.",
+         REPORT_BODY.format(action=REPORT_FORM_ACTION, base=BASE)),
+        ("report/thanks", "Report sent | ProcessChem", "Your bug report was sent.", THANKS_BODY),
+    ):
+        out = SITE / rel / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        head = HEAD.format(title=title, desc=desc, canon=f"{BASE}/{rel}/", base=BASE).replace(' aria-current="page"', "")
+        if rel == "report":
+            head = head.replace('<a href="/report/">', '<a href="/report/" aria-current="page">')
+        else:
+            head = head.replace('<meta property="og:type" content="article">', '<meta name="robots" content="noindex">\n<meta property="og:type" content="article">')
+        out.write_text(head + f'  <main id="main" class="article report" style="padding-block:24px 40px">\n{body}  </main>\n' + FOOT)
+        if rel == "report":
+            urls.append(f"{BASE}/report/")
+    if "@" in REPORT_FORM_ALIAS:
+        print("NOTE: the report form posts to the plain address; replace REPORT_FORM_ALIAS with FormSubmit's code once it is confirmed")
+    return urls
 
 
 # ---------------------------------------------------------------- landing page from content/landing.md
@@ -409,7 +485,8 @@ def build(source: Path):
     # sitemap, robots, 404
     build_landing()
     privacy_url = build_privacy()
-    urls = [BASE + "/", privacy_url] + [BASE + page_url(n) for n in sorted(built, key=lambda n: (n != HOME_MD, n))]
+    report_urls = build_report()
+    urls = [BASE + "/", privacy_url] + report_urls + [BASE + page_url(n) for n in sorted(built, key=lambda n: (n != HOME_MD, n))]
     (SITE / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n"
@@ -428,7 +505,8 @@ def build(source: Path):
 
 def check(built, problems):
     """Every internal link/anchor resolves, images exist, nothing loads off-site."""
-    html_files = [SITE / "index.html", SITE / "404.html", SITE / "privacy" / "index.html"] + sorted((SITE / "docs").rglob("index.html"))
+    html_files = [SITE / "index.html", SITE / "404.html", SITE / "privacy" / "index.html",
+                  SITE / "report" / "index.html", SITE / "report" / "thanks" / "index.html"] + sorted((SITE / "docs").rglob("index.html"))
     ids = {}
 
     def url_to_file(url_path: str):

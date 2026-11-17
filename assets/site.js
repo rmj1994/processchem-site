@@ -80,7 +80,43 @@
     p.owns = function (el) { return button.contains(el) || list.contains(el); };
     panels.push(p);
   }
-  panel(document.querySelector(".menu-btn"), document.querySelector(".site-head .nav"));
+  var siteNav = document.querySelector(".site-head .nav");
+  panel(document.querySelector(".menu-btn"), siteNav);
+  // "Get the app" opens a small menu with both stores. It lives inside the phone-width
+  // menu, so opening it must not close that menu: it is handled apart from `panels`.
+  var getBtn = document.querySelector(".get-app .cta-link");
+  var getMenu = document.querySelector(".get-menu");
+  if (getBtn && getMenu) {
+    var closeGet = function () { getMenu.classList.remove("open"); getBtn.setAttribute("aria-expanded", "false"); };
+    getBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = !getMenu.classList.contains("open");
+      getMenu.classList.toggle("open", open);
+      getBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) { var first = getMenu.querySelector("a"); if (first) first.focus(); }
+    });
+    document.addEventListener("click", function (e) { if (!getMenu.contains(e.target)) closeGet(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeGet(); });
+  }
+  // Report form: the e-mail subject carries the reporter's subject, and a picture over
+  // the form service's 10 MB limit is refused here rather than failing after sending.
+  var report = document.getElementById("report-form");
+  if (report) {
+    report.addEventListener("submit", function (e) {
+      var err = report.querySelector(".err");
+      var files = report.querySelector('input[type="file"]').files || [];
+      var total = 0;
+      for (var i = 0; i < files.length; i++) total += files[i].size;
+      if (total > 10 * 1024 * 1024) {
+        e.preventDefault();
+        err.textContent = "The pictures add up to more than 10 MB. Choose fewer or smaller ones.";
+        return;
+      }
+      var subj = report.querySelector('[name="subject"]').value.trim();
+      report.querySelector('[name="_subject"]').value = "ProcessChem bug report: " + subj;
+      err.textContent = "";
+    });
+  }
   var docsList = document.querySelector(".docs-nav-list");
   panel(document.querySelector(".docs-toggle"), docsList, function () {
     var cur = docsList.querySelector('[aria-current="page"]');
